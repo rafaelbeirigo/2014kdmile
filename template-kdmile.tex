@@ -28,6 +28,30 @@
 {\ttfamily\vspace{0.1in}\setlength{\parindent}{18pt}}
 {\vspace{0.1in}}
 
+% Traduções ref. packaged 'algorithm[ic]'
+\renewcommand{\algorithmicrequire}{\textbf{Requer:}}
+\renewcommand{\algorithmicensure}{\textbf{Assegurar-se:}}
+\renewcommand{\algorithmicend}{\textbf{fim}}
+\renewcommand{\algorithmicif}{\textbf{se}}
+\renewcommand{\algorithmicthen}{\textbf{então}}
+\renewcommand{\algorithmicelse}{\textbf{senão}}
+\renewcommand{\algorithmicelsif}{\algorithmicelse\ \algorithmicif}
+\renewcommand{\algorithmicendif}{\algorithmicend\ \algorithmicif}
+\renewcommand{\algorithmicfor}{\textbf{para}}
+\renewcommand{\algorithmicforall}{\textbf{para todo}}
+\renewcommand{\algorithmicdo}{\textbf{faça}}
+\renewcommand{\algorithmicendfor}{\algorithmicend\ \algorithmicfor}
+\renewcommand{\algorithmicwhile}{\textbf{enquanto}}
+\renewcommand{\algorithmicendwhile}{\algorithmicend\ \algorithmicwhile}
+\renewcommand{\algorithmicloop}{\textbf{loop}}
+\renewcommand{\algorithmicendloop}{\algorithmicend\ \algorithmicloop}
+\renewcommand{\algorithmicrepeat}{\textbf{repita}}
+\renewcommand{\algorithmicuntil}{\textbf{até}}
+\renewcommand{\algorithmicprint}{\textbf{imprima}}
+\renewcommand{\algorithmicreturn}{\textbf{retorne}}
+\renewcommand{\algorithmictrue}{\textbf{verdadeiro}}
+\renewcommand{\algorithmicfalse}{\textbf{falso}}
+
 % Para marcar palavras que precisam ser traduzidas
 % \newcommand{\tr}[1]{\colorbox{MidnightBlue}{\textcolor{White}{\textbf{#1}}}}
 \newcommand{\tr}[1]{\textcolor{MidnightBlue}{\textbf{#1}}}
@@ -103,12 +127,12 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
 \label{alg:original}                   % and a label for \ref{} commands later in the document
 \begin{algorithmic}[1]                 % enter the algorithmic environment
     \REQUIRE{Inicializar $s_t,\ a_t,\ o_t,\ r^e_t,\ r^i_t$}
-    \LOOP
+    \REPEAT
     %% \STATE \\
     \STATE Obter próximo estado $s_{t+1}$
     %% \STATE \\
     %% \STATE \\
-    \COMMENT{Lida com a possível ocorrência de um evento saliente}
+    \STATE\COMMENT{Trata ocorrência de evento saliente}
     \IF{ocorreu um evento saliente $e$}
         \IF{macro-ação para $e$, $o_e$, não existe em $O$}
             \STATE Criar $o_e$ em $O$
@@ -122,28 +146,28 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
     \ENDIF
     %% \STATE \\
     %% \STATE \\
-    \COMMENT{Atualiza o modelo de todas as macro-ações}
+    \STATE\COMMENT{Atualiza o modelo das macro-ações}
     \FOR{cada macro-ação $o \neq o_e$ em $O$}
         \IF{$s_{t+1} \in I^o$}
             \STATE Adicionar $s_t$ a $I^o$
         \ENDIF
         \IF{$a_t$ é a ação \tr{greedy} para $o$ no estado $s_t$}
-            %% \COMMENT{Atualiza o modelo probabilístico de transição da macro-ação}\
+            %% \STATE\COMMENT{Atualiza o modelo probabilístico de transição da macro-ação}\
             \STATE $P(x|s_t) \xleftarrow{\alpha}
                    [\gamma(1 - \beta^o(s_{t+1}))P^o(x|s_{t+1}) +
                    \gamma\beta^o(s_{t+1})\delta_{s_{t+1}x}]$
 
-            \COMMENT{Atualiza modelo de recompensa da macro-ação}
+            \STATE\COMMENT{Atualiza modelo de recompensa da macro-ação}
             \STATE $R^o(s_t) \xleftarrow{\alpha} [r^e_t + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$
         \ENDIF
     \ENDFOR
     %% \STATE \\
     %% \STATE \\
-    \COMMENT{Atualização da \tr{função valor estado-ação} do Q-Learning}
+    \STATE\COMMENT{Atualização da \tr{função valor estado-ação} do Q-Learning}
     \STATE $Q_B(s_t, a_t) \xleftarrow{\alpha} r^e_{t} + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})$
     %% \STATE \\
     %% \STATE \\
-    \COMMENT{Atualização da \tr{função valor estado-ação} para
+    \STATE\COMMENT{Atualização da \tr{função valor estado-ação} para
       planejamento SMDP}
     \FOR{cada macro-ação $o$ em $O$}
     \STATE $Q_B(s_t, o) \xleftarrow{\alpha} R^o(s_t) + \sum_{x \in
@@ -154,7 +178,7 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
 
     %% TODO: parece que tem erro na linha abaixo (talvez o \tr...)
 
-    %% \COMMENT{Atualização das \tr{funções valor estado-ação} para as macro-ações}
+    \STATE\COMMENT{Atualização das \tr{funções valor estado-ação} para as macro-ações}
 
     \FOR{cada macro-ação $o$ em $O$ tal que $s_t \in I^o$}
         \newcommand{\sd}{$s_{t+1}$}
@@ -190,9 +214,8 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
         \transita{a};\ 
         \transita{r^e};\ 
         \transita{r^i}\ 
-    \STATE Teste
     \ENDFOR
-    \ENDLOOP
+    \UNTIL{Condição de parada}
 \end{algorithmic}
 \end{algorithm}
 

@@ -53,6 +53,9 @@
 \renewcommand{\algorithmictrue}{\textbf{verdadeiro}}
 \renewcommand{\algorithmicfalse}{\textbf{falso}}
 
+% Comando para espaçamento vertical no ambiente algorithm
+\newcommand{\GIMMESPACE}{\vspace{3.17 mm}}
+
 % Para marcar palavras que precisam ser traduzidas
 % \newcommand{\tr}[1]{\colorbox{MidnightBlue}{\textcolor{White}{\textbf{#1}}}}
 \newcommand{\tr}[1]{\textcolor{MidnightBlue}{\textbf{#1}}}
@@ -125,17 +128,31 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
 \label{alg:original}                   % and a label for \ref{} commands later in the document
 \algsetup{indent=2em}
 \begin{algorithmic}[1]                 % enter the algorithmic environment
+    \newcommand{\sd}{s_{t+1}}
+    \newcommand{\bo}[1]{$\beta^o(#1)$}
+    \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
+    \newcommand{\tv}{\tr{valor terminal para a option $o$}}
+    \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
+    \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
+    \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
+    \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
+    \newcommand{\termoA}{\bo{\sd}$v$}
+    \newcommand{\termoB}{[\ubo{\sd}][\maos]}
+    \newcommand{\termoC}{\bo{x}$v$}
+    \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
+    \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
+
     \REQUIRE{Inicializar $s_t,\ a_t,\ o_t,\ r^e_t,\ r^i_t$}
     \REPEAT
 
-    \STATE Obter próximo estado $s_{t+1}$
-
+    \STATE Obter próximo estado $\sd$
+    \GIMMESPACE
     \STATE\COMMENT{Trata ocorrência de evento saliente}
     \IF{ocorreu um evento saliente $e$}
         \IF{macro-ação para $e$, $o_e$, não existe em $O$}
             \STATE Criar $o_e$ em $O$
             \STATE Adicionar $s_t$ a $I^{o_e}$
-            \STATE $\beta(s_{t+1}) \leftarrow 1$
+            \STATE $\beta^{o_e}(s_{t+1}) \leftarrow 1$
         \ENDIF
         \STATE $r^i_{t+1} \leftarrow \tau[1-P(s_{t+1}|s_t)]$
         \COMMENT{$\tau$ constante}
@@ -143,69 +160,55 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
         \STATE $r^i_{t+1} \leftarrow 0$
     \ENDIF
 
+    \GIMMESPACE
     \STATE\COMMENT{Atualiza o modelo das macro-ações}
     \FOR{cada macro-ação $o \neq o_e$ em $O$}
         \IF{$s_{t+1} \in I^o$}
             \STATE Adicionar $s_t$ a $I^o$
         \ENDIF
         \IF{$a_t$ é a ação \tr{greedy} para $o$ no estado $s_t$}
-            %% \STATE\COMMENT{Atualiza o modelo probabilístico de transição da macro-ação}\
-            \STATE $P(x|s_t) \xleftarrow{\alpha}
-                   [\gamma(1 - \beta^o(s_{t+1}))P^o(x|s_{t+1}) +
-                   \gamma\beta^o(s_{t+1})\delta_{s_{t+1}x}]$
+            \STATE\COMMENT{Atualiza o modelo probabilístico de transição da macro-ação}
+
+            \STATE $P(x|s_t) \xleftarrow{\alpha} [\gamma(1 -
+            \beta^o(s_{t+1}))P^o(x|s_{t+1}) +
+            \gamma\beta^o(s_{t+1})\delta_{s_{t+1}x}]$
 
             \STATE\COMMENT{Atualiza modelo de recompensa da macro-ação}
             \STATE $R^o(s_t) \xleftarrow{\alpha} [r^e_t + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$
         \ENDIF
     \ENDFOR
 
+    \GIMMESPACE
     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} do Q-Learning}
-    \STATE $Q_B(s_t, a_t) \xleftarrow{\alpha} r^e_{t} + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})$
+    \STATE $Q_B(s_t,\ a_t) \xleftarrow{\alpha} r^e_{t} + r^i_t +
+    \gamma\max_{a \in A \cup O}{Q_B(s_{t+1},\ a)}$
 
+    \GIMMESPACE
     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} para
       planejamento SMDP}
     \FOR{cada macro-ação $o$ em $O$}
-    \STATE $Q_B(s_t, o) \xleftarrow{\alpha} R^o(s_t) + \sum_{x \in
-        S}{P^o(x|s_t)\max_{a \in A \cup O}Q_B(x, a)}$
+    \STATE $Q_B(s_t,\ o) \xleftarrow{\alpha} R^o(s_t) + \sum_{x \in
+        S}{P^o(x|s_t)\max_{a \in A \cup O}Q_B(x,\ a)}$
     \ENDFOR
 
+    \GIMMESPACE
     \STATE\COMMENT{Atualização das \tr{funções valor estado-ação} para as macro-ações}
     \FOR{cada macro-ação $o$ em $O$ tal que $s_t \in I^o$}
-        \newcommand{\sd}{$s_{t+1}$}
-        \newcommand{\bo}[1]{$\beta^o($#1$)$}
-        \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
-        \newcommand{\tv}{\tr{valor terminal para a option $o$}}
-
-        \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{$#1$}$}
-        \newcommand{\maos}{\maxao{$Q^o($\sd$,\ a)$}}
-        \newcommand{\maox}{\maxao{$Q^o(x,\ a)$}}
-
-        \newcommand{\termoA}{\bo{\sd}$v$}
-        \newcommand{\termoB}{$[$\ubo{\sd}$][$\maos$]$}
-
-        \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
-
         \STATE $v \leftarrow$ \tv
-        \STATE $Q^o(s_t,\ a_t)$ \aalpha $\ r^e_t\ +\ \gamma\{$\termoA$\ +\ $\termoB$\}$
-
+        \STATE $Q^o(s_t,\ a_t)$\aalpha$\ r^e_t\ +\ \gamma\{$\termoA$\ +\ $\termoB$\}$
         \FOR{cada macro-ação $o'$ em $O$ tal que $s_t \in I^{o'}$ e $o \neq o'$}
-            \newcommand{\sumxes}[1]{$\sum_{x \in S}{$#1$}$}
-            \newcommand{\termoC}{\bo{$x$}$v$}
-            \newcommand{\termoD}{$[$\ubo{$x$}$][$\maox$]$}
-            \STATE $Q^o(s_t,\ o')$ \aalpha $R^{o'}(s_t)\ + $
-            \sumxes{$P^{o'}(x|s_t)$}$\{$$\termoC$\ +\ $\termoD$\}$
+            \STATE $Q^o(s_t,\ o')$\aalpha $R^{o'}(s_t)\ + \sum_{x \in
+              S}{P^{o'}(x|s_t)}\{$\termoC$\ +\ $\termoD$\}$
         \ENDFOR
-    \STATE Escolher $a_{t+1}$ através de estratégia
-    \tr{$\epsilon$-greedy} com respeito a $Q_B$
-    \STATE $r^e_{t+1} \leftarrow$ Recompensa extrínsica recebida na
-    transição $s_t,\ a_t \rightarrow$ \sd
-
-    \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
-    \STATE \transita{s};\ 
-        \transita{a};\ 
-        \transita{r^e};\ 
-        \transita{r^i}\ 
     \ENDFOR
+
+    \STATE Escolher $a_{t+1}$ através de estratégia \tr{$\epsilon$-greedy} com respeito a $Q_B$
+
+    \STATE $r^e_{t+1} \leftarrow$ Recompensa extrínsica recebida na
+    transição $s_t,\ a_t \rightarrow \sd$
+
+    \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
+
     \UNTIL{condição de parada}
 \end{algorithmic}
 \end{algorithm}

@@ -195,7 +195,8 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
             \STATE $Q^o(s_t,\ o')$ \aalpha $R^{o'}(s_t)\ + $
             \sumxes{$P^{o'}(x|s_t)$}$\{$$\termoC$\ +\ $\termoD$\}$
         \ENDFOR
-    \STATE Escolher $a_{t+1}$ através de estratégia \tr{$\epsilon$-greedy}
+    \STATE Escolher $a_{t+1}$ através de estratégia
+    \tr{$\epsilon$-greedy} com respeito a $Q_B$
     \STATE $r^e_{t+1} \leftarrow$ Recompensa extrínsica recebida na
     transição $s_t,\ a_t \rightarrow$ \sd
 
@@ -205,7 +206,7 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
         \transita{r^e};\ 
         \transita{r^i}\ 
     \ENDFOR
-    \UNTIL{Condição de parada}
+    \UNTIL{condição de parada}
 \end{algorithmic}
 \end{algorithm}
 

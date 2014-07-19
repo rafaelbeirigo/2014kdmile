@@ -125,13 +125,13 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
 \begin{algorithm}                      % enter the algorithm environment
 \caption{Algoritmo original}           % give the algorithm a caption
 \label{alg:original}                   % and a label for \ref{} commands later in the document
+\algsetup{indent=2em}
 \begin{algorithmic}[1]                 % enter the algorithmic environment
     \REQUIRE{Inicializar $s_t,\ a_t,\ o_t,\ r^e_t,\ r^i_t$}
     \REPEAT
-    %% \STATE \\
+
     \STATE Obter próximo estado $s_{t+1}$
-    %% \STATE \\
-    %% \STATE \\
+
     \STATE\COMMENT{Trata ocorrência de evento saliente}
     \IF{ocorreu um evento saliente $e$}
         \IF{macro-ação para $e$, $o_e$, não existe em $O$}
@@ -144,8 +144,7 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
     \ELSE
         \STATE $r^i_{t+1} \leftarrow 0$
     \ENDIF
-    %% \STATE \\
-    %% \STATE \\
+
     \STATE\COMMENT{Atualiza o modelo das macro-ações}
     \FOR{cada macro-ação $o \neq o_e$ em $O$}
         \IF{$s_{t+1} \in I^o$}
@@ -161,25 +160,18 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
             \STATE $R^o(s_t) \xleftarrow{\alpha} [r^e_t + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$
         \ENDIF
     \ENDFOR
-    %% \STATE \\
-    %% \STATE \\
+
     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} do Q-Learning}
     \STATE $Q_B(s_t, a_t) \xleftarrow{\alpha} r^e_{t} + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})$
-    %% \STATE \\
-    %% \STATE \\
+
     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} para
       planejamento SMDP}
     \FOR{cada macro-ação $o$ em $O$}
     \STATE $Q_B(s_t, o) \xleftarrow{\alpha} R^o(s_t) + \sum_{x \in
         S}{P^o(x|s_t)\max_{a \in A \cup O}Q_B(x, a)}$
     \ENDFOR
-    %% \STATE \\
-    %% \STATE \\
-
-    %% TODO: parece que tem erro na linha abaixo (talvez o \tr...)
 
     \STATE\COMMENT{Atualização das \tr{funções valor estado-ação} para as macro-ações}
-
     \FOR{cada macro-ação $o$ em $O$ tal que $s_t \in I^o$}
         \newcommand{\sd}{$s_{t+1}$}
         \newcommand{\bo}[1]{$\beta^o($#1$)$}

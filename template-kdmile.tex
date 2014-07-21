@@ -7,9 +7,10 @@
 \usepackage{graphicx,url}  % for using figures and url format
 \usepackage[T1]{fontenc}   % avoids warnings such as "LaTeX Font Warning: Font shape 'OMS/cmtt/m/n' undefined"
 \usepackage[brazilian]{babel}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{soul,xcolor}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage[usenames,dvipsnames]{color}
 \usepackage{amsmath}
 
 %\usepackage{cite} % NOTE: do **not** include this package because it conflicts with kdmile.bst
@@ -52,6 +53,8 @@
 \renewcommand{\algorithmicreturn}{\textbf{retorne}}
 \renewcommand{\algorithmictrue}{\textbf{verdadeiro}}
 \renewcommand{\algorithmicfalse}{\textbf{falso}}
+\renewcommand{\algorithmicand}{\textbf{e}}
+\renewcommand{\algorithmicor}{\textbf{ou}}
 
 % Comando para espaçamento vertical no ambiente algorithm
 \newcommand{\GIMMESPACE}{\vspace{3.17 mm}}
@@ -61,7 +64,8 @@
 \newcommand{\tr}[1]{\textcolor{MidnightBlue}{\textbf{#1}}}
 
 % Para marcar partes do algoritmo original que foram modificadas
-\newcommand{\grifar}[1]{\colorbox{MidnightBlue}{\textcolor{Black}{\textbf{#1}}}}
+\sethlcolor{Green}
+\newcommand{\grifar}[1]{\hl{#1}}
 
 % Substituir pelo título quando estiver definido
 \newcommand{\titulo}{Título}
@@ -145,10 +149,14 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
     \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
     \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
 
-    \REQUIRE{Inicializar $s_t,\ a_t,\ o_t,\ r^e_t,\ r^i_t$}
+    \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
     \REPEAT
 
     \STATE Obter próximo estado $\sd$
+
+    \STATE \grifar{$r^e_{t+1} \leftarrow$ recompensa extrínsica
+      recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
+
     \GIMMESPACE
     \STATE\COMMENT{Trata ocorrência de evento saliente}
     \IF{ocorreu um evento saliente $e$}
@@ -165,40 +173,44 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
 
     \GIMMESPACE
     \STATE\COMMENT{Atualiza o modelo das macro-ações}
-    \FOR{cada macro-ação $o \neq o_e$ em $O$}
-        \IF{$s_{t+1} \in I^o$}
+    \FOR{cada macro-ação $o \neq $\grifar{$o_e$} em $O$}
+        \IF{$s_{t+1} \in I^o$ \AND \grifar{$\beta^o(s_t) \neq 1$}}
             \STATE Adicionar $s_t$ a $I^o$
         \ENDIF
-        \IF{$a_t$ é a ação \tr{greedy} para $o$ no estado $s_t$}
+        \IF{\grifar{$a_t$ é a ação} \tr{greedy} \grifar{para $o$ no estado $s_t$}}
             \STATE\COMMENT{Atualiza o modelo probabilístico de transição da macro-ação}
 
             \STATE $P(x|s_t) \xleftarrow{\alpha} [\gamma(1 -
             \beta^o(s_{t+1}))P^o(x|s_{t+1}) +
             \gamma\beta^o(s_{t+1})\delta_{s_{t+1}x}]$
 
-            \STATE\COMMENT{Atualiza modelo de recompensa da macro-ação}
-            \STATE $R^o(s_t) \xleftarrow{\alpha} [r^e_t + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$
+            \STATE\COMMENT{Atualiza modelo de recompensa da
+              macro-ação} \STATE $R^o(s_t) \xleftarrow{\alpha}
+            [$\grifar{$r^e_{t+1}$}$ + \gamma(1 -
+            \beta^o(s_{t+1}))R^o(s_{t+1})]$
         \ENDIF
     \ENDFOR
 
     \GIMMESPACE
     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} do Q-Learning}
-    \STATE $Q_B(s_t,\ a_t) \xleftarrow{\alpha} r^e_{t} + r^i_t +
+    \STATE $Q_B(s_t,\ a_t) \xleftarrow{\alpha} $\grifar{$r^e_{t+1}$}$ + $\grifar{$r^i_{t+1}$}$ +
     \gamma\max_{a \in A \cup O}{Q_B(s_{t+1},\ a)}$
 
     \GIMMESPACE
     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} para
       planejamento SMDP}
     \FOR{cada macro-ação $o$ em $O$}
-    \STATE $Q_B(s_t,\ o) \xleftarrow{\alpha} R^o(s_t) + \sum_{x \in
-        S}{P^o(x|s_t)\max_{a \in A \cup O}Q_B(x,\ a)}$
+        \IF{\grifar{$s_t \in I^o$}}
+            \STATE $Q_B(s_t,\ o) \xleftarrow{\alpha} R^o(s_t) + \sum_{x \in
+                S}{P^o(x|s_t)\max_{a \in A \cup O}Q_B(x,\ a)}$
+        \ENDIF
     \ENDFOR
 
     \GIMMESPACE
     \STATE\COMMENT{Atualização das \tr{funções valor estado-ação} para as macro-ações}
     \FOR{cada macro-ação $o$ em $O$ tal que $s_t \in I^o$}
         \STATE $v \leftarrow$ \tv
-        \STATE $Q^o(s_t,\ a_t)$\aalpha$\ r^e_t\ +\ \gamma\{$\termoA$\ +\ $\termoB$\}$
+        \STATE $Q^o(s_t,\ a_t)$\aalpha$\ $\grifar{$r^e_{t+1}$}$\ +\ \gamma\{$\termoA$\ +\ $\termoB$\}$
         \FOR{cada macro-ação $o'$ em $O$ tal que $s_t \in I^{o'}$ e $o \neq o'$}
             \STATE $Q^o(s_t,\ o')$\aalpha $R^{o'}(s_t)\ + \sum_{x \in
               S}{P^{o'}(x|s_t)}\{$\termoC$\ +\ $\termoD$\}$
@@ -207,9 +219,6 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
 
     \STATE Escolher $a_{t+1}$ através de estratégia
     \tr{$\epsilon$-greedy} com respeito a $Q_B$
-
-    \STATE \grifar{$r^e_{t+1} \leftarrow$ recompensa extrínsica
-      recebida na transição $s_t,\ a_t \rightarrow \sd$}
 
     \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
 

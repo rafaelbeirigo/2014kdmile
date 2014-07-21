@@ -60,6 +60,9 @@
 % \newcommand{\tr}[1]{\colorbox{MidnightBlue}{\textcolor{White}{\textbf{#1}}}}
 \newcommand{\tr}[1]{\textcolor{MidnightBlue}{\textbf{#1}}}
 
+% Para marcar partes do algoritmo original que foram modificadas
+\newcommand{\grifar}[1]{\colorbox{MidnightBlue}{\textcolor{Black}{\textbf{#1}}}}
+
 % Substituir pelo título quando estiver definido
 \newcommand{\titulo}{Título}
 
@@ -202,10 +205,11 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
         \ENDFOR
     \ENDFOR
 
-    \STATE Escolher $a_{t+1}$ através de estratégia \tr{$\epsilon$-greedy} com respeito a $Q_B$
+    \STATE Escolher $a_{t+1}$ através de estratégia
+    \tr{$\epsilon$-greedy} com respeito a $Q_B$
 
-    \STATE $r^e_{t+1} \leftarrow$ Recompensa extrínsica recebida na
-    transição $s_t,\ a_t \rightarrow \sd$
+    \STATE \grifar{$r^e_{t+1} \leftarrow$ recompensa extrínsica
+      recebida na transição $s_t,\ a_t \rightarrow \sd$}
 
     \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
 

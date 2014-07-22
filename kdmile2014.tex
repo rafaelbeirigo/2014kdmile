@@ -12,6 +12,7 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{amsmath}
+\usepackage{ulem}
 
 %\usepackage{cite} % NOTE: do **not** include this package because it conflicts with kdmile.bst
 
@@ -28,6 +29,10 @@
 \newenvironment{latexcode}
 {\ttfamily\vspace{0.1in}\setlength{\parindent}{18pt}}
 {\vspace{0.1in}}
+
+% Configurações gráficas
+\DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg} % Preferência por .eps (maior resolução)
+\graphicspath{{fig/}}                           % Pasta padrão para as figuras
 
 % Traduções ref. packaged 'algorithm[ic]'
 \floatname{algorithm}{Algoritmo} % termo utilizado na referenciação
@@ -65,7 +70,10 @@
 
 % Para marcar partes do algoritmo original que foram modificadas
 \sethlcolor{Green}
-\newcommand{\grifar}[1]{\hl{#1}}
+\newcommand{\grifar}[1]{\dotuline{#1}}
+% \newcommand{\grifar}[1]{\hl{#1}}
+% \newcommand{\grifar}[1]{\dashuline{#1}}
+% \newcommand{\grifar}[1]{\uwave{#1}}
 
 % Substituir pelo título quando estiver definido
 \newcommand{\titulo}{Lorem ipsum dolor sit amet, consectetuer adipiscing elit}
@@ -134,36 +142,15 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor
 \section{Introdução}
 Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo. Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus. Nullam libero mauris, consequat quis, varius et, dictum id, arcu. Mauris mollis tincidunt felis. Aliquam feugiat tellus ut neque. Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit.
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.
-
-Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo. Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus. Nullam libero mauris, consequat quis, varius et, dictum id, arcu. Mauris mollis tincidunt felis. Aliquam feugiat tellus ut neque. Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit.
-
-Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede. Sed bibendum. Aliquam posuere. Nunc aliquet, augue nec adipiscing interdum, lacus tellus malesuada massa, quis varius mi purus non odio. Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna. Curabitur vulputate vestibulum lorem. Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros. Sed id ligula quis est convallis tempor. Curabitur lacinia pulvinar nibh. Nam a sapien.
-
-Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede. Sed bibendum. Aliquam posuere. Nunc aliquet, augue nec adipiscing interdum, lacus tellus malesuada massa, quis varius mi purus non odio. Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna. Curabitur vulputate vestibulum lorem. Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros. Sed id ligula quis est convallis tempor. Curabitur lacinia pulvinar nibh. Nam a sapien.
-
-Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede. Sed bibendum. Aliquam posuere. Nunc aliquet, augue nec adipiscing interdum, lacus tellus malesuada massa, quis varius mi purus non odio. Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna. Curabitur vulputate vestibulum lorem. Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros. Sed id ligula quis est convallis tempor. Curabitur lacinia pulvinar nibh. Nam a sapien.
-
 \section{Fundamentos Teóricos}
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.
-
-Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo. Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus. Nullam libero mauris, consequat quis, varius et, dictum id, arcu. Mauris mollis tincidunt felis. Aliquam feugiat tellus ut neque. Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit.
-
-Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo. Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus. Nullam libero mauris, consequat quis, varius et, dictum id, arcu. Mauris mollis tincidunt felis. Aliquam feugiat tellus ut neque. Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit.
-
-Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo. Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus. Nullam libero mauris, consequat quis, varius et, dictum id, arcu. Mauris mollis tincidunt felis. Aliquam feugiat tellus ut neque. Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit.
-
-% ARTICLE NEW SECTION
 \section{Algoritmo Proposto}\label{sec:algoritmo}
-No Algoritmo \ref{alg:modificado} encontra-se a proposta deste artigo, onde as modificações em relação à proposta original \cite{imrl} encontram-se marcadas. Essas modificações foram propostas no intuito de contribuir à proposta original soluções de eventuais ambiguidades ou aparentes inconsistências, dessa forma contribuindo com um algoritmo que, mantendo o espírito original da utilização de Motivação Instrínseca no Aprendizado por Reforço, acrescenta e investiga alternativas de implementação no intuito de obter melhorias de desempenho no aprendizado do agente.
+No Algoritmo \ref{alg:modificado} encontram-se marcadas as modificações propostas em relação ao algoritmo original \cite{imrl}. O intuito é o de contribuir à proposta original soluções de eventuais ambiguidades ou aparentes inconsistências, dessa forma apresentando um algoritmo que, mantendo o espírito original da utilização de Motivação Instrínseca no Aprendizado por Reforço, acrescenta alternativas de implementação buscando obter melhorias de desempenho no aprendizado. Abaixo são descritas as motivações e respectivas motivações teóricas e/ou de cunho prático.
 
 Nas linhas \ref{alg:mod:ind:model}, \ref{alg:mod:ind:ql} e \ref{alg:mod:ind:qo}, os índices de $r^e_t$ e $r^i_t$ foram modificados para $r^e_{t+1}$ e $r^i_{t+1}$, respectivamente. Isso foi feito para permitir que as atualizações que utilizam esses valores considerassem a transição $s_t,\ a_t \leftarrow s_{t+1}$ ao invés da precedente a esta, como era anteriormente. Ainda de acordo com essa modificação, a obtenção de $r^e_{t+1}$, que anteriormente era realizada após a linha \ref{alg:mod:re2:localantigo}, passa a ser realizada logo após a transição de estados (linha \ref{alg:mod:re2}).
 
-A atualização do modelo da macro-ação na proposta original, é precedida de um teste para evitar que a macro-ação correspondente ao evento saliente que possa ter ocorrido no passo atual, $o_e$, seja processada (linha \ref{alg:mod:oe:if}). Uma vantagem advinda disso é o de se poder utilizar os valores de $Q^{o_e}$ já atualizados. Entretanto, como a atualização de $Q^{o_e}$ somente ocorre ao final do algoritmo, é necessário esperar os próximos passos para utilizar os valores atualizados.
-
-Dessa forma, e como a primeira referência a $o_e$ ocorre na linha \ref{alg:mod:oe:priocorr}, na nova proposta a inicialização e atribuição foram adicionadas nas linhas \ref{alg:mod:oe:ini} e \ref{alg:mod:oe:atr}, respectivamente. Isso foi feito por dois motivos: (i) definir $o_e$ de forma explícita no algoritmo e (ii) tratar os valores que $o_e$ assume de acordo com a lógica de atualização do modelo da macro-ação, aproveitando os valores atualizados de $Q^{o_e}$.
+A atualização do modelo da macro-ação na proposta original, é precedida de um teste para evitar que a macro-ação correspondente ao evento saliente que possa ter ocorrido no passo atual, $o_e$, seja processada (linha \ref{alg:mod:oe:if}). Uma vantagem advinda disso é o de se poder utilizar os valores de $Q^{o_e}$ já atualizados. Entretanto, como a atualização de $Q^{o_e}$ somente ocorre ao final do algoritmo, é necessário esperar os próximos passos para utilizar os valores atualizados.  Dessa forma, e como a primeira referência a $o_e$ ocorre na linha \ref{alg:mod:oe:priocorr}, na nova proposta a inicialização e atribuição foram adicionadas nas linhas \ref{alg:mod:oe:ini} e \ref{alg:mod:oe:atr}, respectivamente. Isso foi feito por dois motivos: (i) definir $o_e$ de forma explícita no algoritmo e (ii) tratar os valores que $o_e$ assume de acordo com a lógica de atualização do modelo da macro-ação, aproveitando os valores atualizados de $Q^{o_e}$.
 
 O algoritmo original prevê a adição de estados às macro-ações de forma retroativa: caso o agente, partindo de $s_t$ alcance $s_{t+1}$ e $s_{t+1} \in I^o$, $s_t$ é adicionado a $I^o$. Entretanto, caso uma macro-ação possa ser reiniciada em um estado terminal, pode ser gerado um ciclo de repetição indefinido em que a macro-ação chama a si mesma ao terminar. Dessa forma, na linha \ref{alg:mod:addI} foi adicionado um teste para evitar que um estado terminal da macro-ação seja adicionado ao seu \tr{conjunto iniciador}.
 
@@ -171,11 +158,12 @@ Como a escolha de quais ações são aplicáveis nesse momento é um fator importante
 
 Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP, linha \ref{alg:mod:qbo}) considerava para esse cálculo quaiquer estados $s_t$ que o agente viesse a visitar. Para evitar problemas de incosistência entre a função-valor e o \tr{conjunto iniciador} de uma macro-ação $o$, foi adicionado um teste que somente atualiza $Q_B(s_t,\ o)$ para uma dada option $o$ se $s_t \in I^o$. Dessa forma, evita-se que seja atribuído um valor positivo à execução de uma macro-ação $o$ em um estado em que a macro-ação não possa ser executada. Uma outra vantagem decorrente dessa modificação é a possível economia de recursos computacionais, já que algumas atualizações desnecessárias são potencialmente evitadas.
 
-\begin{algorithm}                      % enter the algorithm environment
-\caption{Algoritmo modificado}         % give the algorithm a caption
-\label{alg:modificado}                 % and a label for \ref{} commands later in the document
+\begin{algorithm}
+\caption{Algoritmo proposto (modificações sugeridas sublinhadas com pontilhado)}
+\label{alg:modificado}
 \algsetup{indent=2em}
-\begin{algorithmic}[1]                 % enter the algorithmic environment
+\small
+\begin{algorithmic}[1]
     \newcommand{\sd}{s_{t+1}}
     \newcommand{\bo}[1]{$\beta^o(#1)$}
     \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
@@ -202,13 +190,13 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 
     \STATE\COMMENT{Trata ocorrência de evento saliente}
 
-    \STATE\label{alg:mod:oe:ini}\grifar{$o_e \leftarrow nil$}
+    \STATE \label{alg:mod:oe:ini}\grifar{$o_e \leftarrow nil$}
 
     \IF{ocorreu um evento saliente $e$}
 
         \IF{macro-ação para $e$, $o_e$, não existe em $O$}\label{alg:mod:oe:priocorr}
 
-            \STATE\label{alg:mod:oe:atr}\grifar{$o_e \leftarrow $[representação da macro-ação associada a $e$]}
+            \STATE \label{alg:mod:oe:atr}\grifar{$o_e \leftarrow $[macro-ação para $e$]}
 
             \STATE Criar $o_e$ em $O$
 
@@ -218,9 +206,7 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 
         \ENDIF
 
-        \STATE $r^i_{t+1} \leftarrow \tau[1-P(s_{t+1}|s_t)]$
-
-        \COMMENT{$\tau$ constante}
+        \STATE $r^i_{t+1} \leftarrow \tau[1-P(s_{t+1}|s_t)]$ \COMMENT{$\tau$ constante}
 
     \ELSE
 
@@ -290,9 +276,7 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 
     \ENDFOR \label{alg:mod:re2:localantigo}
 
-    \STATE Escolher $a_{t+1}$ através de estratégia
-
-    \tr{$\epsilon$-greedy} com respeito a $Q_B$
+    \STATE Escolher $a_{t+1}$ através de estratégia \tr{$\epsilon$-greedy} com respeito a $Q_B$
 
     \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
 
@@ -301,12 +285,59 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 \end{algorithmic}
 \end{algorithm}
 	
-% INCLUDE BIBLIOGRAPHY WHICH MUST FOLLOW kdmile.bst TEMPLATE
-% \bibliographystyle{kdmile}
-% \bibliography{kdmileb}
-% For information on how to write bibliography entries, 
-% see file kdmileb.bib
+\section{Resultados e Discussão}
+% Checar localização desse parágrafo (seria um de arcabouço teórico?)
+Espera-se como resultado da aplicação da utilização de Motivação Intrínseca em Aprendizado por Reforço um aceleramento do processo de aprendizado através da exploração da estrutura hierárquica do problema. Esse aproveitamento pode ser feito em três etapas: (i) identificação de \tr{sub-tarefas} e (ii) aprendizado e refinamento da solução das sub-tarefas (iii) composição da solução para a tarefa inicial utilizando as soluções das sub-tarefas.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{r_i-2014-07-12_07-15-03-Teri.eps}
+    \caption{Evolução da recompensa intrínseca recebida no aprendizado}
+    \label{fig:rixt}
+\end{figure}
+
+Para testar as propostas relacionadas ao algoritmo, procedeu-se à realização de experimentos , cuja função seria a de verificar empiricamente a validade da implementação. Essa verificação empírica serviria a dois propósitos: checar a consistência da implementação e avaliar a qualidade das modificações propostas.  Um experimento que se enquadra no primeiro dos propósitos consisitiu em avaliar a quantidade e valor das recompensas intrínsecas recebidas associadas a cada evento saliente possível (um resultado similar foi apresentado na Figura 4 do artigo original). O experimento consistiu de 100 repetições de $5\times10^5$ passos cada, onde o agente aprendia de acordo com o Algoritmo \ref{alg:modificado}. Os resultados estão presentes na figura \ref{fig:rixt}, onde são apresentados os valores de recompensa intrínseca recebidos pelo agente por passos do experimento.
+
+A análise dos resultados presentes na Figura \ref{fig:rixt} sugere algumas características do aprendizado resultante: o agente inicialmente procede à execução das tarefas mais simples, como ligar/desligar a luz. Isso pode ser visto pela frequência e prematuridade com que o agente recebe recompensas intrínsecas para essas tarefas. Pode-se perceber uma variação dos valores recebidos associados ao evento saliente com a repetição dos mesmos: há uma tendência de \emph{diminuição} dos valores recebidos para eventos salientes repetidos.
+
+É importante notar, entretanto, que, marcadamente no caso do evento \emph{lightON}, parece haver algumas vezes um \emph{aumento} da recompensa intrínseca recebida com a repetição. Isso pode ser devido à definição de evento saliente utilizada especificamente para esse experimento (somente atributos relacionados aos \tr{status} do ambiente), o que, associado à definição de $P^o$ para a descrição completa do estado, permitiria também uma evolução crescente de seus valores.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{imrlvsql.png}
+    \caption{Comparação de aprendizado utilizando ou não motivação intrínseca para descoberta de macro-ações}
+    \label{fig:imrlvsql}
+\end{figure}
+
+Pode-se também observar uma aparente \emph{graduação} do agente na execução das sub-tarefas: após o aprendizado das sub-tarefas mais simples, começam a ocorrer com mais frequência recompensas intrínsecas associadas a sub-tarefas mais complexas, que por sua vez são dependentes das mais simples. Em última instância, a sub-tarefa \emph{monkeyON} ocorre seguindo o padrão descrito acima e aproximadamente após o aprendizado das sub-tarefas mais simples de que \emph{monkeyON} depende. Essa é, das características citadas, a de maior interesse para este trabalho, pois sugere justamente a ocorrência de um aprendizado (e consequente utilização) das macro-ações de uma forma \emph{hierárquica}, partindo de sub-tarefas componentes mais simples até atinger o objetivo final do problema.
+
+Para avaliar a importância relativa da descoberta de macro-ações com auxílio de motivação intrínseca, foi realizado um experimento no qual o agente aprende com o Q-Learning tradicional, ou seja, não utiliza recompensas intrínsecas para a descoberta de macro-ações e comparado com o desempenho do agente que utiliza o Algoritmo \ref{alg:modificado} para o aprendizado. O resultado desse experimento pode ser visto na figura \ref{fig:imrlvsql}, que mostra a quantidade média de passos necessárias para atingir o objetivo à medida que o agente o atinge, ou seja, quão rápido o agente consegue resolver a tarefa em \emph{cada vez menos passos}. Pela análise do gráfico, podemos ver que o agente que utiliza a motivação intrínseca além da extrínseca possui uma evolução mais rápida em relação ao agente que somente utiliza a motivação extrínseca, o que sugere que a vantagem da utilização da motivação intrínseca para obtenção de macro-ações no aprendizado.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{epsopt.png}
+    \caption{Análise da sensibilidade do algoritmo à estratégia de abandono da macro-ação}
+    \label{fig:epsopt}
+\end{figure}
+
+Para verificar a suscetibilidade do algoritmo proposto seria à \tr{estratégia de abandono da macro-ação}, foram realizadas repetições de experimentos com variações gradativas do valor de $\epsilon_o$, conforme descrito na seção \tr{...}. Os resultados são apresentados na figura \ref{fig:epsopt}. O gráfico mostra a média cumulativa de ativações do \emph{monkey} por passo. Pela análise desses resultados, podemos verificar a variação do desempenho do aprendizado com o valor escolhido para $\epsilon_o$, sugerindo que a correta escolha desse parâmetro possui um impacto significativo no desempenho de aprendizado do agente. \tr{TODO: complementar}
+
+Foram também investigadas duas estratégias de adição de novos estados à macro-ação: (i) \tr{backward}, em que um novo estado $s_t$ somente é adicionado ao conjunto iniciador $I^o$ de uma macro-ação $o$ se ocorrer que ao realizar a transição $s_t,\ a_t \rightarrow s_{t+1}$, tenha-se $s_{t+1} \in I^o$ e (ii) \tr{backward+forward}, em que ocorre a adição descrita em (i), além de: caso o agente, estando em $s_t \in I^o$, realizar a transição  $s_t,\ a_t \rightarrow s_{t+1}$, $s_{t+1}$ é incluído em $I^o$. Como no algoritmo original, somente era realizada a adição (i), mas no artigo original de macro-ações \cite{option} é levantada também a possibilidade descrita em (ii), procedeu-se à investigação dos possíveis resultados decorrentes dessa nova adição. Os resultados desse experimento podem ser vistos na figura \ref{fig:dummy}, que mostra \tr{...}. Pela análise dos resultados aí presentes, podemos concluir que \tr{...}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{dummy.png}
+    \caption{\tr{TODO: consolidar e plotar} Comparação de aprendizado utilizando adições de estados à macro-ação pelas estratégias \tr{backward} e \tr{backward+forward}}
+    \label{fig:dummy}
+\end{figure}
 
 \begin{received}
 \end{received}
+
+% INCLUDE BIBLIOGRAPHY WHICH MUST FOLLOW kdmile.bst TEMPLATE
+\bibliographystyle{kdmile}
+\bibliography{kdmileb}
+% For information on how to write bibliography entries, 
+% see file kdmileb.bib
+
 \end{document}

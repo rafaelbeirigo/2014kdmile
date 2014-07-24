@@ -154,7 +154,7 @@ A atualização do modelo da option na proposta original, é precedida de um teste 
 
 O algoritmo original prevê a adição de estados às options de forma retroativa: caso o agente, partindo de $s_t$ alcance $s_{t+1}$ e $s_{t+1} \in I^o$, $s_t$ é adicionado a $I^o$. Entretanto, caso uma option possa ser reiniciada em um estado terminal, pode ser gerado um ciclo de repetição indefinido em que a option chama a si mesma ao terminar. Dessa forma, na linha \ref{alg:mod:addI} foi adicionado um teste para evitar que um estado terminal da option seja adicionado ao seu \tr{conjunto iniciador}.
 
-Como a escolha de quais ações são aplicáveis nesse momento é um fator importante na atualização do modelo das options, na proposta original, as funções $P^o$ e $R^o$ somente são atualizadas caso a ação $a_t$ executada no passo atual seja \tr{greedy} para a option em questão (linha \ref{alg:mod:atgreedy}). Isso pode ser explicado pelo fato de que a atualização dessas funções representem um consumo significativo de recursos computacionais. Na proposta atual, essa restrição foi investigada, sendo executados experimentos também para o caso em que não há a necessidade de $a_t$ ser a ação \tr{greedy}.
+Como a escolha de quais ações são aplicáveis nesse momento é um fator importante na atualização do modelo das options, na proposta original, as funções $P^o$ e $R^o$ somente são atualizadas caso a ação $a_t$ executada no passo atual seja gulosa para a option em questão (linha \ref{alg:mod:atgreedy}). Isso pode ser explicado pelo fato de que a atualização dessas funções representem um consumo significativo de recursos computacionais. Na proposta atual, essa restrição foi investigada, sendo executados experimentos também para o caso em que não há a necessidade de $a_t$ ser a ação gulosa.
 
 Na proposta original, a atualização de $Q_B$ para options (planejamento SMDP, linha \ref{alg:mod:qbo}) considerava para esse cálculo quaiquer estados $s_t$ que o agente viesse a visitar. Para evitar problemas de incosistência entre a função-valor e o \tr{conjunto iniciador} de uma option $o$, foi adicionado um teste que somente atualiza $Q_B(s_t,\ o)$ para uma dada option $o$ se $s_t \in I^o$. Dessa forma, evita-se que seja atribuído um valor positivo à execução de uma option $o$ em um estado em que a option não possa ser executada. Uma outra vantagem decorrente dessa modificação é a possível economia de recursos computacionais, já que algumas atualizações desnecessárias são potencialmente evitadas.
 
@@ -226,7 +226,7 @@ Na proposta original, a atualização de $Q_B$ para options (planejamento SMDP, li
 
         \ENDIF
 
-        \IF{\grifar{$a_t$ é a ação} \tr{greedy} \grifar{para $o$ no estado $s_t$}} \label{alg:mod:atgreedy}
+        \IF{\grifar{$a_t$ é a ação gulosa para $o$ no estado $s_t$}} \label{alg:mod:atgulosa}
 
             \STATE\COMMENT{Atualiza o modelo probabilístico de transição da option}
 
@@ -276,7 +276,7 @@ Na proposta original, a atualização de $Q_B$ para options (planejamento SMDP, li
 
     \ENDFOR \label{alg:mod:re2:localantigo}
 
-    \STATE Escolher $a_{t+1}$ através de estratégia \tr{$\epsilon$-greedy} com respeito a $Q_B$
+    \STATE Escolher $a_{t+1}$ através de estratégia \tr{$\epsilon$-gulosa} com respeito a $Q_B$
 
     \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
 

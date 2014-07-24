@@ -123,7 +123,7 @@
 %                   the last argument, in square brackets, is optional.
 
 % Article keywords
-\keywords{aprendizado por reforço, descoberta de macro-ações, motivação intrínseca}
+\keywords{aprendizado por reforço, descoberta de options, motivação intrínseca}
 %  -> \keywords{} (in alphabetical order \keywords{document processing, sequences,
 %                      string searching, subsequences, substrings})
 
@@ -150,13 +150,13 @@ No Algoritmo \ref{alg:modificado} encontram-se marcadas as modificações proposta
 
 Nas linhas \ref{alg:mod:ind:model}, \ref{alg:mod:ind:ql} e \ref{alg:mod:ind:qo}, os índices de $r^e_t$ e $r^i_t$ foram modificados para $r^e_{t+1}$ e $r^i_{t+1}$, respectivamente. Isso foi feito para permitir que as atualizações que utilizam esses valores considerassem a transição $s_t,\ a_t \leftarrow s_{t+1}$ ao invés da precedente a esta, como era anteriormente. Ainda de acordo com essa modificação, a obtenção de $r^e_{t+1}$, que anteriormente era realizada após a linha \ref{alg:mod:re2:localantigo}, passa a ser realizada logo após a transição de estados (linha \ref{alg:mod:re2}).
 
-A atualização do modelo da macro-ação na proposta original, é precedida de um teste para evitar que a macro-ação correspondente ao evento saliente que possa ter ocorrido no passo atual, $o_e$, seja processada (linha \ref{alg:mod:oe:if}). Uma vantagem advinda disso é o de se poder utilizar os valores de $Q^{o_e}$ já atualizados. Entretanto, como a atualização de $Q^{o_e}$ somente ocorre ao final do algoritmo, é necessário esperar os próximos passos para utilizar os valores atualizados.  Dessa forma, e como a primeira referência a $o_e$ ocorre na linha \ref{alg:mod:oe:priocorr}, na nova proposta a inicialização e atribuição foram adicionadas nas linhas \ref{alg:mod:oe:ini} e \ref{alg:mod:oe:atr}, respectivamente. Isso foi feito por dois motivos: (i) definir $o_e$ de forma explícita no algoritmo e (ii) tratar os valores que $o_e$ assume de acordo com a lógica de atualização do modelo da macro-ação, aproveitando os valores atualizados de $Q^{o_e}$.
+A atualização do modelo da option na proposta original, é precedida de um teste para evitar que a option correspondente ao evento saliente que possa ter ocorrido no passo atual, $o_e$, seja processada (linha \ref{alg:mod:oe:if}). Uma vantagem advinda disso é o de se poder utilizar os valores de $Q^{o_e}$ já atualizados. Entretanto, como a atualização de $Q^{o_e}$ somente ocorre ao final do algoritmo, é necessário esperar os próximos passos para utilizar os valores atualizados.  Dessa forma, e como a primeira referência a $o_e$ ocorre na linha \ref{alg:mod:oe:priocorr}, na nova proposta a inicialização e atribuição foram adicionadas nas linhas \ref{alg:mod:oe:ini} e \ref{alg:mod:oe:atr}, respectivamente. Isso foi feito por dois motivos: (i) definir $o_e$ de forma explícita no algoritmo e (ii) tratar os valores que $o_e$ assume de acordo com a lógica de atualização do modelo da option, aproveitando os valores atualizados de $Q^{o_e}$.
 
-O algoritmo original prevê a adição de estados às macro-ações de forma retroativa: caso o agente, partindo de $s_t$ alcance $s_{t+1}$ e $s_{t+1} \in I^o$, $s_t$ é adicionado a $I^o$. Entretanto, caso uma macro-ação possa ser reiniciada em um estado terminal, pode ser gerado um ciclo de repetição indefinido em que a macro-ação chama a si mesma ao terminar. Dessa forma, na linha \ref{alg:mod:addI} foi adicionado um teste para evitar que um estado terminal da macro-ação seja adicionado ao seu \tr{conjunto iniciador}.
+O algoritmo original prevê a adição de estados às options de forma retroativa: caso o agente, partindo de $s_t$ alcance $s_{t+1}$ e $s_{t+1} \in I^o$, $s_t$ é adicionado a $I^o$. Entretanto, caso uma option possa ser reiniciada em um estado terminal, pode ser gerado um ciclo de repetição indefinido em que a option chama a si mesma ao terminar. Dessa forma, na linha \ref{alg:mod:addI} foi adicionado um teste para evitar que um estado terminal da option seja adicionado ao seu \tr{conjunto iniciador}.
 
-Como a escolha de quais ações são aplicáveis nesse momento é um fator importante na atualização do modelo das macro-ações, na proposta original, as funções $P^o$ e $R^o$ somente são atualizadas caso a ação $a_t$ executada no passo atual seja \tr{greedy} para a macro-ação em questão (linha \ref{alg:mod:atgreedy}). Isso pode ser explicado pelo fato de que a atualização dessas funções representem um consumo significativo de recursos computacionais. Na proposta atual, essa restrição foi investigada, sendo executados experimentos também para o caso em que não há a necessidade de $a_t$ ser a ação \tr{greedy}.
+Como a escolha de quais ações são aplicáveis nesse momento é um fator importante na atualização do modelo das options, na proposta original, as funções $P^o$ e $R^o$ somente são atualizadas caso a ação $a_t$ executada no passo atual seja \tr{greedy} para a option em questão (linha \ref{alg:mod:atgreedy}). Isso pode ser explicado pelo fato de que a atualização dessas funções representem um consumo significativo de recursos computacionais. Na proposta atual, essa restrição foi investigada, sendo executados experimentos também para o caso em que não há a necessidade de $a_t$ ser a ação \tr{greedy}.
 
-Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP, linha \ref{alg:mod:qbo}) considerava para esse cálculo quaiquer estados $s_t$ que o agente viesse a visitar. Para evitar problemas de incosistência entre a função-valor e o \tr{conjunto iniciador} de uma macro-ação $o$, foi adicionado um teste que somente atualiza $Q_B(s_t,\ o)$ para uma dada option $o$ se $s_t \in I^o$. Dessa forma, evita-se que seja atribuído um valor positivo à execução de uma macro-ação $o$ em um estado em que a macro-ação não possa ser executada. Uma outra vantagem decorrente dessa modificação é a possível economia de recursos computacionais, já que algumas atualizações desnecessárias são potencialmente evitadas.
+Na proposta original, a atualização de $Q_B$ para options (planejamento SMDP, linha \ref{alg:mod:qbo}) considerava para esse cálculo quaiquer estados $s_t$ que o agente viesse a visitar. Para evitar problemas de incosistência entre a função-valor e o \tr{conjunto iniciador} de uma option $o$, foi adicionado um teste que somente atualiza $Q_B(s_t,\ o)$ para uma dada option $o$ se $s_t \in I^o$. Dessa forma, evita-se que seja atribuído um valor positivo à execução de uma option $o$ em um estado em que a option não possa ser executada. Uma outra vantagem decorrente dessa modificação é a possível economia de recursos computacionais, já que algumas atualizações desnecessárias são potencialmente evitadas.
 
 \begin{algorithm}
 \caption{Algoritmo proposto (modificações sugeridas sublinhadas com pontilhado)}
@@ -194,9 +194,9 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 
     \IF{ocorreu um evento saliente $e$}
 
-        \IF{macro-ação para $e$, $o_e$, não existe em $O$}\label{alg:mod:oe:priocorr}
+        \IF{option para $e$, $o_e$, não existe em $O$}\label{alg:mod:oe:priocorr}
 
-            \STATE \label{alg:mod:oe:atr}\grifar{$o_e \leftarrow $[macro-ação para $e$]}
+            \STATE \label{alg:mod:oe:atr}\grifar{$o_e \leftarrow $[option para $e$]}
 
             \STATE Criar $o_e$ em $O$
 
@@ -216,9 +216,9 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 
     \GIMMESPACE
 
-    \STATE\COMMENT{Atualiza o modelo das macro-ações}
+    \STATE\COMMENT{Atualiza o modelo das options}
 
-    \FOR{cada macro-ação $o \neq $\grifar{$o_e$} em $O$} \label{alg:mod:oe:if}
+    \FOR{cada option $o \neq $\grifar{$o_e$} em $O$} \label{alg:mod:oe:if}
 
         \IF{$s_{t+1} \in I^o$ \AND \grifar{$\beta^o(s_t) \neq 1$}} \label{alg:mod:addI}
 
@@ -228,11 +228,11 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 
         \IF{\grifar{$a_t$ é a ação} \tr{greedy} \grifar{para $o$ no estado $s_t$}} \label{alg:mod:atgreedy}
 
-            \STATE\COMMENT{Atualiza o modelo probabilístico de transição da macro-ação}
+            \STATE\COMMENT{Atualiza o modelo probabilístico de transição da option}
 
             \STATE $P(x|s_t) \xleftarrow{\alpha} [\gamma(1 - \beta^o(s_{t+1}))P^o(x|s_{t+1}) + \gamma\beta^o(s_{t+1})\delta_{s_{t+1}x}]$
 
-            \STATE\COMMENT{Atualiza modelo de recompensa da macro-ação} \STATE $R^o(s_t) \xleftarrow{\alpha} [$\grifar{$r^e_{t+1}$}$ + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$ \label{alg:mod:ind:model}
+            \STATE\COMMENT{Atualiza modelo de recompensa da option} \STATE $R^o(s_t) \xleftarrow{\alpha} [$\grifar{$r^e_{t+1}$}$ + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$ \label{alg:mod:ind:model}
 
         \ENDIF
 
@@ -248,7 +248,7 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 
     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} para planejamento SMDP}
 
-    \FOR{cada macro-ação $o$ em $O$}
+    \FOR{cada option $o$ em $O$}
 
         \IF{\grifar{$s_t \in I^o$}}
 
@@ -260,15 +260,15 @@ Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP
 
     \GIMMESPACE
 
-    \STATE\COMMENT{Atualização das \tr{funções valor estado-ação} para as macro-ações}
+    \STATE\COMMENT{Atualização das \tr{funções valor estado-ação} para as options}
 
-    \FOR{cada macro-ação $o$ em $O$ tal que $s_t \in I^o$}
+    \FOR{cada option $o$ em $O$ tal que $s_t \in I^o$}
 
         \STATE $v \leftarrow$ \tv
 
         \STATE $Q^o(s_t,\ a_t)$\aalpha$\ $\grifar{$r^e_{t+1}$}$\ +\ \gamma\{$\termoA$\ +\ $\termoB$\}$ \label{alg:mod:ind:qo}
 
-        \FOR{cada macro-ação $o'$ em $O$ tal que $s_t \in I^{o'}$ e $o \neq o'$}
+        \FOR{cada option $o'$ em $O$ tal que $s_t \in I^{o'}$ e $o \neq o'$}
 
             \STATE $Q^o(s_t,\ o')$\aalpha $R^{o'}(s_t)\ + \sum_{x \in S}{P^{o'}(x|s_t)}\{$\termoC$\ +\ $\termoD$\}$
 
@@ -305,29 +305,29 @@ A análise dos resultados presentes na Figura \ref{fig:rixt} sugere algumas carac
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{imrlvsql.png}
-    \caption{Comparação de aprendizado utilizando ou não motivação intrínseca para descoberta de macro-ações}
+    \caption{Comparação de aprendizado utilizando ou não motivação intrínseca para descoberta de options}
     \label{fig:imrlvsql}
 \end{figure}
 
-Pode-se também observar uma aparente \emph{graduação} do agente na execução das sub-tarefas: após o aprendizado das sub-tarefas mais simples, começam a ocorrer com mais frequência recompensas intrínsecas associadas a sub-tarefas mais complexas, que por sua vez são dependentes das mais simples. Em última instância, a sub-tarefa \emph{monkeyON} ocorre seguindo o padrão descrito acima e aproximadamente após o aprendizado das sub-tarefas mais simples de que \emph{monkeyON} depende. Essa é, das características citadas, a de maior interesse para este trabalho, pois sugere justamente a ocorrência de um aprendizado (e consequente utilização) das macro-ações de uma forma \emph{hierárquica}, partindo de sub-tarefas componentes mais simples até atinger o objetivo final do problema.
+Pode-se também observar uma aparente \emph{graduação} do agente na execução das sub-tarefas: após o aprendizado das sub-tarefas mais simples, começam a ocorrer com mais frequência recompensas intrínsecas associadas a sub-tarefas mais complexas, que por sua vez são dependentes das mais simples. Em última instância, a sub-tarefa \emph{monkeyON} ocorre seguindo o padrão descrito acima e aproximadamente após o aprendizado das sub-tarefas mais simples de que \emph{monkeyON} depende. Essa é, das características citadas, a de maior interesse para este trabalho, pois sugere justamente a ocorrência de um aprendizado (e consequente utilização) das options de uma forma \emph{hierárquica}, partindo de sub-tarefas componentes mais simples até atinger o objetivo final do problema.
 
-Para avaliar a importância relativa da descoberta de macro-ações com auxílio de motivação intrínseca, foi realizado um experimento no qual o agente aprende com o Q-Learning tradicional, ou seja, não utiliza recompensas intrínsecas para a descoberta de macro-ações e comparado com o desempenho do agente que utiliza o Algoritmo \ref{alg:modificado} para o aprendizado. O resultado desse experimento pode ser visto na figura \ref{fig:imrlvsql}, que mostra a quantidade média de passos necessárias para atingir o objetivo à medida que o agente o atinge, ou seja, quão rápido o agente consegue resolver a tarefa em \emph{cada vez menos passos}. Pela análise do gráfico, podemos ver que o agente que utiliza a motivação intrínseca além da extrínseca possui uma evolução mais rápida em relação ao agente que somente utiliza a motivação extrínseca, o que sugere que a vantagem da utilização da motivação intrínseca para obtenção de macro-ações no aprendizado.
+Para avaliar a importância relativa da descoberta de options com auxílio de motivação intrínseca, foi realizado um experimento no qual o agente aprende com o Q-Learning tradicional, ou seja, não utiliza recompensas intrínsecas para a descoberta de options e comparado com o desempenho do agente que utiliza o Algoritmo \ref{alg:modificado} para o aprendizado. O resultado desse experimento pode ser visto na figura \ref{fig:imrlvsql}, que mostra a quantidade média de passos necessárias para atingir o objetivo à medida que o agente o atinge, ou seja, quão rápido o agente consegue resolver a tarefa em \emph{cada vez menos passos}. Pela análise do gráfico, podemos ver que o agente que utiliza a motivação intrínseca além da extrínseca possui uma evolução mais rápida em relação ao agente que somente utiliza a motivação extrínseca, o que sugere que a vantagem da utilização da motivação intrínseca para obtenção de options no aprendizado.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{epsopt.png}
-    \caption{Análise da sensibilidade do algoritmo à estratégia de abandono da macro-ação}
+    \caption{Análise da sensibilidade do algoritmo à estratégia de abandono da option}
     \label{fig:epsopt}
 \end{figure}
 
-Para verificar a suscetibilidade do algoritmo proposto seria à \tr{estratégia de abandono da macro-ação}, foram realizadas repetições de experimentos com variações gradativas do valor de $\epsilon_o$, conforme descrito na seção \tr{...}. Os resultados são apresentados na figura \ref{fig:epsopt}. O gráfico mostra a média cumulativa de ativações do \emph{monkey} por passo. Pela análise desses resultados, podemos verificar a variação do desempenho do aprendizado com o valor escolhido para $\epsilon_o$, sugerindo que a correta escolha desse parâmetro possui um impacto significativo no desempenho de aprendizado do agente. \tr{TODO: complementar}
+Para verificar a suscetibilidade do algoritmo proposto seria à \tr{estratégia de abandono da option}, foram realizadas repetições de experimentos com variações gradativas do valor de $\epsilon_o$, conforme descrito na seção \tr{...}. Os resultados são apresentados na figura \ref{fig:epsopt}. O gráfico mostra a média cumulativa de ativações do \emph{monkey} por passo. Pela análise desses resultados, podemos verificar a variação do desempenho do aprendizado com o valor escolhido para $\epsilon_o$, sugerindo que a correta escolha desse parâmetro possui um impacto significativo no desempenho de aprendizado do agente. \tr{TODO: complementar}
 
-Foram também investigadas duas estratégias de adição de novos estados à macro-ação: (i) \tr{backward}, em que um novo estado $s_t$ somente é adicionado ao conjunto iniciador $I^o$ de uma macro-ação $o$ se ocorrer que ao realizar a transição $s_t,\ a_t \rightarrow s_{t+1}$, tenha-se $s_{t+1} \in I^o$ e (ii) \tr{backward+forward}, em que ocorre a adição descrita em (i), além de: caso o agente, estando em $s_t \in I^o$, realizar a transição  $s_t,\ a_t \rightarrow s_{t+1}$, $s_{t+1}$ é incluído em $I^o$. Como no algoritmo original, somente era realizada a adição (i), mas no artigo original de macro-ações \cite{option} é levantada também a possibilidade descrita em (ii), procedeu-se à investigação dos possíveis resultados decorrentes dessa nova adição. Os resultados desse experimento podem ser vistos na figura \ref{fig:dummy}, que mostra \tr{...}. Pela análise dos resultados aí presentes, podemos concluir que \tr{...}.
+Foram também investigadas duas estratégias de adição de novos estados à option: (i) \tr{backward}, em que um novo estado $s_t$ somente é adicionado ao conjunto iniciador $I^o$ de uma option $o$ se ocorrer que ao realizar a transição $s_t,\ a_t \rightarrow s_{t+1}$, tenha-se $s_{t+1} \in I^o$ e (ii) \tr{backward+forward}, em que ocorre a adição descrita em (i), além de: caso o agente, estando em $s_t \in I^o$, realizar a transição  $s_t,\ a_t \rightarrow s_{t+1}$, $s_{t+1}$ é incluído em $I^o$. Como no algoritmo original, somente era realizada a adição (i), mas no artigo original de options \cite{option} é levantada também a possibilidade descrita em (ii), procedeu-se à investigação dos possíveis resultados decorrentes dessa nova adição. Os resultados desse experimento podem ser vistos na figura \ref{fig:dummy}, que mostra \tr{...}. Pela análise dos resultados aí presentes, podemos concluir que \tr{...}.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.75\textwidth]{dummy.png}
-    \caption{\tr{TODO: consolidar e plotar} Comparação de aprendizado utilizando adições de estados à macro-ação pelas estratégias \tr{backward} e \tr{backward+forward}}
+    \caption{\tr{TODO: consolidar e plotar} Comparação de aprendizado utilizando adições de estados à option pelas estratégias \tr{backward} e \tr{backward+forward}}
     \label{fig:dummy}
 \end{figure}
 

@@ -76,7 +76,7 @@
 % \newcommand{\grifar}[1]{\uwave{#1}}
 
 % Substituir pelo título quando estiver definido
-\newcommand{\titulo}{Lorem ipsum dolor sit amet, consectetuer adipiscing elit}
+\newcommand{\titulo}{Estratégias de Aplicação de Options no Aprendizado por Reforço com Motivação Intrínseca}
 
 %% Melhores comentários para o pacote algorithm
 \renewcommand{\algorithmiccomment}[1]{// #1}
@@ -108,7 +108,7 @@
 
 % Article abstract - it should be from 100 to 300 words
 \begin{abstract}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.
+  As técnicas de Aprendizado por Reforço permitem a solução de um problema através da escolha de ações que maximizem valores de recompensas recebidas e que refletem a qualidade das ações tomadas pelo agente. Em problemas com estrutura hierárquica, a solução final depende do encadeamento de soluções para sub-problemas aí presentes, sendo frequente a repetição de sub-problemas nesse encadeamento. Nesses casos, a utilização de options permite o aprendizado e armazenamento das soluções individuais para cada sub-problema, que podem então ser utilizadas múltiplas vezes na composição de uma solução completa para o problema final. Apesar de vantajosa, a utilização de options necessita de definições que podem representar uma significativa sobrecarga para o projetista. Para contornar esse problema, foram propostas técnicas de descoberta automática de options, dentre as quais a utilização de motivação intrínseca apresenta resultados promissores. A utilização da motivação intrínseca para a descoberta de options permite ao agente aprender soluções de sub-problemas úteis na solução do problema final sem a sobrecarga de se definir novas recompensas para esse aprendizado de forma manual. Apesar de promissora, a proposta de descoberta automática de options por motivação intrínseca utiliza uma variedade de componentes de aprendizado que ainda carece de investigação aprofundada acerca dos impactos individual e coletivo de cada um, notadamente a aplicação das options durante o aprendizado. Este trabalho apresenta uma investigação de estratégias de aplicação de options durante o Aprendizado por Reforço com Motivação Intrínseca através da implementação das estratégias propostas, acompanhadas de avaliação de desempenho por verificação experimental e breve discussão teórica. Os resultados obtidos neste trabalho são compilados em uma proposta de implementação que utiliza as alternativas que apresentaram o melhor desempenho de aprendizado.
 \end{abstract}
 
 % ACM Computing Classification System categories

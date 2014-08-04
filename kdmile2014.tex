@@ -32,30 +32,30 @@
 {\ttfamily\vspace{0.1in}\setlength{\parindent}{18pt}}
 {\vspace{0.1in}}
 
-% ConfiguraÁıes gr·ficas
-\DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg} % PreferÍncia por .eps (maior resoluÁ„o)
-\graphicspath{{fig/}}                           % Pasta padr„o para as figuras
+% Configura√ß√µes gr√°ficas
+\DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg} % Prefer√™ncia por .eps (maior resolu√ß√£o)
+\graphicspath{{fig/}}                           % Pasta padr√£o para as figuras
 
-% TraduÁıes ref. packaged 'algorithm[ic]'
-\floatname{algorithm}{Algoritmo} % termo utilizado na referenciaÁ„o
+% Tradu√ß√µes ref. packaged 'algorithm[ic]'
+\floatname{algorithm}{Algoritmo} % termo utilizado na referencia√ß√£o
 \renewcommand{\algorithmicrequire}{\textbf{Requer:}}
 \renewcommand{\algorithmicensure}{\textbf{Assegurar-se:}}
 \renewcommand{\algorithmicend}{\textbf{fim}}
 \renewcommand{\algorithmicif}{\textbf{se}}
-\renewcommand{\algorithmicthen}{\textbf{ent„o}}
-\renewcommand{\algorithmicelse}{\textbf{sen„o}}
+\renewcommand{\algorithmicthen}{\textbf{ent√£o}}
+\renewcommand{\algorithmicelse}{\textbf{sen√£o}}
 \renewcommand{\algorithmicelsif}{\algorithmicelse\ \algorithmicif}
 \renewcommand{\algorithmicendif}{\algorithmicend\ \algorithmicif}
 \renewcommand{\algorithmicfor}{\textbf{para}}
 \renewcommand{\algorithmicforall}{\textbf{para todo}}
-\renewcommand{\algorithmicdo}{\textbf{faÁa}}
+\renewcommand{\algorithmicdo}{\textbf{fa√ßa}}
 \renewcommand{\algorithmicendfor}{\algorithmicend\ \algorithmicfor}
 \renewcommand{\algorithmicwhile}{\textbf{enquanto}}
 \renewcommand{\algorithmicendwhile}{\algorithmicend\ \algorithmicwhile}
 \renewcommand{\algorithmicloop}{\textbf{loop}}
 \renewcommand{\algorithmicendloop}{\algorithmicend\ \algorithmicloop}
 \renewcommand{\algorithmicrepeat}{\textbf{repita}}
-\renewcommand{\algorithmicuntil}{\textbf{atÈ}}
+\renewcommand{\algorithmicuntil}{\textbf{at√©}}
 \renewcommand{\algorithmicprint}{\textbf{imprima}}
 \renewcommand{\algorithmicreturn}{\textbf{retorne}}
 \renewcommand{\algorithmictrue}{\textbf{verdadeiro}}
@@ -63,7 +63,7 @@
 \renewcommand{\algorithmicand}{\textbf{e}}
 \renewcommand{\algorithmicor}{\textbf{ou}}
 
-% Comando para espaÁamento vertical no ambiente algorithm
+% Comando para espa√ßamento vertical no ambiente algorithm
 \newcommand{\GIMMESPACE}{\vspace{3.17 mm}}
 
 % Para marcar palavras que precisam ser traduzidas
@@ -77,10 +77,10 @@
 % \newcommand{\grifar}[1]{\dashuline{#1}}
 % \newcommand{\grifar}[1]{\uwave{#1}}
 
-% Substituir pelo tÌtulo quando estiver definido
-\newcommand{\titulo}{AvaliaÁ„o de EstratÈgias para AplicaÁ„o de\\ \ PolÌticas Parciais com MotivaÁ„o IntrÌnseca}
+% Substituir pelo t√≠tulo quando estiver definido
+\newcommand{\titulo}{Avalia√ß√£o de Estrat√©gias para Aplica√ß√£o de\\ \ Pol√≠ticas Parciais com Motiva√ß√£o Intr√≠nseca}
 
-%% Melhores coment·rios para o pacote algorithm
+%% Melhores coment√°rios para o pacote algorithm
 \renewcommand{\algorithmiccomment}[1]{// #1}
 
 % ALL FIELDS UNTIL BEGIN{document} ARE MANDATORY
@@ -104,41 +104,41 @@
 \author{R. L. Beirigo and V. Freire and A. H. R. Costa}
 
 %Affiliation and email
-\institute{Escola PolitÈcnica da Universidade de S„o Paulo, Brazil \\
+\institute{Escola Polit√©cnica da Universidade de S√£o Paulo, Brazil \\
   \email{\{rafaelbeirigo, valdinei.freire, anna.reali\}@usp.br}
 }
 
 % Article abstract - it should be from 100 to 300 words
 \begin{abstract}
-  As tÈcnicas de Aprendizado por ReforÁo permitem a soluÁ„o de um
-  problema atravÈs da escolha de aÁıes que maximizem valores de
-  recompensas recebidas que refletem a qualidade das aÁıes tomadas
+  As t√©cnicas de Aprendizado por Refor√ßo permitem a solu√ß√£o de um
+  problema atrav√©s da escolha de a√ß√µes que maximizem valores de
+  recompensas recebidas que refletem a qualidade das a√ß√µes tomadas
   pelo agente em um processo de tentativa e erro. Em problemas com
-  estrutura hier·rquica, a soluÁ„o final depende do encadeamento de
-  soluÁıes para sub-problemas aÌ presentes, sendo frequente a
-  repetiÁ„o de sub-problemas nesse encadeamento. Nesses casos, a
-  utilizaÁ„o de polÌticas parciais permite o aprendizado e
-  armazenamento das soluÁıes individuais para cada sub-problema, que
-  podem ent„o ser utilizadas m˙ltiplas vezes na composiÁ„o de uma
-  soluÁ„o completa para o problema final, acelerando o
-  aprendizado. Apesar de vantajosa, a utilizaÁ„o de polÌticas parciais
-  necessita de definiÁıes por parte do projetista, o que representa
+  estrutura hier√°rquica, a solu√ß√£o final depende do encadeamento de
+  solu√ß√µes para sub-problemas a√≠ presentes, sendo frequente a
+  repeti√ß√£o de sub-problemas nesse encadeamento. Nesses casos, a
+  utiliza√ß√£o de pol√≠ticas parciais permite o aprendizado e
+  armazenamento das solu√ß√µes individuais para cada sub-problema, que
+  podem ent√£o ser utilizadas m√∫ltiplas vezes na composi√ß√£o de uma
+  solu√ß√£o completa para o problema final, acelerando o
+  aprendizado. Apesar de vantajosa, a utiliza√ß√£o de pol√≠ticas parciais
+  necessita de defini√ß√µes por parte do projetista, o que representa
   uma sobrecarga. Para contornar esse problema, foram propostas
-  tÈcnicas de descoberta autom·tica de polÌticas parciais, dentre as
-  quais a utilizaÁ„o de motivaÁ„o intrÌnseca se destaca por permitir
-  ao agente aprender soluÁıes de sub-problemas ˙teis na soluÁ„o do
+  t√©cnicas de descoberta autom√°tica de pol√≠ticas parciais, dentre as
+  quais a utiliza√ß√£o de motiva√ß√£o intr√≠nseca se destaca por permitir
+  ao agente aprender solu√ß√µes de sub-problemas √∫teis na solu√ß√£o do
   problema final sem a necessidade de se definir manualmente novas
   recompensas para esses sub-problemas individualmente. Apesar de
   promissora, essa proposta utiliza um conjunto de componentes de
-  aprendizado que ainda carece de investigaÁ„o aprofundada acerca dos
+  aprendizado que ainda carece de investiga√ß√£o aprofundada acerca dos
   impactos individual e coletivo de cada componente, notadamente a
-  aplicaÁ„o das polÌticas parciais durante o aprendizado. Neste
-  trabalho s„o investigadas estratÈgias de aplicaÁ„o de polÌticas
-  parciais durante o Aprendizado por ReforÁo com MotivaÁ„o
-  IntrÌnseca. Duas estratÈgias s„o propostas e o desempenho de cada
-  estratÈgia È avaliado experimentalmente. Com base nesta avaliaÁ„o,
-  uma nova estratÈgia È proposta, a qual utiliza as alternativas que
-  apresentaram o melhor desempenho na avaliaÁ„o experimental.
+  aplica√ß√£o das pol√≠ticas parciais durante o aprendizado. Neste
+  trabalho s√£o investigadas estrat√©gias de aplica√ß√£o de pol√≠ticas
+  parciais durante o Aprendizado por Refor√ßo com Motiva√ß√£o
+  Intr√≠nseca. Duas estrat√©gias s√£o propostas e o desempenho de cada
+  estrat√©gia √© avaliado experimentalmente. Com base nesta avalia√ß√£o,
+  uma nova estrat√©gia √© proposta, a qual utiliza as alternativas que
+  apresentaram o melhor desempenho na avalia√ß√£o experimental.
 \end{abstract}
 
 % ACM Computing Classification System categories
@@ -153,7 +153,7 @@
 %                   the last argument, in square brackets, is optional.
 
 % Article keywords
-\keywords{aprendizado por reforÁo, descoberta de polÌticas parciais, motivaÁ„o intrÌnseca}
+\keywords{aprendizado por refor√ßo, descoberta de pol√≠ticas parciais, motiva√ß√£o intr√≠nseca}
 %  -> \keywords{} (in alphabetical order \keywords{document processing, sequences,
 %                      string searching, subsequences, substrings})
 
@@ -169,70 +169,70 @@
 
 \maketitle
 
-% \Section{IntroduÁ„o}
-% Problemas nos quais o agente deve tomar uma sÈrie de decisıes
-% sequenciais podem ser resolvidos atravÈs de tÈcnicas de Aprendizado
-% por ReforÁo \cite{rlsutton,rlczaba}, em que o agente recebe um
-% reforÁo numÈrico indicando a qualidade de cada aÁ„o tomada. Esse
+% \Section{Introdu√ß√£o}
+% Problemas nos quais o agente deve tomar uma s√©rie de decis√µes
+% sequenciais podem ser resolvidos atrav√©s de t√©cnicas de Aprendizado
+% por Refor√ßo \cite{rlsutton,rlczaba}, em que o agente recebe um
+% refor√ßo num√©rico indicando a qualidade de cada a√ß√£o tomada. Esse
 % processo de aprendizado ocorre por tentativa e erro, no qual o
-% agente alterna entre a \emph{aplicaÁ„o} do conhecimento adquirido
-% atÈ o momento para selecionar a melhor aÁ„o e a \emph{exploraÁ„o} do
-% ambiente, onde o agente experimenta novas aÁıes, aumentando o seu
+% agente alterna entre a \emph{aplica√ß√£o} do conhecimento adquirido
+% at√© o momento para selecionar a melhor a√ß√£o e a \emph{explora√ß√£o} do
+% ambiente, onde o agente experimenta novas a√ß√µes, aumentando o seu
 % conhecimento sobre o ambiente e o problema. Apesar do sucesso
-% apresentado na aplicaÁ„o de tÈcnicas AR a problemas reais
+% apresentado na aplica√ß√£o de t√©cnicas AR a problemas reais
 % \cite{tesauro1995tdgammon,barto1996elevator,scardua2002optimal,da2006inverse,abbeel2007helicopter},
-% elas podem apresentar indesejada lentid„o na obtenÁ„o das soluÁıes
+% elas podem apresentar indesejada lentid√£o na obten√ß√£o das solu√ß√µes
 % \cite{barto2003hrl}.
  
-% Uma forma de mitigar essa lentid„o È explorar caracterÌsticas da
-% \emph{representaÁ„o} do problema original que permitam a aplicaÁ„o
-% de tÈcnicas de otimizaÁ„o. Um exemplo disso È a utilizaÁ„o de
-% polÌticas parciais \cite{option1999}, que permitem que um problema
-% de AR originalmente com representaÁ„o monolÌtica seja representado
-% de forma modular. Na nova representaÁ„o, s„o determinados
+% Uma forma de mitigar essa lentid√£o √© explorar caracter√≠sticas da
+% \emph{representa√ß√£o} do problema original que permitam a aplica√ß√£o
+% de t√©cnicas de otimiza√ß√£o. Um exemplo disso √© a utiliza√ß√£o de
+% pol√≠ticas parciais \cite{option1999}, que permitem que um problema
+% de AR originalmente com representa√ß√£o monol√≠tica seja representado
+% de forma modular. Na nova representa√ß√£o, s√£o determinados
 % sub-problemas componentes do problema original, permitindo o
-% aprendizado simult‚neo da soluÁ„o para o problema original e seus
+% aprendizado simult√¢neo da solu√ß√£o para o problema original e seus
 % sub-problemas. Quando o problema original possui uma estrutura
-% \emph{hier·rquica}, È comum o agente ter de resolver mais de uma vez
+% \emph{hier√°rquica}, √© comum o agente ter de resolver mais de uma vez
 % o mesmo sub-problema em momentos diferentes. Nesses casos, a
-% utilizaÁ„o de polÌticas parciais apresenta a vantagem de acelerar o
-% aprendizado por eliminar a necessidade de se aprender a soluÁ„o para
+% utiliza√ß√£o de pol√≠ticas parciais apresenta a vantagem de acelerar o
+% aprendizado por eliminar a necessidade de se aprender a solu√ß√£o para
 % o mesmo sub-problema mais de uma vez, permitindo o reuso do
-% conhecimento j· adquirido na forma de polÌticas parciais
+% conhecimento j√° adquirido na forma de pol√≠ticas parciais
 % \cite{option1999} e dessa forma acelerando o aprendizado.
 
-% Entretanto, para que as polÌticas parciais possam ser utilizadas, h·
-% a necessidade da definiÁ„o de elementos cuja identificaÁ„o pode n„o
-% ser imediata ‡ apreciaÁ„o do problema, podendo causar sobrecarga em
-% tempo de projeto. Para contornar esse revÈs, s„o estudadas tÈcnicas
-% de descoberta autom·tica de polÌticas parciais
+% Entretanto, para que as pol√≠ticas parciais possam ser utilizadas, h√°
+% a necessidade da defini√ß√£o de elementos cuja identifica√ß√£o pode n√£o
+% ser imediata √† aprecia√ß√£o do problema, podendo causar sobrecarga em
+% tempo de projeto. Para contornar esse rev√©s, s√£o estudadas t√©cnicas
+% de descoberta autom√°tica de pol√≠ticas parciais
 % \cite{stolle2002learning,bakker2004hierarchical,mcgovern2001automatic,imrl2004},
-% em que a definiÁ„o das mesmas fica a cargo de um algoritmo
-% respons·vel por identificar sub-problemas e criar polÌticas parciais
-% para resolvÍ-los. Das diversas tÈcnicas empregadas, pode ser
-% destacada a utilizaÁ„o de \emph{motivaÁ„o intrÌnseca} em AR
+% em que a defini√ß√£o das mesmas fica a cargo de um algoritmo
+% respons√°vel por identificar sub-problemas e criar pol√≠ticas parciais
+% para resolv√™-los. Das diversas t√©cnicas empregadas, pode ser
+% destacada a utiliza√ß√£o de \emph{motiva√ß√£o intr√≠nseca} em AR
 % \cite{imrl2004}, em que o agente recebe recompensas adicionais
-% atravÈs de um mecanismo interno associado a variaÁıes de
-% caracterÌsticas do ambiente que lhe despertam \emph{marcado
-% interesse}. Nessas tÈcnicas, o agente È codificado de forma a
-% associar sub-problemas a variaÁıes significativas de atributos
-% selecionados na descriÁ„o fatorada do estado, reduzindo o trabalho
-% de definiÁ„o das polÌticas parciais ‡ determinaÁ„o dos atributos
-% relevantes para a identificaÁ„o dos sub-problemas.
+% atrav√©s de um mecanismo interno associado a varia√ß√µes de
+% caracter√≠sticas do ambiente que lhe despertam \emph{marcado
+% interesse}. Nessas t√©cnicas, o agente √© codificado de forma a
+% associar sub-problemas a varia√ß√µes significativas de atributos
+% selecionados na descri√ß√£o fatorada do estado, reduzindo o trabalho
+% de defini√ß√£o das pol√≠ticas parciais √† determina√ß√£o dos atributos
+% relevantes para a identifica√ß√£o dos sub-problemas.
 
-% Essa tÈcnica foi aplicada com sucesso na soluÁ„o de um problema com
-% forte estrutura hier·rquica \cite{imrl2004}, atravÈs da proposta de
-% um algoritmo que utiliza em conjunto m˙ltiplas tÈcnicas de
-% AR. Apesar da aprensentaÁ„o detalhada do papel da motivaÁ„o
-% intrÌnseca no aprendizado, n„o h· uma investigaÁ„o mais aprofundada
+% Essa t√©cnica foi aplicada com sucesso na solu√ß√£o de um problema com
+% forte estrutura hier√°rquica \cite{imrl2004}, atrav√©s da proposta de
+% um algoritmo que utiliza em conjunto m√∫ltiplas t√©cnicas de
+% AR. Apesar da aprensenta√ß√£o detalhada do papel da motiva√ß√£o
+% intr√≠nseca no aprendizado, n√£o h√° uma investiga√ß√£o mais aprofundada
 % dos diversos componentes de aprendizado envolvidos algoritmo,
-% notadamente a estratÈgia de aplicaÁ„o das polÌticas parciais
-% aprendidas. Neste trabalho, investigamos essa quest„o, apresentando
-% algumas propostas de estratÈgias para a aplicaÁ„o das polÌticas
-% parciais aprendidas juntamente com a avaliaÁ„o experimental de cada
-% uma delas e uma breve discuss„o teÛrica.
+% notadamente a estrat√©gia de aplica√ß√£o das pol√≠ticas parciais
+% aprendidas. Neste trabalho, investigamos essa quest√£o, apresentando
+% algumas propostas de estrat√©gias para a aplica√ß√£o das pol√≠ticas
+% parciais aprendidas juntamente com a avalia√ß√£o experimental de cada
+% uma delas e uma breve discuss√£o te√≥rica.
 
-% \section{Fundamentos TeÛricos}
+% \section{Fundamentos Te√≥ricos}
 % Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
 % hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
 % nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis
@@ -252,122 +252,123 @@
 \newcommand{\peumS}{p_1}
 \newcommand{\peum}{$\peumS$}
 
-% MotivaÁ„o
+% Motiva√ß√£o
 
 % Empilhamento
-O algoritmo IMRL foi adaptado de forma a disponibilizar ao agente uma
-pilha de polÌticas parciais \pilha\ para ser utilizada durante o
-aprendizado, incialmente vazia.  Durante o processo de aprendizado, a
-obtenÁ„o da prÛxima aÁ„o a ser executada pode ocorrer de forma
-aleatÛria ou de forma gulosa, na aplicaÁ„o de \qb\ ou de uma polÌtica
-parcial.  Em cada um desses momentos, caso a prÛxima aÁ„o selecionada
-seja uma polÌtica parcial $p_1$, esta È adicionada ao topo da pilha.
-Dessa forma, um agente que inicia com uma pilha vazia $\pilhaS=[\ ]$ e
-obtÈm como prÛxima aÁ„o a polÌtica parcial \peum\ resultar· com
-$\pilhaS=[\peumS]$. Caso a aplicaÁ„o de \peum\ sugira a execuÁ„o de
-uma nova polÌtica parcial $p_2$, essa ser· ent„o empilhada, resultando
-em $\pilhaS=[\peumS, p_2]$ e assim sucessivamente para novas polÌticas
-parciais.
+Para explorar a caracter√≠stica hier√°rquica presente nas pol√≠ticas
+parciais de forma a acelerar o aprendizado, forneceu-se ao agente uma
+estrutura a ser utilizada para o armazenamento do hist√≥rico de
+utiliza√ß√£o de pol√≠ticas parciais de forma hier√°rquica atrav√©s de uma
+pilha.  Durante o processo de aprendizado, a obten√ß√£o da pr√≥xima a√ß√£o
+a ser executada pode ocorrer de forma aleat√≥ria ou de forma gulosa, na
+aplica√ß√£o de \qb\ ou de uma pol√≠tica parcial.  Em cada um desses
+momentos, caso a pr√≥xima a√ß√£o selecionada seja uma pol√≠tica parcial
+$p_1$, esta √© adicionada ao topo da pilha.  Dessa forma, um agente que
+inicia com uma pilha vazia $\pilhaS=[\ ]$ e obt√©m como pr√≥xima a√ß√£o a
+pol√≠tica parcial \peum\ resultar√° com $\pilhaS=[\peumS]$. Caso a
+aplica√ß√£o de \peum\ sugira a execu√ß√£o de uma nova pol√≠tica parcial
+$p_2$, essa ser√° ent√£o empilhada, resultando em $\pilhaS=[\peumS,
+p_2]$ e assim sucessivamente para novas pol√≠ticas parciais.
 
-% RemoÁ„o topo-base
+% Remo√ß√£o topo-base
 \newcommand{\td}{\emph{top-down}}
 \newcommand{\bu}{\emph{bottom-up}}
 
-Uma polÌtica parcial È removida da pilha no momento em que seu
-objetivo È atingido pelo agente, ou seja, o evento saliente utilizado
-para cri·-la È disparado.  Como uma polÌtica parcial $p$ pode invocar
-outras de modo a atingir seu objetivo, $p$ È removida da pilha
-juntamente com as polÌticas parciais invocadas por ela.  Neste
-trabalho foram investigadas duas estratÈgias de remoÁ„o de polÌticas
+Uma pol√≠tica parcial √© removida da pilha no momento em que seu
+objetivo √© atingido pelo agente, ou seja, o evento saliente utilizado
+para cri√°-la √© disparado.  Como uma pol√≠tica parcial $p$ pode invocar
+outras de modo a atingir seu objetivo, $p$ √© removida da pilha
+juntamente com as pol√≠ticas parciais invocadas por ela.  Neste
+trabalho foram investigadas duas estrat√©gias de remo√ß√£o de pol√≠ticas
 parciais que percorrem a pilha em sentidos opostos:\ \bu\ e \td.  A
-estratÈgia \bu\ testa as polÌticas parciais para remoÁ„o partindo da
-base da pilha em direÁ„o ao topo, ou seja, prioriza a remoÁ„o das
-polÌticas parciais mais \emph{antigas} sendo que a estratÈgia \td\
+estrat√©gia \bu\ testa as pol√≠ticas parciais para remo√ß√£o partindo da
+base da pilha em dire√ß√£o ao topo, ou seja, prioriza a remo√ß√£o das
+pol√≠ticas parciais mais \emph{antigas} sendo que a estrat√©gia \td\
 realiza o percurso em sentido oposto, iniciando o teste pelo topo da
-pilha em direÁ„o ‡ base, priorizando a remoÁ„o das polÌticas parciais
+pilha em dire√ß√£o √† base, priorizando a remo√ß√£o das pol√≠ticas parciais
 mais \emph{recentes}.
 
-% % DiferenÁa conceitual vs. diferenÁa na aplicaÁ„o
-% Apesar de poss˙irem uma diferenÁa conceitual sutil, os pressupostos de
-% cada estratÈgia s„o antagÙnicos: \bu\, ao priorizar a remoÁ„o das
-% polÌticas mais antigas, favorece a parte do pressuposto de que as
-% polÌticas parciais invocadas por outras possuem t„o somente a funÁ„o
+% % Diferen√ßa conceitual vs. diferen√ßa na aplica√ß√£o
+% Apesar de poss√∫irem uma diferen√ßa conceitual sutil, os pressupostos de
+% cada estrat√©gia s√£o antag√¥nicos: \bu\, ao priorizar a remo√ß√£o das
+% pol√≠ticas mais antigas, favorece a parte do pressuposto de que as
+% pol√≠ticas parciais invocadas por outras possuem t√£o somente a fun√ß√£o
 % ditada pela que as chamou.
 
-% impacto da aplicaÁ„o de cada uma delas È significativo, como mostram
+% impacto da aplica√ß√£o de cada uma delas √© significativo, como mostram
 % os experimentos.
 
 
 % No Algoritmo \ref{alg:modificado} encontram-se marcadas as
-% modificaÁıes propostas em relaÁ„o ao algoritmo original
-% \cite{imrl2004}. O intuito È o de contribuir ‡ proposta original
-% soluÁıes de eventuais ambiguidades ou aparentes inconsistÍncias,
-% dessa forma apresentando um algoritmo que, mantendo o espÌrito
-% original da utilizaÁ„o de MotivaÁ„o InstrÌnseca no Aprendizado por
-% ReforÁo, acrescenta alternativas de implementaÁ„o buscando obter
-% melhorias de desempenho no aprendizado. Abaixo s„o descritas as
-% motivaÁıes e respectivas motivaÁıes teÛricas e/ou de cunho pr·tico.
+% modifica√ß√µes propostas em rela√ß√£o ao algoritmo original
+% \cite{imrl2004}. O intuito √© o de contribuir √† proposta original
+% solu√ß√µes de eventuais ambiguidades ou aparentes inconsist√™ncias,
+% dessa forma apresentando um algoritmo que, mantendo o esp√≠rito
+% original da utiliza√ß√£o de Motiva√ß√£o Instr√≠nseca no Aprendizado por
+% Refor√ßo, acrescenta alternativas de implementa√ß√£o buscando obter
+% melhorias de desempenho no aprendizado. Abaixo s√£o descritas as
+% motiva√ß√µes e respectivas motiva√ß√µes te√≥ricas e/ou de cunho pr√°tico.
 
 % Nas linhas \ref{alg:mod:ind:model}, \ref{alg:mod:ind:ql} e
-% \ref{alg:mod:ind:qo}, os Ìndices de $r^e_t$ e $r^i_t$ foram
+% \ref{alg:mod:ind:qo}, os √≠ndices de $r^e_t$ e $r^i_t$ foram
 % modificados para $r^e_{t+1}$ e $r^i_{t+1}$, respectivamente. Isso
-% foi feito para permitir que as atualizaÁıes que utilizam esses
-% valores considerassem a transiÁ„o $s_t,\ a_t \leftarrow s_{t+1}$ ao
-% invÈs da precedente a esta, como era anteriormente. Ainda de acordo
-% com essa modificaÁ„o, a obtenÁ„o de $r^e_{t+1}$, que anteriormente
-% era realizada apÛs a linha \ref{alg:mod:re2:localantigo}, passa a
-% ser realizada logo apÛs a transiÁ„o de estados (linha
+% foi feito para permitir que as atualiza√ß√µes que utilizam esses
+% valores considerassem a transi√ß√£o $s_t,\ a_t \leftarrow s_{t+1}$ ao
+% inv√©s da precedente a esta, como era anteriormente. Ainda de acordo
+% com essa modifica√ß√£o, a obten√ß√£o de $r^e_{t+1}$, que anteriormente
+% era realizada ap√≥s a linha \ref{alg:mod:re2:localantigo}, passa a
+% ser realizada logo ap√≥s a transi√ß√£o de estados (linha
 % \ref{alg:mod:re2}).
 
-% A atualizaÁ„o do modelo da polÌtica parcial na proposta original, È
-% precedida de um teste para evitar que a polÌtica parcial
+% A atualiza√ß√£o do modelo da pol√≠tica parcial na proposta original, √©
+% precedida de um teste para evitar que a pol√≠tica parcial
 % correspondente ao evento saliente que possa ter ocorrido no passo
 % atual, $o_e$, seja processada (linha \ref{alg:mod:oe:if}). Uma
-% vantagem advinda disso È o de se poder utilizar os valores de
-% $Q^{o_e}$ j· atualizados. Entretanto, como a atualizaÁ„o de
-% $Q^{o_e}$ somente ocorre ao final do algoritmo, È necess·rio esperar
-% os prÛximos passos para utilizar os valores atualizados. Dessa
-% forma, e como a primeira referÍncia a $o_e$ ocorre na linha
-% \ref{alg:mod:oe:priocorr}, na nova proposta a inicializaÁ„o e
-% atribuiÁ„o foram adicionadas nas linhas \ref{alg:mod:oe:ini} e
+% vantagem advinda disso √© o de se poder utilizar os valores de
+% $Q^{o_e}$ j√° atualizados. Entretanto, como a atualiza√ß√£o de
+% $Q^{o_e}$ somente ocorre ao final do algoritmo, √© necess√°rio esperar
+% os pr√≥ximos passos para utilizar os valores atualizados. Dessa
+% forma, e como a primeira refer√™ncia a $o_e$ ocorre na linha
+% \ref{alg:mod:oe:priocorr}, na nova proposta a inicializa√ß√£o e
+% atribui√ß√£o foram adicionadas nas linhas \ref{alg:mod:oe:ini} e
 % \ref{alg:mod:oe:atr}, respectivamente. Isso foi feito por dois
-% motivos: (i) definir $o_e$ de forma explÌcita no algoritmo e (ii)
-% tratar os valores que $o_e$ assume de acordo com a lÛgica de
-% atualizaÁ„o do modelo da polÌtica parcial, aproveitando os valores
+% motivos: (i) definir $o_e$ de forma expl√≠cita no algoritmo e (ii)
+% tratar os valores que $o_e$ assume de acordo com a l√≥gica de
+% atualiza√ß√£o do modelo da pol√≠tica parcial, aproveitando os valores
 % atualizados de $Q^{o_e}$.
 
-% O algoritmo original prevÍ a adiÁ„o de estados ‡s polÌticas parciais
+% O algoritmo original prev√™ a adi√ß√£o de estados √†s pol√≠ticas parciais
 % de forma retroativa: caso o agente, partindo de $s_t$ alcance
-% $s_{t+1}$ e $s_{t+1} \in I^o$, $s_t$ È adicionado a
-% $I^o$. Entretanto, caso uma polÌtica parcial possa ser reiniciada em
-% um estado terminal, pode ser gerado um ciclo de repetiÁ„o indefinido
-% em que a polÌtica parcial chama a si mesma ao terminar. Dessa forma,
+% $s_{t+1}$ e $s_{t+1} \in I^o$, $s_t$ √© adicionado a
+% $I^o$. Entretanto, caso uma pol√≠tica parcial possa ser reiniciada em
+% um estado terminal, pode ser gerado um ciclo de repeti√ß√£o indefinido
+% em que a pol√≠tica parcial chama a si mesma ao terminar. Dessa forma,
 % na linha \ref{alg:mod:addI} foi adicionado um teste para evitar que
-% um estado terminal da polÌtica parcial seja adicionado ao seu
+% um estado terminal da pol√≠tica parcial seja adicionado ao seu
 % conjunto iniciador.
 
-% Como a escolha de quais aÁıes s„o aplic·veis nesse momento È um
-% fator importante na atualizaÁ„o do modelo das polÌticas parciais, na
-% proposta original, as funÁıes $P^o$ e $R^o$ somente s„o atualizadas
-% caso a aÁ„o $a_t$ executada no passo atual seja gulosa para a
-% polÌtica parcial em quest„o (linha \ref{alg:mod:atgreedy}). Isso
-% pode ser explicado pelo fato de que a atualizaÁ„o dessas funÁıes
+% Como a escolha de quais a√ß√µes s√£o aplic√°veis nesse momento √© um
+% fator importante na atualiza√ß√£o do modelo das pol√≠ticas parciais, na
+% proposta original, as fun√ß√µes $P^o$ e $R^o$ somente s√£o atualizadas
+% caso a a√ß√£o $a_t$ executada no passo atual seja gulosa para a
+% pol√≠tica parcial em quest√£o (linha \ref{alg:mod:atgreedy}). Isso
+% pode ser explicado pelo fato de que a atualiza√ß√£o dessas fun√ß√µes
 % representem um consumo significativo de recursos computacionais. Na
-% proposta atual, essa restriÁ„o foi investigada, sendo executados
-% experimentos tambÈm para o caso em que n„o h· a necessidade de $a_t$
-% ser a aÁ„o gulosa.
+% proposta atual, essa restri√ß√£o foi investigada, sendo executados
+% experimentos tamb√©m para o caso em que n√£o h√° a necessidade de $a_t$
+% ser a a√ß√£o gulosa.
 
-% Na proposta original, a atualizaÁ„o de $Q_B$ para polÌticas parciais
+% Na proposta original, a atualiza√ß√£o de $Q_B$ para pol√≠ticas parciais
 % (planejamento SMDP, linha \ref{alg:mod:qbo}) considerava para esse
-% c·lculo quaiquer estados $s_t$ que o agente viesse a visitar. Para
-% evitar problemas de incosistÍncia entre a funÁ„o-valor e o conjunto
-% iniciador de uma polÌtica parcial $o$, foi adicionado um teste que
-% somente atualiza $Q_B(s_t,\ o)$ para uma dada polÌtica parcial $o$
-% se $s_t \in I^o$. Dessa forma, evita-se que seja atribuÌdo um valor
-% positivo ‡ execuÁ„o de uma polÌtica parcial $o$ em um estado em que
-% a polÌtica parcial n„o possa ser executada. Uma outra vantagem
-% decorrente dessa modificaÁ„o È a possÌvel economia de recursos
-% computacionais, j· que algumas atualizaÁıes desnecess·rias s„o
+% c√°lculo quaiquer estados $s_t$ que o agente viesse a visitar. Para
+% evitar problemas de incosist√™ncia entre a fun√ß√£o-valor e o conjunto
+% iniciador de uma pol√≠tica parcial $o$, foi adicionado um teste que
+% somente atualiza $Q_B(s_t,\ o)$ para uma dada pol√≠tica parcial $o$
+% se $s_t \in I^o$. Dessa forma, evita-se que seja atribu√≠do um valor
+% positivo √† execu√ß√£o de uma pol√≠tica parcial $o$ em um estado em que
+% a pol√≠tica parcial n√£o possa ser executada. Uma outra vantagem
+% decorrente dessa modifica√ß√£o √© a poss√≠vel economia de recursos
+% computacionais, j√° que algumas atualiza√ß√µes desnecess√°rias s√£o
 % potencialmente evitadas.
 
 % \begin{algorithm}
@@ -379,7 +380,7 @@ mais \emph{recentes}.
 %     \newcommand{\sd}{s_{t+1}}
 %     \newcommand{\bo}[1]{$\beta^o(#1)$}
 %     \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
-%     \newcommand{\tv}{\tr{valor terminal para a polÌtica parcial $o$}}
+%     \newcommand{\tv}{\tr{valor terminal para a pol√≠tica parcial $o$}}
 %     \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
 %     \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
 %     \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
@@ -394,21 +395,21 @@ mais \emph{recentes}.
 
 %     \REPEAT
 
-%     \STATE Obter prÛximo estado $\sd$
+%     \STATE Obter pr√≥ximo estado $\sd$
 
-%     \STATE \label{alg:mod:re2} \grifar{$r^e_{t+1} \leftarrow$ recompensa extrÌnsica recebida na transiÁ„o $s_t,\ a_t \rightarrow s_{t+1}$}
+%     \STATE \label{alg:mod:re2} \grifar{$r^e_{t+1} \leftarrow$ recompensa extr√≠nsica recebida na transi√ß√£o $s_t,\ a_t \rightarrow s_{t+1}$}
 
 %     \GIMMESPACE
 
-%     \STATE\COMMENT{Trata ocorrÍncia de evento saliente}
+%     \STATE\COMMENT{Trata ocorr√™ncia de evento saliente}
 
 %     \STATE \label{alg:mod:oe:ini}\grifar{$o_e \leftarrow nil$}
 
 %     \IF{ocorreu um evento saliente $e$}
 
-%         \IF{polÌtica parcial para $e$, $o_e$, n„o existe em $O$}\label{alg:mod:oe:priocorr}
+%         \IF{pol√≠tica parcial para $e$, $o_e$, n√£o existe em $O$}\label{alg:mod:oe:priocorr}
 
-%             \STATE \label{alg:mod:oe:atr}\grifar{$o_e \leftarrow $[polÌtica parcial para $e$]}
+%             \STATE \label{alg:mod:oe:atr}\grifar{$o_e \leftarrow $[pol√≠tica parcial para $e$]}
 
 %             \STATE Criar $o_e$ em $O$
 
@@ -428,9 +429,9 @@ mais \emph{recentes}.
 
 %     \GIMMESPACE
 
-%     \STATE\COMMENT{Atualiza o modelo das polÌticas parciais}
+%     \STATE\COMMENT{Atualiza o modelo das pol√≠ticas parciais}
 
-%     \FOR{cada polÌtica parcial $o \neq $\grifar{$o_e$} em $O$} \label{alg:mod:oe:if}
+%     \FOR{cada pol√≠tica parcial $o \neq $\grifar{$o_e$} em $O$} \label{alg:mod:oe:if}
 
 %         \IF{$s_{t+1} \in I^o$ \AND \grifar{$\beta^o(s_t) \neq 1$}} \label{alg:mod:addI}
 
@@ -438,13 +439,13 @@ mais \emph{recentes}.
 
 %         \ENDIF
 
-%         \IF{\grifar{$a_t$ È a aÁ„o gulosa para $o$ no estado $s_t$}} \label{alg:mod:atgulosa}
+%         \IF{\grifar{$a_t$ √© a a√ß√£o gulosa para $o$ no estado $s_t$}} \label{alg:mod:atgulosa}
 
-%             \STATE\COMMENT{Atualiza o modelo probabilÌstico de transiÁ„o da polÌtica parcial}
+%             \STATE\COMMENT{Atualiza o modelo probabil√≠stico de transi√ß√£o da pol√≠tica parcial}
 
 %             \STATE $P(x|s_t) \xleftarrow{\alpha} [\gamma(1 - \beta^o(s_{t+1}))P^o(x|s_{t+1}) + \gamma\beta^o(s_{t+1})\delta_{s_{t+1}x}]$
 
-%             \STATE\COMMENT{Atualiza modelo de recompensa da polÌtica parcial} \STATE $R^o(s_t) \xleftarrow{\alpha} [$\grifar{$r^e_{t+1}$}$ + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$ \label{alg:mod:ind:model}
+%             \STATE\COMMENT{Atualiza modelo de recompensa da pol√≠tica parcial} \STATE $R^o(s_t) \xleftarrow{\alpha} [$\grifar{$r^e_{t+1}$}$ + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$ \label{alg:mod:ind:model}
 
 %         \ENDIF
 
@@ -452,15 +453,15 @@ mais \emph{recentes}.
 
 %     \GIMMESPACE
 
-%     \STATE\COMMENT{AtualizaÁ„o da \tr{funÁ„o valor estado-aÁ„o} do Q-Learning}
+%     \STATE\COMMENT{Atualiza√ß√£o da \tr{fun√ß√£o valor estado-a√ß√£o} do Q-Learning}
 
 %     \STATE $Q_B(s_t,\ a_t) \xleftarrow{\alpha} $\grifar{$r^e_{t+1}$}$ + $\grifar{$r^i_{t+1}$}$ + \gamma\max_{a \in A \cup O}{Q_B(s_{t+1},\ a)}$ \label{alg:mod:ind:ql}
 
 %     \GIMMESPACE
 
-%     \STATE\COMMENT{AtualizaÁ„o da \tr{funÁ„o valor estado-aÁ„o} para planejamento SMDP}
+%     \STATE\COMMENT{Atualiza√ß√£o da \tr{fun√ß√£o valor estado-a√ß√£o} para planejamento SMDP}
 
-%     \FOR{cada polÌtica parcial $o$ em $O$}
+%     \FOR{cada pol√≠tica parcial $o$ em $O$}
 
 %         \IF{\grifar{$s_t \in I^o$}}
 
@@ -472,15 +473,15 @@ mais \emph{recentes}.
 
 %     \GIMMESPACE
 
-%     \STATE\COMMENT{AtualizaÁ„o das \tr{funÁıes valor estado-aÁ„o} para as polÌticas parciais}
+%     \STATE\COMMENT{Atualiza√ß√£o das \tr{fun√ß√µes valor estado-a√ß√£o} para as pol√≠ticas parciais}
 
-%     \FOR{cada polÌtica parcial $o$ em $O$ tal que $s_t \in I^o$}
+%     \FOR{cada pol√≠tica parcial $o$ em $O$ tal que $s_t \in I^o$}
 
 %         \STATE $v \leftarrow$ \tv
 
 %         \STATE $Q^o(s_t,\ a_t)$\aalpha$\ $\grifar{$r^e_{t+1}$}$\ +\ \gamma\{$\termoA$\ +\ $\termoB$\}$ \label{alg:mod:ind:qo}
 
-%         \FOR{cada polÌtica parcial $o'$ em $O$ tal que $s_t \in I^{o'}$ e $o \neq o'$}
+%         \FOR{cada pol√≠tica parcial $o'$ em $O$ tal que $s_t \in I^{o'}$ e $o \neq o'$}
 
 %             \STATE $Q^o(s_t,\ o')$\aalpha $R^{o'}(s_t)\ + \sum_{x \in S}{P^{o'}(x|s_t)}\{$\termoC$\ +\ $\termoD$\}$
 
@@ -488,11 +489,11 @@ mais \emph{recentes}.
 
 %     \ENDFOR \label{alg:mod:re2:localantigo}
 
-%     \STATE Escolher $a_{t+1}$ atravÈs de estratÈgia \tr{$\epsilon$-gulosa} com respeito a $Q_B$
+%     \STATE Escolher $a_{t+1}$ atrav√©s de estrat√©gia \tr{$\epsilon$-gulosa} com respeito a $Q_B$
 
 %     \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
 
-%     \UNTIL{condiÁ„o de parada}
+%     \UNTIL{condi√ß√£o de parada}
 
 % \end{algorithmic}
 % \end{algorithm}
@@ -506,7 +507,7 @@ mais \emph{recentes}.
 % diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
 % vestibulum accumsan nisl.
 
-% \section{Resultados e Discuss„o}
+% \section{Resultados e Discuss√£o}
 % Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
 % hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
 % nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis
@@ -515,40 +516,64 @@ mais \emph{recentes}.
 % diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
 % vestibulum accumsan nisl.
 
-% Checar localizaÁ„o desse par·grafo (seria um de arcabouÁo teÛrico?)
-% Espera-se como resultado da aplicaÁ„o da utilizaÁ„o de MotivaÁ„o
-% IntrÌnseca em Aprendizado por ReforÁo um aceleramento do processo de
-% aprendizado atravÈs da exploraÁ„o da estrutura hier·rquica do
-% problema. Esse aproveitamento pode ser feito em trÍs etapas: (i)
-% identificaÁ„o de sub-problemas e (ii) aprendizado e refinamento da
-% soluÁ„o dos sub-problemas (iii) composiÁ„o da soluÁ„o para a tarefa
-% inicial utilizando as soluÁıes dos sub-problemas.
+% Checar localiza√ß√£o desse par√°grafo (seria um de arcabou√ßo te√≥rico?)
+% Espera-se como resultado da aplica√ß√£o da utiliza√ß√£o de Motiva√ß√£o
+% Intr√≠nseca em Aprendizado por Refor√ßo um aceleramento do processo de
+% aprendizado atrav√©s da explora√ß√£o da estrutura hier√°rquica do
+% problema. Esse aproveitamento pode ser feito em tr√™s etapas: (i)
+% identifica√ß√£o de sub-problemas e (ii) aprendizado e refinamento da
+% solu√ß√£o dos sub-problemas (iii) composi√ß√£o da solu√ß√£o para a tarefa
+% inicial utilizando as solu√ß√µes dos sub-problemas.
 
-% Para testar as propostas relacionadas ao algoritmo, procedeu-se ‡
-% realizaÁ„o de experimentos , cuja funÁ„o seria a de verificar
-% empiricamente a validade da implementaÁ„o. Essa verificaÁ„o
-% empÌrica serviria a dois propÛsitos: checar a consistÍncia da
-% implementaÁ„o e avaliar a qualidade das modificaÁıes propostas.
-% Um experimento que se enquadra no primeiro dos propÛsitos
+% Para testar as propostas relacionadas ao algoritmo, procedeu-se √†
+% realiza√ß√£o de experimentos , cuja fun√ß√£o seria a de verificar
+% empiricamente a validade da implementa√ß√£o. Essa verifica√ß√£o
+% emp√≠rica serviria a dois prop√≥sitos: checar a consist√™ncia da
+% implementa√ß√£o e avaliar a qualidade das modifica√ß√µes propostas.
+% Um experimento que se enquadra no primeiro dos prop√≥sitos
 % consisitiu em avaliar a quantidade e valor das recompensas
-% intrÌnsecas recebidas associadas a cada evento saliente possÌvel
+% intr√≠nsecas recebidas associadas a cada evento saliente poss√≠vel
 % (um resultado similar foi apresentado na Figura 4 do artigo
-% original). O experimento consistiu de 100 repetiÁıes de
+% original). O experimento consistiu de 100 repeti√ß√µes de
 % $5\times10^5$ passos cada, onde o agente aprendia de acordo com o
-% Algoritmo \ref{alg:modificado}. Os resultados est„o presentes na
-% figura \ref{fig:rixt}, onde s„o apresentados os valores de
-% recompensa intrÌnseca recebidos pelo agente por passos do
+% Algoritmo \ref{alg:modificado}. Os resultados est√£o presentes na
+% figura \ref{fig:rixt}, onde s√£o apresentados os valores de
+% recompensa intr√≠nseca recebidos pelo agente por passos do
 % experimento.
 
-% A an·lise dos resultados presentes na Figura \ref{fig:rixt} sugere
-% algumas caracterÌsticas do aprendizado resultante: o agente
-% inicialmente procede ‡ execuÁ„o das tarefas mais simples, como
-% ligar/desligar a luz. Isso pode ser visto pela frequÍncia e
-% prematuridade com que o agente recebe recompensas intrÌnsecas para
-% essas tarefas. Pode-se perceber uma variaÁ„o dos valores recebidos
-% associados ao evento saliente com a repetiÁ„o dos mesmos: h· uma
-% tendÍncia de \emph{diminuiÁ„o} dos valores recebidos para eventos
+% A an√°lise dos resultados presentes na Figura \ref{fig:rixt} sugere
+% algumas caracter√≠sticas do aprendizado resultante: o agente
+% inicialmente procede √† execu√ß√£o das tarefas mais simples, como
+% ligar/desligar a luz. Isso pode ser visto pela frequ√™ncia e
+% prematuridade com que o agente recebe recompensas intr√≠nsecas para
+% essas tarefas. Pode-se perceber uma varia√ß√£o dos valores recebidos
+% associados ao evento saliente com a repeti√ß√£o dos mesmos: h√° uma
+% tend√™ncia de \emph{diminui√ß√£o} dos valores recebidos para eventos
 % salientes repetidos.
+
+\section{Configura√ß√£o Experimental}
+Para avaliar o desempenho da estrat√©gia proposta, foram realizados
+conjuntos de experimentos onde o algoritmo implementado contempla as
+modifica√ß√µes concernentes a cada estrat√©gia.
+
+% 5e5 passos, n√£o-epis√≥dico
+% valores dos par√¢metros
+
+\newcommand{\mi}{MI}
+
+\newcommand{\mon}{$monkey_{ON}$} Para avaliar o impacto da utiliza√ß√£o
+de \mi\ no aprendizado, foram realizados dois experimentos utilizando
+o algoritmo proposto, mas em um deles foi desativado o m√≥dulo de
+obten√ß√£o de pol√≠ticas parciais a partir de \mi. A dura√ß√£o de cada
+experimento foi de $5e5$ passos, o agente recebendo uma recompensa
+extr√≠nseca para ocorr√™ncia de \mon\ no valor de 10 e recompensas
+intr√≠nsecas para os demais eventos salientes no valor de 1. Os
+resultados est√£o presentes no gr√°fico da \ref{fig:}
+
+nos quais um dos agentes utilizava o algoritmo proposto e o outro n√£o
+agente disp√µe de $5e5$ passos, sendo recompensado de 1 para ativa√ß√µes
+de eventos salientes e 10 para ativa√ß√µes do $monkey_{}$ utilizando o
+algoritmo proposto.
 
 \begin{figure}
   \centering
@@ -556,53 +581,53 @@ mais \emph{recentes}.
     \centering
     \begin{subfigure}[b]{0.47\textwidth}
       \includegraphics[width=\textwidth]{EfeitoMI}
-      \caption{Efeito da MotivaÁ„o IntrÌnseca no Aprendizado}
+      \caption{Efeito da Motiva√ß√£o Intr√≠nseca no Aprendizado}
       \label{fig:mi}
     \end{subfigure}
     ~
     \begin{subfigure}[b]{0.47\textwidth}
       \includegraphics[width=\textwidth]{toyonxstep-mediaacum-epsopt-parcial-02-04-06-08}
-      \caption{InfluÍncia de $\epsilon_{p^3}$ no Aprendizado}
+      \caption{Influ√™ncia de $\epsilon_{p^3}$ no Aprendizado}
       \label{fig:ep3}
     \end{subfigure}
   \end{subfigure}
 
   \begin{subfigure}[t]{\textwidth}
     \includegraphics[width=\textwidth]{r_i-2014-07-12_07-15-03-Teri}
-    \caption{Recebimento de Recompensa IntrÌnseca Durante o Aprendizado}
+    \caption{Recebimento de Recompensa Intr√≠nseca Durante o Aprendizado}
     \label{fig:ri}
   \end{subfigure}
   \caption{}\label{fig:res}
 \end{figure}
 
-% Para verificar a suscetibilidade do algoritmo proposto seria ‡
-% \tr{estratÈgia de abandono da polÌtica parcial}, foram realizadas
-% repetiÁıes de experimentos com variaÁıes gradativas do valor de
-% $\epsilon_o$, conforme descrito na seÁ„o \tr{...}. Os resultados s„o
-% apresentados na figura \ref{fig:epsopt}. O gr·fico mostra a mÈdia
-% cumulativa de ativaÁıes do \emph{monkey} por passo. Pela an·lise
-% desses resultados, podemos verificar a variaÁ„o do desempenho do
+% Para verificar a suscetibilidade do algoritmo proposto seria √†
+% \tr{estrat√©gia de abandono da pol√≠tica parcial}, foram realizadas
+% repeti√ß√µes de experimentos com varia√ß√µes gradativas do valor de
+% $\epsilon_o$, conforme descrito na se√ß√£o \tr{...}. Os resultados s√£o
+% apresentados na figura \ref{fig:epsopt}. O gr√°fico mostra a m√©dia
+% cumulativa de ativa√ß√µes do \emph{monkey} por passo. Pela an√°lise
+% desses resultados, podemos verificar a varia√ß√£o do desempenho do
 % aprendizado com o valor escolhido para $\epsilon_o$, sugerindo que a
-% correta escolha desse par‚metro possui um impacto significativo no
+% correta escolha desse par√¢metro possui um impacto significativo no
 % desempenho de aprendizado do agente. \tr{TODO: complementar}
 
-% Foram tambÈm investigadas duas estratÈgias de adiÁ„o de novos
-% estados ‡ polÌtica parcial: (i) \tr{backward}, em que um novo estado
-% $s_t$ somente È adicionado ao conjunto iniciador $I^o$ de uma
-% polÌtica parcial $o$ se ocorrer que ao realizar a transiÁ„o $s_t,\
+% Foram tamb√©m investigadas duas estrat√©gias de adi√ß√£o de novos
+% estados √† pol√≠tica parcial: (i) \tr{backward}, em que um novo estado
+% $s_t$ somente √© adicionado ao conjunto iniciador $I^o$ de uma
+% pol√≠tica parcial $o$ se ocorrer que ao realizar a transi√ß√£o $s_t,\
 % a_t \rightarrow s_{t+1}$, tenha-se $s_{t+1} \in I^o$ e (ii)
-% \tr{backward+forward}, em que ocorre a adiÁ„o descrita em (i), alÈm
-% de: caso o agente, estando em $s_t \in I^o$, realizar a transiÁ„o
-% $s_t,\ a_t \rightarrow s_{t+1}$, $s_{t+1}$ È incluÌdo em $I^o$. Como
-% no algoritmo original, somente era realizada a adiÁ„o (i), mas no
-% artigo original de polÌticas parciais \cite{option1999} È levantada
-% tambÈm a possibilidade descrita em (ii), procedeu-se ‡ investigaÁ„o
-% dos possÌveis resultados decorrentes dessa nova adiÁ„o. Os
+% \tr{backward+forward}, em que ocorre a adi√ß√£o descrita em (i), al√©m
+% de: caso o agente, estando em $s_t \in I^o$, realizar a transi√ß√£o
+% $s_t,\ a_t \rightarrow s_{t+1}$, $s_{t+1}$ √© inclu√≠do em $I^o$. Como
+% no algoritmo original, somente era realizada a adi√ß√£o (i), mas no
+% artigo original de pol√≠ticas parciais \cite{option1999} √© levantada
+% tamb√©m a possibilidade descrita em (ii), procedeu-se √† investiga√ß√£o
+% dos poss√≠veis resultados decorrentes dessa nova adi√ß√£o. Os
 % resultados desse experimento podem ser vistos na figura
-% \ref{fig:dummy}, que mostra \tr{...}. Pela an·lise dos resultados aÌ
+% \ref{fig:dummy}, que mostra \tr{...}. Pela an√°lise dos resultados a√≠
 % presentes, podemos concluir que \tr{...}.
 
-% \section{Conclus„o}
+% \section{Conclus√£o}
 % Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
 % hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
 % nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis

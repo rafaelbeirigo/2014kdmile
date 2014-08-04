@@ -269,6 +269,35 @@ uma nova política parcial $p_2$, essa será então empilhada, resultando
 em $\pilhaS=[\peumS, p_2]$ e assim sucessivamente para novas políticas
 parciais.
 
+% Remoção topo-base
+\newcommand{\td}{\emph{top-down}}
+\newcommand{\bu}{\emph{bottom-up}}
+
+Uma política parcial é removida da pilha no momento em que seu
+objetivo é atingido pelo agente, ou seja, o evento saliente utilizado
+para criá-la é disparado.  Como uma política parcial $p$ pode invocar
+outras de modo a atingir seu objetivo, $p$ é removida da pilha
+juntamente com as políticas parciais invocadas por ela.  Neste
+trabalho foram investigadas duas estratégias de remoção de políticas
+parciais que percorrem a pilha em sentidos opostos:\ \bu\ e \td.  A
+estratégia \bu\ testa as políticas parciais para remoção partindo da
+base da pilha em direção ao topo, ou seja, prioriza a remoção das
+políticas parciais mais \emph{antigas} sendo que a estratégia \td\
+realiza o percurso em sentido oposto, iniciando o teste pelo topo da
+pilha em direção à base, priorizando a remoção das políticas parciais
+mais \emph{recentes}.
+
+% % Diferença conceitual vs. diferença na aplicação
+% Apesar de possúirem uma diferença conceitual sutil, os pressupostos de
+% cada estratégia são antagônicos: \bu\, ao priorizar a remoção das
+% políticas mais antigas, favorece a parte do pressuposto de que as
+% políticas parciais invocadas por outras possuem tão somente a função
+% ditada pela que as chamou.
+
+% impacto da aplicação de cada uma delas é significativo, como mostram
+% os experimentos.
+
+
 % No Algoritmo \ref{alg:modificado} encontram-se marcadas as
 % modificações propostas em relação ao algoritmo original
 % \cite{imrl2004}. O intuito é o de contribuir à proposta original

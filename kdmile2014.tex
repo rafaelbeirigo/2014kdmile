@@ -169,7 +169,7 @@
 
 \maketitle
 
-% \section{Introdução}
+% \Section{Introdução}
 % Problemas nos quais o agente deve tomar uma série de decisões
 % sequenciais podem ser resolvidos através de técnicas de Aprendizado
 % por Reforço \cite{rlsutton,rlczaba}, em que o agente recebe um
@@ -241,14 +241,63 @@
 % diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
 % vestibulum accumsan nisl.
 
-% \section{Algoritmo}\label{sec:algoritmo}
-% Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-% hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
-% nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis
-% natoque penatibus et magnis dis parturient montes, nascetur
-% ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique
-% diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
-% vestibulum accumsan nisl.
+\section{Algoritmo}\label{sec:algoritmo}
+
+\newcommand{\pilhaS}{\mathcal{P}}
+\newcommand{\pilha}{$\pilhaS$}
+\newcommand{\attS}{a_{t+1}}
+\newcommand{\att}{$\attS$}
+\newcommand{\qbS}{Q^B}
+\newcommand{\qb}{$\qbS$}
+\newcommand{\peumS}{p_1}
+\newcommand{\peum}{$\peumS$}
+
+% Motivação
+
+% Empilhamento
+Para explorar a característica hierárquica presente nas políticas
+parciais de forma a acelerar o aprendizado, forneceu-se ao agente uma
+estrutura a ser utilizada para o armazenamento do histórico de
+utilização de políticas parciais de forma hierárquica através de uma
+pilha.  Durante o processo de aprendizado, a obtenção da próxima ação
+a ser executada pode ocorrer de forma aleatória ou de forma gulosa, na
+aplicação de \qb\ ou de uma política parcial.  Em cada um desses
+momentos, caso a próxima ação selecionada seja uma política parcial
+$p_1$, esta é adicionada ao topo da pilha.  Dessa forma, um agente que
+inicia com uma pilha vazia $\pilhaS=[\ ]$ e obtém como próxima ação a
+política parcial \peum\ resultará com $\pilhaS=[\peumS]$. Caso a
+aplicação de \peum\ sugira a execução de uma nova política parcial
+$p_2$, essa será então empilhada, resultando em $\pilhaS=[\peumS,
+p_2]$ e assim sucessivamente para novas políticas parciais.
+
+% Remoção topo-base
+\newcommand{\td}{\emph{top-down}}
+\newcommand{\bu}{\emph{bottom-up}}
+
+Uma política parcial é removida da pilha no momento em que seu
+objetivo é atingido pelo agente, ou seja, o evento saliente utilizado
+para criá-la é disparado.  Como uma política parcial $p$ pode invocar
+outras de modo a atingir seu objetivo, $p$ é removida da pilha
+juntamente com as políticas parciais invocadas por ela.  Neste
+trabalho foram investigadas duas estratégias de remoção de políticas
+parciais que percorrem a pilha em sentidos opostos:\ \bu\ e \td.  A
+estratégia \bu\ testa as políticas parciais para remoção partindo da
+base da pilha em direção ao topo, ou seja, prioriza a remoção das
+políticas parciais mais \emph{antigas} sendo que a estratégia \td\
+realiza o percurso em sentido oposto, iniciando o teste pelo topo da
+pilha em direção à base, priorizando a remoção das políticas parciais
+mais \emph{recentes}.
+
+% % Diferença conceitual vs. diferença na aplicação
+% Apesar de possúirem uma diferença conceitual sutil, os pressupostos de
+% cada estratégia são antagônicos: \bu\, ao priorizar a remoção das
+% políticas mais antigas, favorece a parte do pressuposto de que as
+% políticas parciais invocadas por outras possuem tão somente a função
+% ditada pela que as chamou.
+
+% impacto da aplicação de cada uma delas é significativo, como mostram
+% os experimentos.
+
 
 % No Algoritmo \ref{alg:modificado} encontram-se marcadas as
 % modificações propostas em relação ao algoritmo original
@@ -501,6 +550,30 @@
 % associados ao evento saliente com a repetição dos mesmos: há uma
 % tendência de \emph{diminuição} dos valores recebidos para eventos
 % salientes repetidos.
+
+\section{Configuração Experimental}
+Para avaliar o desempenho da estratégia proposta, foram realizados
+conjuntos de experimentos onde o algoritmo implementado contempla as
+modificações concernentes a cada estratégia.
+
+% 5e5 passos, não-episódico
+% valores dos parâmetros
+
+\newcommand{\mi}{MI}
+
+\newcommand{\mon}{$monkey_{ON}$} Para avaliar o impacto da utilização
+de \mi\ no aprendizado, foram realizados dois experimentos utilizando
+o algoritmo proposto, mas em um deles foi desativado o módulo de
+obtenção de políticas parciais a partir de \mi. A duração de cada
+experimento foi de $5e5$ passos, o agente recebendo uma recompensa
+extrínseca para ocorrência de \mon\ no valor de 10 e recompensas
+intrínsecas para os demais eventos salientes no valor de 1. Os
+resultados estão presentes no gráfico da \ref{fig:}
+
+nos quais um dos agentes utilizava o algoritmo proposto e o outro não
+agente dispõe de $5e5$ passos, sendo recompensado de 1 para ativações
+de eventos salientes e 10 para ativações do $monkey_{}$ utilizando o
+algoritmo proposto.
 
 \begin{figure}
   \centering

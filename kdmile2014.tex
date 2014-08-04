@@ -169,7 +169,7 @@
 
 \maketitle
 
-% \section{Introdução}
+% \Section{Introdução}
 % Problemas nos quais o agente deve tomar uma série de decisões
 % sequenciais podem ser resolvidos através de técnicas de Aprendizado
 % por Reforço \cite{rlsutton,rlczaba}, em que o agente recebe um
@@ -241,14 +241,33 @@
 % diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
 % vestibulum accumsan nisl.
 
-% \section{Algoritmo}\label{sec:algoritmo}
-% Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-% hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
-% nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis
-% natoque penatibus et magnis dis parturient montes, nascetur
-% ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique
-% diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
-% vestibulum accumsan nisl.
+\section{Algoritmo}\label{sec:algoritmo}
+
+\newcommand{\pilhaS}{\mathcal{P}}
+\newcommand{\pilha}{$\pilhaS$}
+\newcommand{\attS}{a_{t+1}}
+\newcommand{\att}{$\attS$}
+\newcommand{\qbS}{Q^B}
+\newcommand{\qb}{$\qbS$}
+\newcommand{\peumS}{p_1}
+\newcommand{\peum}{$\peumS$}
+
+% Motivação
+
+% Empilhamento
+A estratégia consistiu de disponibilizar ao agente uma pilha de
+políticas parciais \pilha\ para ser utilizada durante o aprendizado,
+incialmente vazia.  Durante o processo de aprendizado, a obtenção da
+próxima ação a ser executada pode ocorrer de forma aleatória ou de
+forma gulosa, na aplicação de \qb\ ou de uma política parcial.  Em
+cada um desses momentos, caso a próxima ação selecionada seja uma
+política parcial $p_1$, esta é adicionada ao topo da pilha.  Dessa
+forma, um agente que inicia com uma pilha vazia $\pilhaS=[\ ]$ e obtém
+como próxima ação a política parcial \peum\ resultará com
+$\pilhaS=[\peumS]$. Caso a aplicação de \peum\ sugira a execução de
+uma nova política parcial $p_2$, essa será então empilhada, resultando
+em $\pilhaS=[\peumS, p_2]$ e assim sucessivamente para novas políticas
+parciais.
 
 % No Algoritmo \ref{alg:modificado} encontram-se marcadas as
 % modificações propostas em relação ao algoritmo original

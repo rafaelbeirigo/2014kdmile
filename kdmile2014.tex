@@ -255,15 +255,15 @@
 % Motivação
 
 % Empilhamento
-A estratégia consistiu de disponibilizar ao agente uma pilha de
-políticas parciais \pilha\ para ser utilizada durante o aprendizado,
-incialmente vazia.  Durante o processo de aprendizado, a obtenção da
-próxima ação a ser executada pode ocorrer de forma aleatória ou de
-forma gulosa, na aplicação de \qb\ ou de uma política parcial.  Em
-cada um desses momentos, caso a próxima ação selecionada seja uma
-política parcial $p_1$, esta é adicionada ao topo da pilha.  Dessa
-forma, um agente que inicia com uma pilha vazia $\pilhaS=[\ ]$ e obtém
-como próxima ação a política parcial \peum\ resultará com
+O algoritmo IMRL foi adaptado de forma a disponibilizar ao agente uma
+pilha de políticas parciais \pilha\ para ser utilizada durante o
+aprendizado, incialmente vazia.  Durante o processo de aprendizado, a
+obtenção da próxima ação a ser executada pode ocorrer de forma
+aleatória ou de forma gulosa, na aplicação de \qb\ ou de uma política
+parcial.  Em cada um desses momentos, caso a próxima ação selecionada
+seja uma política parcial $p_1$, esta é adicionada ao topo da pilha.
+Dessa forma, um agente que inicia com uma pilha vazia $\pilhaS=[\ ]$ e
+obtém como próxima ação a política parcial \peum\ resultará com
 $\pilhaS=[\peumS]$. Caso a aplicação de \peum\ sugira a execução de
 uma nova política parcial $p_2$, essa será então empilhada, resultando
 em $\pilhaS=[\peumS, p_2]$ e assim sucessivamente para novas políticas

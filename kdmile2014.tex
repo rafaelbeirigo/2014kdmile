@@ -247,16 +247,22 @@ de definição das políticas parciais à determinação dos atributos
 relevantes para a identificação dos sub-problemas.
 
 Essa técnica foi aplicada com sucesso na solução de um problema com
-forte estrutura hierárquica \cite{imrl2004}, através da proposta de
-um algoritmo que utiliza em conjunto múltiplas técnicas de
-AR. Apesar da aprensentação detalhada do papel da motivação
-intrínseca no aprendizado, não há uma investigação mais aprofundada
-dos diversos componentes de aprendizado envolvidos algoritmo,
-notadamente a estratégia de aplicação das políticas parciais
-aprendidas. Neste trabalho, investigamos essa questão, apresentando
-algumas propostas de estratégias para a aplicação das políticas
-parciais aprendidas juntamente com a avaliação experimental de cada
-uma delas e uma breve discussão teórica.
+forte estrutura hierárquica \cite{imrl2004}, através da proposta de um
+algoritmo que utiliza em conjunto múltiplas técnicas de AR. Apesar da
+aprensentação detalhada do papel da motivação intrínseca no
+aprendizado, não há uma investigação mais aprofundada dos diversos
+componentes de aprendizado envolvidos algoritmo, notadamente a
+estratégia de aplicação das políticas parciais aprendidas. Neste
+trabalho, investigamos essa questão, apresentando estratégias para a
+aplicação das políticas parciais aprendidas juntamente com a avaliação
+experimental de cada uma delas.  A primeira contribuição refere-se ao
+armazenamento da aplicação de políticas parciais através de uma
+estrutura de dados em forma de pilha, que armazena incrementalmente as
+políticas parciais utilizadas pelo agente.  Para o processo de
+terminação das políticas parciais e consequente remoção da pilha,
+investiga-se o papel da exploração nesse processo.  Os resultados
+experimentais obtidos sugerem a aplicabilidade das técnicas propostas
+para o aprendizado de políticas parciais com a utilização de \mi.
 
 \section{Fundamentos Teóricos}
 Problemas de decisão sequencial são usualmente representados por um
@@ -288,7 +294,7 @@ $\pi:S \rightarrow \mathcal{O}$, associa ações primitivas ou políticas
 parciais a serem executas, sendo que $\mathcal{O}$ corresponde ao
 conjunto de todas as ações primitivas e políticas parciais.
 
-\section{Técnica Proposta}\label{sec:algoritmo}
+\section{Proposta}\label{sec:algoritmo}
 Políticas parciais podem ser obtidas automaticamente simultaneamente
 ao aprendizado através do algoritmo apresentado em \cite{imrl2004},
 que utiliza motivação intrínseca para detectar a presença de
@@ -332,53 +338,51 @@ aplica a política parcial sendo seguida de forma gulosa e, em caso
 contrário, o agente realiza exploração, ou seja, executa uma ação
 aleatória dentre as possíveis para o estado atual.
 
+% O Algoritmo \ref{alg:armipep} representa a proposta em pseudo-código.
 
-O Algoritmo \ref{alg:armipep} representa a proposta em pseudo-código.
+% \begin{algorithm}
+% \caption{ARMIP\ep}
+% \label{alg:armipep}
+% \algsetup{indent=2em}
+% \small
+% \begin{algorithmic}[1]
+%     \newcommand{\sd}{s_{t+1}}
+%     \newcommand{\bo}[1]{$\beta^o(#1)$}
+%     \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
+%     \newcommand{\tv}{\tr{valor terminal para a política parcial $o$}}
+%     \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
+%     \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
+%     \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
+%     \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
+%     \newcommand{\termoA}{\bo{\sd}$v$}
+%     \newcommand{\termoB}{[\ubo{\sd}][\maos]}
+%     \newcommand{\termoC}{\bo{x}$v$}
+%     \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
+%     \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
 
-\begin{algorithm}
-\caption{ARMIP\ep}
-\label{alg:armipep}
-\algsetup{indent=2em}
-\small
-\begin{algorithmic}[1]
-    \newcommand{\sd}{s_{t+1}}
-    \newcommand{\bo}[1]{$\beta^o(#1)$}
-    \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
-    \newcommand{\tv}{\tr{valor terminal para a política parcial $o$}}
-    \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
-    \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
-    \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
-    \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
-    \newcommand{\termoA}{\bo{\sd}$v$}
-    \newcommand{\termoB}{[\ubo{\sd}][\maos]}
-    \newcommand{\termoC}{\bo{x}$v$}
-    \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
-    \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
+%     \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
 
-    \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
+%     \REPEAT
 
-    \REPEAT
+%     \STATE Obter próximo estado $\sd$ e recompensa extrínsica $r^e_{t+1}$ recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
 
-    \STATE Obter próximo estado $\sd$ e recompensa extrínsica $r^e_{t+1}$ recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
+%     \STATE\COMMENT{Tratar ocorrência de evento saliente}
 
-    \STATE\COMMENT{Tratar ocorrência de evento saliente}
+%     \STATE\COMMENT{Atualizar modelo das políticas parciais}
 
-    \STATE\COMMENT{Atualizar modelo das políticas parciais}
+%     \STATE\COMMENT{Atualizar função valor estado-ação do Q-Learning, $Q_B$}
 
-    \STATE\COMMENT{Atualizar função valor estado-ação do Q-Learning, $Q_B$}
+%     \STATE\COMMENT{Atualizar funções valor estado-ação das políticas parciais}
 
-    \STATE\COMMENT{Atualizar funções valor estado-ação das políticas parciais}
+%     \STATE Escolher $a_{t+1}$ através de estratégia $\epsilon$-gulosa
+%     com respeito a $Q_B$; aplicar políticas parciais por estratégia
+%     \ep-gulosa; empilhar ocorrências de políticas parciais 
 
-    \STATE Escolher $a_{t+1}$ através de estratégia $\epsilon$-gulosa
-    com respeito a $Q_B$; aplicar políticas parciais por estratégia
-    \ep-gulosa; empilhar ocorrências de políticas parciais 
+%     \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
 
-    \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
-
-    \UNTIL{condição de parada}
-
-\end{algorithmic}
-\end{algorithm}
+%     \UNTIL{condição de parada}
+% \end{algorithmic}
+% \end{algorithm}
 
 % No Algoritmo \ref{alg:modificado} encontram-se marcadas as
 % modificações propostas em relação ao algoritmo original
@@ -579,16 +583,9 @@ O Algoritmo \ref{alg:armipep} representa a proposta em pseudo-código.
 % \end{algorithmic}
 % \end{algorithm}
 
-\section{Experimentos}
+\section{Avaliação Experimental}
 O domínio utilizado na avaliação experimental foi o \emph{Playroom}
-\cite{imrl2004}, em que o agente se econtra em um reticulado
-$5\times5$ e deve descobrir como ativar um \emph{alarme} interagindo
-com objetos aí presentes.
-O agente é composto de um \emph{olho}, uma \emph{mão} e um \emph{alvo}
-e possui sempre disponíveis as seguintes ações: apontar \emph{olho}
-para a célula onde se encontra a \emph{mão} ou para a célula onde se
-encontra o \emph{alvo}; mover a \emph{mão} ou o \emph{alvo} para a
-célula atualmente apontada pelo \emph{olho}.
+\cite{imrl2004}, em que o agente
 \begin{wrapfigure}{r}{0.5\textwidth}
   \small
   \begin{center}
@@ -616,6 +613,13 @@ sino & - & \beon\ & V \\
   \caption{Objetos presentes no domínio com as correspondentes ações e eventos salientes}
   \label{fig:obj}
 \end{wrapfigure}
+se econtra em um reticulado $5\times5$ e deve descobrir como ativar um
+\emph{alarme} interagindo com objetos aí presentes. O agente é
+composto de um \emph{olho}, uma \emph{mão} e um \emph{alvo} e possui
+sempre disponíveis as seguintes ações: apontar \emph{olho} para a
+célula onde se encontra a \emph{mão} ou para a célula onde se encontra
+o \emph{alvo}; mover a \emph{mão} ou o \emph{alvo} para a célula
+atualmente apontada pelo \emph{olho}.
 
 Na tabela ao lado estão relacionados os objetos aí presentes,
 juntamente com as ações e o evento saliente que disparam.  Essas ações
@@ -696,17 +700,38 @@ ao valor de \ep.
   \caption{}\label{fig:res}
 \end{figure}
 
-% \section{Conclusão}
-% Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-% hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
-% nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis
-% natoque penatibus et magnis dis parturient montes, nascetur
-% ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique
-% diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
-% vestibulum accumsan nisl.
+\section{Conclusão}
+Neste trabalho foram propostas duas estratégias de aplicação de
+políticas parciais no Aprendizado por Reforço com Motivação
+Intrínseca: aplicação de políticas parciais em pilha e exploração
+interna à política parcial.  Experimentos foram realizados de forma a
+validar a proposta, nos quais o agente armazenava as políticas
+parciais aplicadas duranteo o aprendizado, removendo-as através de
+estratégia proposta.  A aplicação das políticas parciais foi
+modificada de forma a permitir exploração interna, com a qual o agente
+poderia contornar uma eventual restritividade por parte da aplicação
+das políticas parciais.  Realizou-se uma comparação da técnica de
+aprendizado proposta frente a abordagens mais clássicas e
+comportamento aleatório.  Os resultados obtidos sugerem a
+aplicabilidade da técnica para acelerar o processo de aprendizado.
+Percebeu-se ainda que o parâmetro de exploração interna à política
+parcial possui impacto significativo no desempenho de aprendizado,
+sendo o desempenho apresentado diretamente proporcional a esse valor.
 
-% \begin{received}
-% \end{received}
+A estratégia proposta pode ser utilizada para o aprendizado automático
+de políticas parciais em problemas de Aprendizado por Reforço,
+contribuindo dessa forma para o campo de pesquisa em Transferência de
+Conhecimento
+\cite{beirigo2012,bergamo2011accelerating,bogdan2013forward,da2011geometric,da2011navigation,koga2013speeding,matos2011simultaneous,matos2011stochastic},
+que busca acelerar o aprendizado do agente através do reuso de
+características compartilhadas entre problemas distintos.  Como
+trabalhos futuros, pretende-se a esteder o algoritmo para a solução de
+uma classe de problemas, em que os sub-problemas comuns são
+identificados e armazenados para uso futuro, dessa forma contribuindo
+para acelerar a obtenção das soluções.
+
+\begin{received}
+\end{received}
 
 % INCLUDE BIBLIOGRAPHY WHICH MUST FOLLOW kdmile.bst TEMPLATE
 \bibliographystyle{kdmile}

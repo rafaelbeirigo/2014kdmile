@@ -107,7 +107,7 @@
 \newcommand{\titulo}{Avaliação de Estratégias para Aplicação de\\ \ Políticas Parciais com Motivação Intrínseca}
 
 %% Melhores comentários para o pacote algorithm
-\renewcommand{\algorithmiccomment}[1]{// #1}
+\renewcommand{\algorithmiccomment}[1]{#1}
 
 % ALL FIELDS UNTIL BEGIN{document} ARE MANDATORY
 
@@ -269,65 +269,49 @@ a probabilidade de alcançar um estado a partir de outro através da
 execução de uma ação.  Uma política $\pi: S \rightarrow A$ associa uma
 ação a ser executada em um estado e a função $V^{\pi}: S \rightarrow
 \mathcal{R}$ fornece o valor esperado de recompensas futuras ao,
-partindo de $s \in S$, executar $\pi$.  A solução de um PDM  é dado
-pela política \emph{ótima} $\pi^* = \arg$
-que indica pode ser obtida por técnicas de Aprendizado por Reforço
-(AR) \cite{rlczaba}
+partindo de $s \in S$, executar $\pi$.  A solução de um PDM é dado
+pela política $\pi^* = \arg\max_{\pi}{V^{\pi}(s), \forall s \in S}$,
+denominada \emph{ótima}, que pode ser obtida através de técnicas de
+Aprendizado por Reforço (AR) \cite{rlczaba}, nas quais o agente
+experimenta ações em estados ainda não visitados através de
+exploração, guiando sua trajetória através do conhecimento já
+adquirido, em um compromisso entre a descoberta de informação sobre o
+ambiente e a utilização do conhecimento adquirido.
 
-Um problema de decisão sequencial modelado por um Markovian Decision
-Process (MDP) (Puterman, 2009) é definido pela quádrupla , na qual
+Por ser realizado através de tentativa e erro esse processo é
+geralmente lento e pode ser acelerado pela utilização de políticas
+parciais \cite{option1999}, definidas por $<\mathcal{I}, \pi, \beta>$,
+em que $\mathcal{I} \subseteq S$ indica os estados em que a política
+parcial pode ser iniciada, $\beta: S \rightarrow [0,1]$ a
+probabilidade de terminar a política parcial em um estado $s \in S$ e
+$\pi:S \rightarrow \mathcal{O}$, associa ações primitivas ou políticas
+parciais a serem executas, sendo que $\mathcal{O}$ corresponde ao
+conjunto de todas as ações primitivas e políticas parciais.
 
-
-compreende um conjunto de estados do ambiente, contém as ações
-possíveis de serem executadas em cada estado, ambos finitos, e
-representam, respectivamente, a probabilidade de transição e a
-recompensa recebida ao, partindo de um estado alcançar o estado
-executando-se a ação .
-
-Uma política  associa a cada par  uma probabilidade de se executar a
-ação  estando estado , sendo o valor de uma política  obtido através
-da função , onde  fornece o valor esperado de recompensas futuras ao
-se seguir a política  partindo do estado .
-A solução para um MDP consiste em uma política ótima , tal que , ou
-seja,  maximiza o valor esperado de recompensas recebidas para todos
-os estados aí presentes.
-Métodos de RL (Sutton e Barto, 1998) podem ser utilizados para
-solucionar MDPs. Ao utilizar uma técnica de RL, um agente interage com
-o ambiente, realizando uma ação para cada estado e observando a
-recompensa recebida. O intuito do agente é o de maximizar o valor
-esperado de recompensas recebidas.
-Para isso, o agente necessita experimentar ações em estados ainda não
-visitados através de exploração, mas deve também guiar sua trajetória
-utilizando o conhecimento já adquirido sobre os estados visitados
-anteriormente.
-Dessa forma, há um compromisso entre a descoberta de informação sobre
-o ambiente e a utilização do conhecimento adquirido até o momento,
-muitas vezes referido como o compromisso exploração/explotação.
-/
 \section{Técnica Proposta}\label{sec:algoritmo}
-Para explorar a característica hierárquica presente nas políticas
-parciais de forma a acelerar o aprendizado, o algoritmo presente em
-\cite{imrl2004} foi adaptado para disponibilizar ao agente uma
-estrutura \pilha\ em forma de pilha para armazenar a hierarquia de
-políticas parciais utilizadas pelo agente.  No momento da obtenção da
-próxima ação, esta pode ser executada de forma aleatória ou gulosa (na
-aplicação de \qb\ ou de uma política parcial).  Em cada um desses
-momentos, caso a próxima ação selecionada seja uma política parcial
-$p_1$, esta é adicionada ao topo da pilha.  Dessa forma, um agente que
-inicia com uma pilha vazia $\pilhaS=[\ ]$ e obtém como próxima ação a
-política parcial \peum\ resultará com $\pilhaS=[\peumS]$. Caso a
-aplicação de \peum\ sugira a execução de uma nova política parcial
-$p_2$, essa será então empilhada, resultando em $\pilhaS=[\peumS,
-p_2]$ e assim sucessivamente para novas políticas parciais.
-
-Uma política parcial é removida da pilha no momento em que seu
-objetivo é atingido pelo agente, ou seja, o evento saliente utilizado
-para criá-la é disparado.  Como uma política parcial $p$ pode invocar
-outras de modo a atingir seu objetivo, $p$ é removida da pilha
-juntamente com as políticas parciais invocadas por ela.  A estratégia
-de remoção testa as políticas parciais para remoção partindo da base
-da pilha em direção ao topo, ou seja, prioriza a remoção das políticas
-parciais mais anteriormente adicinadas.
+Políticas parciais podem ser obtidas automaticamente simultaneamente
+ao aprendizado através do algoritmo apresentado em \cite{imrl2004},
+que utiliza motivação intrínseca para detectar a presença de
+sub-problemas e associar a cada um deles uma política parcial para
+resolvê-lo.  Neste trabalho propõe-se a adição de duas funcionalidades
+a esse algoritmo, a saber: utilização de uma \emph{pilha} de políticas
+parciais e exploração \emph{interna às políticas parciais}.  No
+momento da obtenção da próxima ação, feita de forma aleatória ou
+gulosa, caso a próxima ação selecionada seja uma política parcial
+$p_1$, esta é adicionada ao topo da pilha \pilha.  Dessa forma, um
+agente que inicia com uma pilha vazia $\pilhaS=[\ ]$ e obtém como
+próxima ação a política parcial \peum\ resultará com
+$\pilhaS=[\peumS]$. Caso a aplicação de \peum\ sugira a execução de
+uma nova política parcial $p_2$, essa será então empilhada, resultando
+em $\pilhaS=[\peumS, p_2]$ e assim sucessivamente para novas políticas
+parciais.  Uma política parcial é removida da pilha no momento em que
+seu objetivo é atingido pelo agente, ou seja, o evento saliente
+utilizado para criá-la é disparado.  Como uma política parcial $p$
+pode invocar outras de modo a atingir seu objetivo, $p$ é removida da
+pilha juntamente com as políticas parciais invocadas por ela.  A
+estratégia de remoção testa as políticas parciais para remoção
+partindo da base da pilha em direção ao topo, ou seja, prioriza a
+remoção das políticas parciais mais anteriormente adicinadas.
 
 Propõe-se também um mecanismo de \emph{exploração interna} à política
 parcial, elaborada para atenuar o efeito de \emph{rigidez}
@@ -347,6 +331,54 @@ intervalo $[0,1]$; caso esse valor seja maior que \ep\, o agente
 aplica a política parcial sendo seguida de forma gulosa e, em caso
 contrário, o agente realiza exploração, ou seja, executa uma ação
 aleatória dentre as possíveis para o estado atual.
+
+
+O Algoritmo \ref{alg:armipep} representa a proposta em pseudo-código.
+
+\begin{algorithm}
+\caption{ARMIP\ep}
+\label{alg:armipep}
+\algsetup{indent=2em}
+\small
+\begin{algorithmic}[1]
+    \newcommand{\sd}{s_{t+1}}
+    \newcommand{\bo}[1]{$\beta^o(#1)$}
+    \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
+    \newcommand{\tv}{\tr{valor terminal para a política parcial $o$}}
+    \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
+    \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
+    \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
+    \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
+    \newcommand{\termoA}{\bo{\sd}$v$}
+    \newcommand{\termoB}{[\ubo{\sd}][\maos]}
+    \newcommand{\termoC}{\bo{x}$v$}
+    \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
+    \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
+
+    \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
+
+    \REPEAT
+
+    \STATE Obter próximo estado $\sd$ e recompensa extrínsica $r^e_{t+1}$ recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
+
+    \STATE\COMMENT{Tratar ocorrência de evento saliente}
+
+    \STATE\COMMENT{Atualizar modelo das políticas parciais}
+
+    \STATE\COMMENT{Atualizar função valor estado-ação do Q-Learning, $Q_B$}
+
+    \STATE\COMMENT{Atualizar funções valor estado-ação das políticas parciais}
+
+    \STATE Escolher $a_{t+1}$ através de estratégia $\epsilon$-gulosa
+    com respeito a $Q_B$; aplicar políticas parciais por estratégia
+    \ep-gulosa; empilhar ocorrências de políticas parciais 
+
+    \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
+
+    \UNTIL{condição de parada}
+
+\end{algorithmic}
+\end{algorithm}
 
 % No Algoritmo \ref{alg:modificado} encontram-se marcadas as
 % modificações propostas em relação ao algoritmo original

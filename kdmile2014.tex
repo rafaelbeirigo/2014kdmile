@@ -66,13 +66,29 @@
 
 % Eventos salientes
 \newcommand{\tmon}{$alarme_{ON}$}
+\newcommand{\tmoff}{$alarme_{OFF}$}
 \newcommand{\muon}{$musica_{ON}$}
 \newcommand{\muoff}{$musica_{OFF}$}
 \newcommand{\lion}{$luz_{ON}$}
-\newcommand{\beon}{$sino_{ON}$}
-\newcommand{\tmoff}{$alarme_{OFF}$}
 \newcommand{\lioff}{$luz_{OFF}$}
-\newcommand{\beoff}{$sino_{OFF}$}
+\newcommand{\beon}{$sino_{ON}$}
+
+% Termos/conceitos
+\newcommand{\mi}{motivação intrínseca}
+\newcommand{\epS}{\epsilon_{p}}
+\newcommand{\ep}{$\epS$}
+\newcommand{\mi}{MI}
+\newcommand{\mon}{$monkey_{ON}$}
+\newcommand{\pilhaS}{\mathcal{P}}
+\newcommand{\pilha}{$\pilhaS$}
+\newcommand{\attS}{a_{t+1}}
+\newcommand{\att}{$\attS$}
+\newcommand{\qbS}{Q^B}
+\newcommand{\qb}{$\qbS$}
+\newcommand{\peumS}{p_1}
+\newcommand{\peum}{$\peumS$}
+\newcommand{\td}{\emph{top-down}}
+\newcommand{\bu}{\emph{bottom-up}}
 
 % Comando para espaçamento vertical no ambiente algorithm
 \newcommand{\GIMMESPACE}{\vspace{3.17 mm}}
@@ -131,7 +147,7 @@
   utilização de políticas parciais permite o aprendizado e
   armazenamento das soluções individuais para cada sub-problema, que
   podem então ser utilizadas múltiplas vezes na composição de uma
-  solução completa para o problema final, acelerando o
+   solução completa para o problema final, acelerando o
   aprendizado. Apesar de vantajosa, a utilização de políticas parciais
   necessita de definições por parte do projetista, o que representa
   uma sobrecarga. Para contornar esse problema, foram propostas
@@ -252,18 +268,7 @@ uma delas e uma breve discussão teórica.
 % diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
 % vestibulum accumsan nisl.
 
-\section{Proposta}\label{sec:algoritmo}
-
-\newcommand{\pilhaS}{\mathcal{P}}
-\newcommand{\pilha}{$\pilhaS$}
-\newcommand{\attS}{a_{t+1}}
-\newcommand{\att}{$\attS$}
-\newcommand{\qbS}{Q^B}
-\newcommand{\qb}{$\qbS$}
-\newcommand{\peumS}{p_1}
-\newcommand{\peum}{$\peumS$}
-\newcommand{\td}{\emph{top-down}}
-\newcommand{\bu}{\emph{bottom-up}}
+\section{Técnica Proposta}\label{sec:algoritmo}
 
 % Motivação
 
@@ -308,9 +313,6 @@ estratégia no caso de a política parcial ser ótima para o sub-problema
 sendo resolvido, essa restrição potencialmente atrapalharia o
 desempenho de aprendizado do agente nos passos iniciais, em que as
 políticas parciais estão em fase inicial de aprendizado.
-
-\newcommand{\epS}{\epsilon_{p}}
-\newcommand{\ep}{$\epS$}
 
 Dessa forma, foi implementado o mecanismo de exploração interna à
 política parcial no algoritmo através de escolha $\epsilon$-gulosa, em
@@ -575,26 +577,16 @@ possíveis para o estado atual.
 % recompensa intrínseca recebidos pelo agente por passos do
 % experimento.
 
-% A análise dos resultados presentes na Figura \ref{fig:rixt} sugere
-% algumas características do aprendizado resultante: o agente
-% inicialmente procede à execução das tarefas mais simples, como
-% ligar/desligar a luz. Isso pode ser visto pela frequência e
-% prematuridade com que o agente recebe recompensas intrínsecas para
-% essas tarefas. Pode-se perceber uma variação dos valores recebidos
-% associados ao evento saliente com a repetição dos mesmos: há uma
-% tendência de \emph{diminuição} dos valores recebidos para eventos
-% salientes repetidos.
-
-\section{Avaliação Experimental}
+\section{Experimentos}
 O domínio utilizado na avaliação experimental foi o \emph{Playroom}
 \cite{imrl2004}, em que o agente se econtra em um reticulado
 $5\times5$ e deve descobrir como ativar um \emph{alarme} interagindo
-com objetos aí presentes.  O agente é composto de um \emph{olho}, uma
-\emph{mão} e um \emph{alvo} e possui sempre disponíveis as seguintes
-ações: apontar \emph{olho} para a célula onde se encontra a \emph{mão}
-ou para a célula onde se encontra o \emph{alvo}; mover a \emph{mão} ou
-o \emph{alvo} para a célula atualmente apontada pelo \emph{olho}.
-
+com objetos aí presentes.
+O agente é composto de um \emph{olho}, uma \emph{mão} e um \emph{alvo}
+e possui sempre disponíveis as seguintes ações: apontar \emph{olho}
+para a célula onde se encontra a \emph{mão} ou para a célula onde se
+encontra o \emph{alvo}; mover a \emph{mão} ou o \emph{alvo} para a
+célula atualmente apontada pelo \emph{olho}.
 \begin{wrapfigure}{r}{0.5\textwidth}
   \small
   \begin{center}
@@ -622,6 +614,7 @@ sino & - & \beon\ & V \\
   \caption{Objetos presentes no domínio com as correspondentes ações e eventos salientes}
   \label{fig:obj}
 \end{wrapfigure}
+
 Na tabela ao lado estão relacionados os objetos aí presentes,
 juntamente com as ações e o evento saliente que disparam.  Essas ações
 ficam disponíveis somente quando o \emph{olho} e a \emph{mão} estão
@@ -635,27 +628,46 @@ ligada e a música desligada simultaneamente e é desativado quando o
 estado da luz ou da música é modificado; o agente somente consegue
 diferenciar os botões e agir sobre eles se a luz estiver ligada.
 
-Para avaliar o impacto da técnica de aprendizado proposta, foram
-realizados dois experimentos, sendo que em um deles o módulo de
-obtenção de políticas parciais a partir de \mi foi desativado.  A
-duração de cada experimento foi de $5e5$ passos, com o agente
+Para avaliar a técnica proposta, foram realizados dois experimentos,
+sendo que em um deles o módulo de obtenção de políticas parciais a
+partir de \mi\ foi desativado, ou seja, o agente somente receberia
+recompensas extrínsecas, sem a obtenção de políticas parciais.  Foram
+realizados 100 experimentos, de $5e5$ passos cada, com o agente
 recebendo uma recompensa extrínseca para ocorrência de \mon\ no valor
 de 10 e recompensas intrínsecas para os demais eventos salientes no
-valor de 1. Os resultados estão presentes no gráfico da Figura
-\ref{fig:res}. 
+valor de 1.  Os resultados são apresentados no gráfico da Figura
+\ref{fig:mi}, que apresenta a média de passos necessários para ativar
+\tmon\ por quantidade de ativação. Os resultados aí presentes sugerem
+maior eficiência de aprendizado por parte do agente que utiliza
+\mi\, pois este diminui o tempo necessário para a solução do problema
+com uma maior rapidez em relação ao agente que utiliza somente
+motivação extrínseca.
 
-% 5e5 passos, não-episódico
-% valores dos parâmetros
+No gráfico da Figura \ref{fig:mi} são apresentados os valores de
+recompensa intrínseca recebida por passo do experimento, evidenciando
+algumas características do aprendizado utilizando \mi : o agente
+inicialmente procede à execução das tarefas mais simples, como
+ligar/desligar a luz, o que pode ser visto pela frequência e
+prematuridade com que o agente recebe recompensas intrínsecas para
+essas tarefas. Pode-se perceber também uma variação dos valores
+recebidos associados ao evento saliente com a repetição dos mesmos: há
+uma tendência de \emph{diminuição} dos valores recebidos para eventos
+salientes repetidos, mostrando a capacidade da técnica de priorizar a
+realização de tarefas menos conhecidas.
 
-\newcommand{\mi}{MI}
-
-\newcommand{\mon}{$monkey_{ON}$}
-
-
-nos quais um dos agentes utilizava o algoritmo proposto e o outro não
-agente dispõe de $5e5$ passos, sendo recompensado de 1 para ativações
-de eventos salientes e 10 para ativações do $monkey_{}$ utilizando o
-algoritmo proposto.
+Para avaliar o impacto da utilização de exploração interna à política
+parcial, foram realizados 100 experimentos de 500 mil passos cada com
+a mesma parametrização de recompensas anterior e com valores de $\epS
+\in \{0.2, 0.4, 0.6, 0.8\}$.  O desempenho foi comparado com um agente
+utilizando Q-Learning e outro com comportamento aleatório e os
+resultados estão presentes na Figura \ref{fig:ep}, que apresenta a
+média cumulativa de ativações do \tmon\ por passo de experimento.  A
+análise do gráfico sugere que a utilização da técnica proposta para
+obtenção e aplicação de políticas parciais pode superar a utilzação de
+algoritmos que não utilizam políticas parciais.  Pode-se também
+perceber que o valor de \ep\ possui impacto significativo no
+aprendizado, sendo o desempenho apresentado diretamente proporcional
+ao valor de \ep.
 
 \begin{figure}
   \centering
@@ -669,8 +681,8 @@ algoritmo proposto.
     ~
     \begin{subfigure}[b]{0.47\textwidth}
       \includegraphics[width=\textwidth]{toyonxstep-mediaacum-epsopt-parcial-02-04-06-08}
-      \caption{Influência de $\epsilon_{p^3}$ no Aprendizado}
-      \label{fig:ep3}
+      \caption{Influência de \ep\ no Aprendizado}
+      \label{fig:ep}
     \end{subfigure}
   \end{subfigure}
 
@@ -681,33 +693,6 @@ algoritmo proposto.
   \end{subfigure}
   \caption{}\label{fig:res}
 \end{figure}
-
-% Para verificar a suscetibilidade do algoritmo proposto seria à
-% \tr{estratégia de abandono da política parcial}, foram realizadas
-% repetições de experimentos com variações gradativas do valor de
-% $\epsilon_o$, conforme descrito na seção \tr{...}. Os resultados são
-% apresentados na figura \ref{fig:epsopt}. O gráfico mostra a média
-% cumulativa de ativações do \emph{monkey} por passo. Pela análise
-% desses resultados, podemos verificar a variação do desempenho do
-% aprendizado com o valor escolhido para $\epsilon_o$, sugerindo que a
-% correta escolha desse parâmetro possui um impacto significativo no
-% desempenho de aprendizado do agente. \tr{TODO: complementar}
-
-% Foram também investigadas duas estratégias de adição de novos
-% estados à política parcial: (i) \tr{backward}, em que um novo estado
-% $s_t$ somente é adicionado ao conjunto iniciador $I^o$ de uma
-% política parcial $o$ se ocorrer que ao realizar a transição $s_t,\
-% a_t \rightarrow s_{t+1}$, tenha-se $s_{t+1} \in I^o$ e (ii)
-% \tr{backward+forward}, em que ocorre a adição descrita em (i), além
-% de: caso o agente, estando em $s_t \in I^o$, realizar a transição
-% $s_t,\ a_t \rightarrow s_{t+1}$, $s_{t+1}$ é incluído em $I^o$. Como
-% no algoritmo original, somente era realizada a adição (i), mas no
-% artigo original de políticas parciais \cite{option1999} é levantada
-% também a possibilidade descrita em (ii), procedeu-se à investigação
-% dos possíveis resultados decorrentes dessa nova adição. Os
-% resultados desse experimento podem ser vistos na figura
-% \ref{fig:dummy}, que mostra \tr{...}. Pela análise dos resultados aí
-% presentes, podemos concluir que \tr{...}.
 
 % \section{Conclusão}
 % Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec

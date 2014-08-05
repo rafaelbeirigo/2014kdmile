@@ -292,48 +292,29 @@ Uma política parcial é removida da pilha no momento em que seu
 objetivo é atingido pelo agente, ou seja, o evento saliente utilizado
 para criá-la é disparado.  Como uma política parcial $p$ pode invocar
 outras de modo a atingir seu objetivo, $p$ é removida da pilha
-juntamente com as políticas parciais invocadas por ela.  Neste
-trabalho foram investigadas duas estratégias de remoção de políticas
-parciais que percorrem a pilha em sentidos opostos:\ \bu\ e \td.  A
-estratégia \bu\ testa as políticas parciais para remoção partindo da
-base da pilha em direção ao topo, ou seja, prioriza a remoção das
-políticas parciais mais \emph{antigas} sendo que a estratégia \td\
-realiza o percurso em sentido oposto, iniciando o teste pelo topo da
-pilha em direção à base, priorizando a remoção das políticas parciais
-mais \emph{recentes}.
+juntamente com as políticas parciais invocadas por ela.  A estratégia
+de remoção testa as políticas parciais para remoção partindo da base
+da pilha em direção ao topo, ou seja, prioriza a remoção das políticas
+parciais mais anteriormente adicinadas.
 
-Neste trabalho é proposto também um mecanismo de \emph{exploração
-    interna} à política parcial, elaborada para atenuar o efeito de
-\emph{rigidez} potencialmente imposto pela política parcial, em que o
-agente fica preso a uma sequência de ações. Dessa forma, durante a
-aplicação de uma política parcial por parte do agente, no momento da
-escolha da próxima ação a ser executada, originalmente essa escolha
-seria feita sempre de forma gulosa somente.  Apesar de ser a melhor
-estratégia no caso de a política parcial ser ótima para o sub-problema
-sendo resolvido, essa restrição potencialmente atrapalharia o
-desempenho de aprendizado do agente nos passos iniciais, em que as
-políticas parciais estão em fase inicial de aprendizado.
-
-Dessa forma, foi implementado o mecanismo de exploração interna à
-política parcial no algoritmo através de escolha $\epsilon$-gulosa, em
-que o parâmetro $\epS \in [0,1]$ indica o percentual de exploração
-utilizado na aplicação da política parcial.  No momento da aplicação
-da política parcial, é sorteado um valor no intervalo $[0,1]$.  Caso
-esse valor sorteado seja maior que \ep\, o agente aplica a política
-parcial sendo seguida de forma gulosa.  Caso contrário, o agente
-realiza exploração, ou seja, executa uma ação aleatória dentre as
-possíveis para o estado atual.
-
-% % Diferença conceitual vs. diferença na aplicação
-% Apesar de possúirem uma diferença conceitual sutil, os pressupostos de
-% cada estratégia são antagônicos: \bu\, ao priorizar a remoção das
-% políticas mais antigas, favorece a parte do pressuposto de que as
-% políticas parciais invocadas por outras possuem tão somente a função
-% ditada pela que as chamou.
-
-% impacto da aplicação de cada uma delas é significativo, como mostram
-% os experimentos.
-
+Propõe-se também um mecanismo de \emph{exploração interna} à política
+parcial, elaborada para atenuar o efeito de \emph{rigidez}
+potencialmente imposto pela política parcial, em que o agente fica
+preso a uma sequência de ações. Dessa forma, durante a aplicação de
+uma política parcial por parte do agente, no momento da escolha da
+próxima ação a ser executada, originalmente essa escolha seria feita
+sempre de forma gulosa somente.  Isso foi feito porque, apesar de a
+estratégia gulosa ser a melhor no caso de a política parcial ser ótima
+para o sub-problema sendo resolvido, ela implica em uma restrição que
+potencialmente atrapalharia o desempenho de aprendizado do agente nos
+passos iniciais, em que as políticas parciais estão em fase inicial de
+aprendizado.  Dessa forma, o parâmetro $\epS \in [0,1]$ indica o
+percentual de exploração utilizado na aplicação da política parcial.
+No momento da aplicação da política parcial, é sorteado um valor no
+intervalo $[0,1]$; caso esse valor seja maior que \ep\, o agente
+aplica a política parcial sendo seguida de forma gulosa e, em caso
+contrário, o agente realiza exploração, ou seja, executa uma ação
+aleatória dentre as possíveis para o estado atual.
 
 % No Algoritmo \ref{alg:modificado} encontram-se marcadas as
 % modificações propostas em relação ao algoritmo original

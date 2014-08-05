@@ -288,6 +288,31 @@ realiza o percurso em sentido oposto, iniciando o teste pelo topo da
 pilha em direção à base, priorizando a remoção das políticas parciais
 mais \emph{recentes}.
 
+Neste trabalho é proposto também um mecanismo de \emph{exploração
+    interna} à política parcial, elaborada para atenuar o efeito de
+\emph{rigidez} potencialmente imposto pela política parcial, em que o
+agente fica preso a uma sequência de ações. Dessa forma, durante a
+aplicação de uma política parcial por parte do agente, no momento da
+escolha da próxima ação a ser executada, originalmente essa escolha
+seria feita sempre de forma gulosa somente.  Apesar de ser a melhor
+estratégia no caso de a política parcial ser ótima para o sub-problema
+sendo resolvido, essa restrição potencialmente atrapalharia o
+desempenho de aprendizado do agente nos passos iniciais, em que as
+políticas parciais estão em fase inicial de aprendizado.
+
+\newcommand{\epS}{\epsilon_{p}}
+\newcommand{\ep}{$\epS$}
+
+Dessa forma, foi implementado o mecanismo de exploração interna à
+política parcial no algoritmo através de escolha $\epsilon$-gulosa, em
+que o parâmetro $\ep \in [0,1]$ indica o percentual de exploração
+utilizado na aplicação da política parcial.  No momento da aplicação
+da política parcial, é sorteado um valor no intervalo $[0,1]$.  Caso
+esse valor sorteado seja maior que \ep\, o agente aplica a política
+parcial sendo seguida de forma gulosa.  Caso contrário, o agente
+realiza exploração, ou seja, executa uma ação aleatória dentre as
+possíveis para o estado atual.
+
 % % Diferença conceitual vs. diferença na aplicação
 % Apesar de possúirem uma diferença conceitual sutil, os pressupostos de
 % cada estratégia são antagônicos: \bu\, ao priorizar a remoção das

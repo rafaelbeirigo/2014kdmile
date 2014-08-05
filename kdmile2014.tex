@@ -5,9 +5,11 @@
 
 \documentclass[kdmile,a4paper]{kdmile} % NOTE: kdmile is published on A4 paper
 \usepackage{graphicx,url}  % for using figures and url format
+\usepackage{wrapfig}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage[T1]{fontenc}   % avoids warnings such as "LaTeX Font Warning: Font shape 'OMS/cmtt/m/n' undefined"
+\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}   % avoids warnings such as "LaTeX Font Warning: Font shape 'OMS/cmtt/m/n' undefined"
 \usepackage[brazilian]{babel}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{soul,xcolor}
@@ -62,6 +64,30 @@
 \renewcommand{\algorithmicfalse}{\textbf{falso}}
 \renewcommand{\algorithmicand}{\textbf{e}}
 \renewcommand{\algorithmicor}{\textbf{ou}}
+
+% Eventos salientes
+\newcommand{\tmon}{$alarme_{ON}$}
+\newcommand{\tmoff}{$alarme_{OFF}$}
+\newcommand{\muon}{$musica_{ON}$}
+\newcommand{\muoff}{$musica_{OFF}$}
+\newcommand{\lion}{$luz_{ON}$}
+\newcommand{\lioff}{$luz_{OFF}$}
+\newcommand{\beon}{$sino_{ON}$}
+
+% Termos/conceitos
+\newcommand{\mi}{motivação intrínseca}
+\newcommand{\epS}{\epsilon_{p}}
+\newcommand{\ep}{$\epS$}
+\newcommand{\pilhaS}{\mathcal{P}}
+\newcommand{\pilha}{$\pilhaS$}
+\newcommand{\attS}{a_{t+1}}
+\newcommand{\att}{$\attS$}
+\newcommand{\qbS}{Q^B}
+\newcommand{\qb}{$\qbS$}
+\newcommand{\peumS}{p_1}
+\newcommand{\peum}{$\peumS$}
+\newcommand{\td}{\emph{top-down}}
+\newcommand{\bu}{\emph{bottom-up}}
 
 % Comando para espaçamento vertical no ambiente algorithm
 \newcommand{\GIMMESPACE}{\vspace{3.17 mm}}
@@ -120,7 +146,7 @@
   utilização de políticas parciais permite o aprendizado e
   armazenamento das soluções individuais para cada sub-problema, que
   podem então ser utilizadas múltiplas vezes na composição de uma
-  solução completa para o problema final, acelerando o
+   solução completa para o problema final, acelerando o
   aprendizado. Apesar de vantajosa, a utilização de políticas parciais
   necessita de definições por parte do projetista, o que representa
   uma sobrecarga. Para contornar esse problema, foram propostas
@@ -169,99 +195,123 @@
 
 \maketitle
 
-% \Section{Introdução}
-% Problemas nos quais o agente deve tomar uma série de decisões
-% sequenciais podem ser resolvidos através de técnicas de Aprendizado
-% por Reforço \cite{rlsutton,rlczaba}, em que o agente recebe um
-% reforço numérico indicando a qualidade de cada ação tomada. Esse
-% processo de aprendizado ocorre por tentativa e erro, no qual o
-% agente alterna entre a \emph{aplicação} do conhecimento adquirido
-% até o momento para selecionar a melhor ação e a \emph{exploração} do
-% ambiente, onde o agente experimenta novas ações, aumentando o seu
-% conhecimento sobre o ambiente e o problema. Apesar do sucesso
-% apresentado na aplicação de técnicas AR a problemas reais
-% \cite{tesauro1995tdgammon,barto1996elevator,scardua2002optimal,da2006inverse,abbeel2007helicopter},
-% elas podem apresentar indesejada lentidão na obtenção das soluções
-% \cite{barto2003hrl}.
+\section{Introdução}
+Problemas nos quais o agente deve tomar uma série de decisões
+sequenciais podem ser resolvidos através de técnicas de Aprendizado
+por Reforço \cite{rlczaba}, em que o agente recebe um reforço numérico
+indicando a qualidade de cada ação tomada. Esse processo de
+aprendizado ocorre por tentativa e erro, no qual o agente alterna
+entre a \emph{aplicação} do conhecimento adquirido até o momento para
+selecionar a melhor ação e a \emph{exploração} do ambiente, onde o
+agente experimenta novas ações, aumentando o seu conhecimento sobre o
+ambiente e o problema. Apesar do sucesso apresentado na aplicação de
+técnicas AR a problemas reais
+\cite{tesauro1995tdgammon,barto1996elevator,scardua2002optimal,da2006inverse,abbeel2007helicopter},
+elas podem apresentar indesejada lentidão na obtenção das soluções
+\cite{barto2003hrl}.
  
-% Uma forma de mitigar essa lentidão é explorar características da
-% \emph{representação} do problema original que permitam a aplicação
-% de técnicas de otimização. Um exemplo disso é a utilização de
-% políticas parciais \cite{option1999}, que permitem que um problema
-% de AR originalmente com representação monolítica seja representado
-% de forma modular. Na nova representação, são determinados
-% sub-problemas componentes do problema original, permitindo o
-% aprendizado simultâneo da solução para o problema original e seus
-% sub-problemas. Quando o problema original possui uma estrutura
-% \emph{hierárquica}, é comum o agente ter de resolver mais de uma vez
-% o mesmo sub-problema em momentos diferentes. Nesses casos, a
-% utilização de políticas parciais apresenta a vantagem de acelerar o
-% aprendizado por eliminar a necessidade de se aprender a solução para
-% o mesmo sub-problema mais de uma vez, permitindo o reuso do
-% conhecimento já adquirido na forma de políticas parciais
-% \cite{option1999} e dessa forma acelerando o aprendizado.
+Uma forma de mitigar essa lentidão é explorar características da
+\emph{representação} do problema original que permitam a aplicação
+de técnicas de otimização. Um exemplo disso é a utilização de
+políticas parciais \cite{option1999}, que permitem que um problema
+de AR originalmente com representação monolítica seja representado
+de forma modular. Na nova representação, são determinados
+sub-problemas componentes do problema original, permitindo o
+aprendizado simultâneo da solução para o problema original e seus
+sub-problemas. Quando o problema original possui uma estrutura
+\emph{hierárquica}, é comum o agente ter de resolver mais de uma vez
+o mesmo sub-problema em momentos diferentes. Nesses casos, a
+utilização de políticas parciais apresenta a vantagem de acelerar o
+aprendizado por eliminar a necessidade de se aprender a solução para
+o mesmo sub-problema mais de uma vez, permitindo o reuso do
+conhecimento já adquirido na forma de políticas parciais
+\cite{option1999} e dessa forma acelerando o aprendizado.
 
-% Entretanto, para que as políticas parciais possam ser utilizadas, há
-% a necessidade da definição de elementos cuja identificação pode não
-% ser imediata à apreciação do problema, podendo causar sobrecarga em
-% tempo de projeto. Para contornar esse revés, são estudadas técnicas
-% de descoberta automática de políticas parciais
-% \cite{stolle2002learning,bakker2004hierarchical,mcgovern2001automatic,imrl2004},
-% em que a definição das mesmas fica a cargo de um algoritmo
-% responsável por identificar sub-problemas e criar políticas parciais
-% para resolvê-los. Das diversas técnicas empregadas, pode ser
-% destacada a utilização de \emph{motivação intrínseca} em AR
-% \cite{imrl2004}, em que o agente recebe recompensas adicionais
-% através de um mecanismo interno associado a variações de
-% características do ambiente que lhe despertam \emph{marcado
-% interesse}. Nessas técnicas, o agente é codificado de forma a
-% associar sub-problemas a variações significativas de atributos
-% selecionados na descrição fatorada do estado, reduzindo o trabalho
-% de definição das políticas parciais à determinação dos atributos
-% relevantes para a identificação dos sub-problemas.
+Entretanto, para que as políticas parciais possam ser utilizadas, há
+a necessidade da definição de elementos cuja identificação pode não
+ser imediata à apreciação do problema, podendo causar sobrecarga em
+tempo de projeto. Para contornar esse revés, são estudadas técnicas
+de descoberta automática de políticas parciais
+\cite{stolle2002learning,bakker2004hierarchical,mcgovern2001automatic,imrl2004},
+em que a definição das mesmas fica a cargo de um algoritmo
+responsável por identificar sub-problemas e criar políticas parciais
+para resolvê-los. Das diversas técnicas empregadas, pode ser
+destacada a utilização de \emph{motivação intrínseca} em AR
+\cite{imrl2004}, em que o agente recebe recompensas adicionais
+através de um mecanismo interno associado a variações de
+características do ambiente que lhe despertam \emph{marcado
+interesse}. Nessas técnicas, o agente é codificado de forma a
+associar sub-problemas a variações significativas de atributos
+selecionados na descrição fatorada do estado, reduzindo o trabalho
+de definição das políticas parciais à determinação dos atributos
+relevantes para a identificação dos sub-problemas.
 
-% Essa técnica foi aplicada com sucesso na solução de um problema com
-% forte estrutura hierárquica \cite{imrl2004}, através da proposta de
-% um algoritmo que utiliza em conjunto múltiplas técnicas de
-% AR. Apesar da aprensentação detalhada do papel da motivação
-% intrínseca no aprendizado, não há uma investigação mais aprofundada
-% dos diversos componentes de aprendizado envolvidos algoritmo,
-% notadamente a estratégia de aplicação das políticas parciais
-% aprendidas. Neste trabalho, investigamos essa questão, apresentando
-% algumas propostas de estratégias para a aplicação das políticas
-% parciais aprendidas juntamente com a avaliação experimental de cada
-% uma delas e uma breve discussão teórica.
+Essa técnica foi aplicada com sucesso na solução de um problema com
+forte estrutura hierárquica \cite{imrl2004}, através da proposta de
+um algoritmo que utiliza em conjunto múltiplas técnicas de
+AR. Apesar da aprensentação detalhada do papel da motivação
+intrínseca no aprendizado, não há uma investigação mais aprofundada
+dos diversos componentes de aprendizado envolvidos algoritmo,
+notadamente a estratégia de aplicação das políticas parciais
+aprendidas. Neste trabalho, investigamos essa questão, apresentando
+algumas propostas de estratégias para a aplicação das políticas
+parciais aprendidas juntamente com a avaliação experimental de cada
+uma delas e uma breve discussão teórica.
 
-% \section{Fundamentos Teóricos}
-% Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-% hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
-% nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis
-% natoque penatibus et magnis dis parturient montes, nascetur
-% ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique
-% diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
-% vestibulum accumsan nisl.
+\section{Fundamentos Teóricos}
+Problemas de decisão sequencial são usualmente representados por um
+\emph{Processo Markoviano de Decisão} (PMD) \cite{puterman2009markov},
+definido pela quádrupa $<S, A, P, R>$, em que $S$ e $A$ são conjuntos
+finitos de estados e ações respectivamente,
+$R:S\rightarrow\mathcal{R}$ representa a recompensa recebida ao
+alcançar um estado $s \in S$ e $P:S\times A\times S \rightarrow [0,1]$
+a probabilidade de alcançar um estado a partir de outro através da
+execução de uma ação.  Uma política $\pi: S \rightarrow A$ associa uma
+ação a ser executada em um estado e a função $V^{\pi}: S \rightarrow
+\mathcal{R}$ fornece o valor esperado de recompensas futuras ao,
+partindo de $s \in S$, executar $\pi$.  A solução de um PDM  é dado
+pela política \emph{ótima} $\pi^* = \arg$
+que indica pode ser obtida por técnicas de Aprendizado por Reforço
+(AR) \cite{rlczaba}
 
-\section{Algoritmo}\label{sec:algoritmo}
+Um problema de decisão sequencial modelado por um Markovian Decision
+Process (MDP) (Puterman, 2009) é definido pela quádrupla , na qual
 
-\newcommand{\pilhaS}{\mathcal{P}}
-\newcommand{\pilha}{$\pilhaS$}
-\newcommand{\attS}{a_{t+1}}
-\newcommand{\att}{$\attS$}
-\newcommand{\qbS}{Q^B}
-\newcommand{\qb}{$\qbS$}
-\newcommand{\peumS}{p_1}
-\newcommand{\peum}{$\peumS$}
 
-% Motivação
+compreende um conjunto de estados do ambiente, contém as ações
+possíveis de serem executadas em cada estado, ambos finitos, e
+representam, respectivamente, a probabilidade de transição e a
+recompensa recebida ao, partindo de um estado alcançar o estado
+executando-se a ação .
 
-% Empilhamento
+Uma política  associa a cada par  uma probabilidade de se executar a
+ação  estando estado , sendo o valor de uma política  obtido através
+da função , onde  fornece o valor esperado de recompensas futuras ao
+se seguir a política  partindo do estado .
+A solução para um MDP consiste em uma política ótima , tal que , ou
+seja,  maximiza o valor esperado de recompensas recebidas para todos
+os estados aí presentes.
+Métodos de RL (Sutton e Barto, 1998) podem ser utilizados para
+solucionar MDPs. Ao utilizar uma técnica de RL, um agente interage com
+o ambiente, realizando uma ação para cada estado e observando a
+recompensa recebida. O intuito do agente é o de maximizar o valor
+esperado de recompensas recebidas.
+Para isso, o agente necessita experimentar ações em estados ainda não
+visitados através de exploração, mas deve também guiar sua trajetória
+utilizando o conhecimento já adquirido sobre os estados visitados
+anteriormente.
+Dessa forma, há um compromisso entre a descoberta de informação sobre
+o ambiente e a utilização do conhecimento adquirido até o momento,
+muitas vezes referido como o compromisso exploração/explotação.
+/
+\section{Técnica Proposta}\label{sec:algoritmo}
 Para explorar a característica hierárquica presente nas políticas
-parciais de forma a acelerar o aprendizado, forneceu-se ao agente uma
-estrutura a ser utilizada para o armazenamento do histórico de
-utilização de políticas parciais de forma hierárquica através de uma
-pilha.  Durante o processo de aprendizado, a obtenção da próxima ação
-a ser executada pode ocorrer de forma aleatória ou de forma gulosa, na
-aplicação de \qb\ ou de uma política parcial.  Em cada um desses
+parciais de forma a acelerar o aprendizado, o algoritmo presente em
+\cite{imrl2004} foi adaptado para disponibilizar ao agente uma
+estrutura \pilha\ em forma de pilha para armazenar a hierarquia de
+políticas parciais utilizadas pelo agente.  No momento da obtenção da
+próxima ação, esta pode ser executada de forma aleatória ou gulosa (na
+aplicação de \qb\ ou de uma política parcial).  Em cada um desses
 momentos, caso a próxima ação selecionada seja uma política parcial
 $p_1$, esta é adicionada ao topo da pilha.  Dessa forma, um agente que
 inicia com uma pilha vazia $\pilhaS=[\ ]$ e obtém como próxima ação a
@@ -270,34 +320,33 @@ aplicação de \peum\ sugira a execução de uma nova política parcial
 $p_2$, essa será então empilhada, resultando em $\pilhaS=[\peumS,
 p_2]$ e assim sucessivamente para novas políticas parciais.
 
-% Remoção topo-base
-\newcommand{\td}{\emph{top-down}}
-\newcommand{\bu}{\emph{bottom-up}}
-
 Uma política parcial é removida da pilha no momento em que seu
 objetivo é atingido pelo agente, ou seja, o evento saliente utilizado
 para criá-la é disparado.  Como uma política parcial $p$ pode invocar
 outras de modo a atingir seu objetivo, $p$ é removida da pilha
-juntamente com as políticas parciais invocadas por ela.  Neste
-trabalho foram investigadas duas estratégias de remoção de políticas
-parciais que percorrem a pilha em sentidos opostos:\ \bu\ e \td.  A
-estratégia \bu\ testa as políticas parciais para remoção partindo da
-base da pilha em direção ao topo, ou seja, prioriza a remoção das
-políticas parciais mais \emph{antigas} sendo que a estratégia \td\
-realiza o percurso em sentido oposto, iniciando o teste pelo topo da
-pilha em direção à base, priorizando a remoção das políticas parciais
-mais \emph{recentes}.
+juntamente com as políticas parciais invocadas por ela.  A estratégia
+de remoção testa as políticas parciais para remoção partindo da base
+da pilha em direção ao topo, ou seja, prioriza a remoção das políticas
+parciais mais anteriormente adicinadas.
 
-% % Diferença conceitual vs. diferença na aplicação
-% Apesar de possúirem uma diferença conceitual sutil, os pressupostos de
-% cada estratégia são antagônicos: \bu\, ao priorizar a remoção das
-% políticas mais antigas, favorece a parte do pressuposto de que as
-% políticas parciais invocadas por outras possuem tão somente a função
-% ditada pela que as chamou.
-
-% impacto da aplicação de cada uma delas é significativo, como mostram
-% os experimentos.
-
+Propõe-se também um mecanismo de \emph{exploração interna} à política
+parcial, elaborada para atenuar o efeito de \emph{rigidez}
+potencialmente imposto pela política parcial, em que o agente fica
+preso a uma sequência de ações. Dessa forma, durante a aplicação de
+uma política parcial por parte do agente, no momento da escolha da
+próxima ação a ser executada, originalmente essa escolha seria feita
+sempre de forma gulosa somente.  Isso foi feito porque, apesar de a
+estratégia gulosa ser a melhor no caso de a política parcial ser ótima
+para o sub-problema sendo resolvido, ela implica em uma restrição que
+potencialmente atrapalharia o desempenho de aprendizado do agente nos
+passos iniciais, em que as políticas parciais estão em fase inicial de
+aprendizado.  Dessa forma, o parâmetro $\epS \in [0,1]$ indica o
+percentual de exploração utilizado na aplicação da política parcial.
+No momento da aplicação da política parcial, é sorteado um valor no
+intervalo $[0,1]$; caso esse valor seja maior que \ep\, o agente
+aplica a política parcial sendo seguida de forma gulosa e, em caso
+contrário, o agente realiza exploração, ou seja, executa uma ação
+aleatória dentre as possíveis para o estado atual.
 
 % No Algoritmo \ref{alg:modificado} encontram-se marcadas as
 % modificações propostas em relação ao algoritmo original
@@ -497,83 +546,98 @@ mais \emph{recentes}.
 
 % \end{algorithmic}
 % \end{algorithm}
-	
-% \section{Experimentos}
-% Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-% hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
-% nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis
-% natoque penatibus et magnis dis parturient montes, nascetur
-% ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique
-% diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
-% vestibulum accumsan nisl.
 
-% \section{Resultados e Discussão}
-% Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-% hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam
-% nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis
-% natoque penatibus et magnis dis parturient montes, nascetur
-% ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique
-% diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam
-% vestibulum accumsan nisl.
+\section{Experimentos}
+O domínio utilizado na avaliação experimental foi o \emph{Playroom}
+\cite{imrl2004}, em que o agente se econtra em um reticulado
+$5\times5$ e deve descobrir como ativar um \emph{alarme} interagindo
+com objetos aí presentes.
+O agente é composto de um \emph{olho}, uma \emph{mão} e um \emph{alvo}
+e possui sempre disponíveis as seguintes ações: apontar \emph{olho}
+para a célula onde se encontra a \emph{mão} ou para a célula onde se
+encontra o \emph{alvo}; mover a \emph{mão} ou o \emph{alvo} para a
+célula atualmente apontada pelo \emph{olho}.
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \small
+  \begin{center}
+    % BEGIN RECEIVE ORGTBL thenameofthetable
+\begin{tabular}{llll}
+\hline
+Objeto & Ação & Evento & Mov. \\
+ &  & saliente &  \\
+\hline
+alarme & - & \tmon\ & - \\
+ & - & \tmoff\ & - \\
+botão A & pressionar & \muon\ & - \\
+ & empurrar & - & V \\
+botão B & pressionar & \muoff\ & - \\
+ & empurrar & - & V \\
+bola & chutar &  & A \\
+interruptor & pressionar & \lion & - \\
+ & pressionar & \lioff & - \\
+sino & - & \beon\ & V \\
+\hline
+\end{tabular}
+    % END RECEIVE ORGTBL thenameofthetable
+  \end{center}
+  \tiny
+  \caption{Objetos presentes no domínio com as correspondentes ações e eventos salientes}
+  \label{fig:obj}
+\end{wrapfigure}
 
-% Checar localização desse parágrafo (seria um de arcabouço teórico?)
-% Espera-se como resultado da aplicação da utilização de Motivação
-% Intrínseca em Aprendizado por Reforço um aceleramento do processo de
-% aprendizado através da exploração da estrutura hierárquica do
-% problema. Esse aproveitamento pode ser feito em três etapas: (i)
-% identificação de sub-problemas e (ii) aprendizado e refinamento da
-% solução dos sub-problemas (iii) composição da solução para a tarefa
-% inicial utilizando as soluções dos sub-problemas.
+Na tabela ao lado estão relacionados os objetos aí presentes,
+juntamente com as ações e o evento saliente que disparam.  Essas ações
+ficam disponíveis somente quando o \emph{olho} e a \emph{mão} estão
+sobre a célula em que se encontra o objeto.  Na coluna \emph{Mov.},
+objetos marcados com \emph{A} movem-se para a posição atual do
+\emph{alvo} e as marcadas com \emph{V} para uma célula vizinha
+aleatória ao serem ativados.  Caso a \emph{bola} seja chutada com o
+\emph{alvo} sobre o \emph{sino}, este é ativado, disparando o evento
+\beon.  O \emph{alarme} dispara quando o ocorre \beon\ a luz está
+ligada e a música desligada simultaneamente e é desativado quando o
+estado da luz ou da música é modificado; o agente somente consegue
+diferenciar os botões e agir sobre eles se a luz estiver ligada.
 
-% Para testar as propostas relacionadas ao algoritmo, procedeu-se à
-% realização de experimentos , cuja função seria a de verificar
-% empiricamente a validade da implementação. Essa verificação
-% empírica serviria a dois propósitos: checar a consistência da
-% implementação e avaliar a qualidade das modificações propostas.
-% Um experimento que se enquadra no primeiro dos propósitos
-% consisitiu em avaliar a quantidade e valor das recompensas
-% intrínsecas recebidas associadas a cada evento saliente possível
-% (um resultado similar foi apresentado na Figura 4 do artigo
-% original). O experimento consistiu de 100 repetições de
-% $5\times10^5$ passos cada, onde o agente aprendia de acordo com o
-% Algoritmo \ref{alg:modificado}. Os resultados estão presentes na
-% figura \ref{fig:rixt}, onde são apresentados os valores de
-% recompensa intrínseca recebidos pelo agente por passos do
-% experimento.
+Para avaliar a técnica proposta, foram realizados dois experimentos,
+sendo que em um deles o módulo de obtenção de políticas parciais a
+partir de \mi\ foi desativado, ou seja, o agente somente receberia
+recompensas extrínsecas, sem a obtenção de políticas parciais.  Foram
+realizados 100 experimentos, de $5e5$ passos cada, com o agente
+recebendo uma recompensa extrínseca para ocorrência de \tmon\ no valor
+de 10 e recompensas intrínsecas para os demais eventos salientes no
+valor de 1.  Os resultados são apresentados no gráfico da Figura
+\ref{fig:mi}, que apresenta a média de passos necessários para ativar
+\tmon\ por quantidade de ativação. Os resultados aí presentes sugerem
+maior eficiência de aprendizado por parte do agente que utiliza \mi\,
+pois este diminui o tempo necessário para a solução do problema com
+uma maior rapidez em relação ao agente que utiliza somente motivação
+extrínseca.
 
-% A análise dos resultados presentes na Figura \ref{fig:rixt} sugere
-% algumas características do aprendizado resultante: o agente
-% inicialmente procede à execução das tarefas mais simples, como
-% ligar/desligar a luz. Isso pode ser visto pela frequência e
-% prematuridade com que o agente recebe recompensas intrínsecas para
-% essas tarefas. Pode-se perceber uma variação dos valores recebidos
-% associados ao evento saliente com a repetição dos mesmos: há uma
-% tendência de \emph{diminuição} dos valores recebidos para eventos
-% salientes repetidos.
+No gráfico da Figura \ref{fig:mi} são apresentados os valores de
+recompensa intrínseca recebida por passo do experimento, evidenciando
+algumas características do aprendizado utilizando \mi : o agente
+inicialmente procede à execução das tarefas mais simples, como
+ligar/desligar a luz, o que pode ser visto pela frequência e
+prematuridade com que o agente recebe recompensas intrínsecas para
+essas tarefas. Pode-se perceber também uma variação dos valores
+recebidos associados ao evento saliente com a repetição dos mesmos: há
+uma tendência de \emph{diminuição} dos valores recebidos para eventos
+salientes repetidos, mostrando a capacidade da técnica de priorizar a
+realização de tarefas menos conhecidas.
 
-\section{Configuração Experimental}
-Para avaliar o desempenho da estratégia proposta, foram realizados
-conjuntos de experimentos onde o algoritmo implementado contempla as
-modificações concernentes a cada estratégia.
-
-% 5e5 passos, não-episódico
-% valores dos parâmetros
-
-\newcommand{\mi}{MI}
-
-\newcommand{\mon}{$monkey_{ON}$} Para avaliar o impacto da utilização
-de \mi\ no aprendizado, foram realizados dois experimentos utilizando
-o algoritmo proposto, mas em um deles foi desativado o módulo de
-obtenção de políticas parciais a partir de \mi. A duração de cada
-experimento foi de $5e5$ passos, o agente recebendo uma recompensa
-extrínseca para ocorrência de \mon\ no valor de 10 e recompensas
-intrínsecas para os demais eventos salientes no valor de 1. Os
-resultados estão presentes no gráfico da \ref{fig:}
-
-nos quais um dos agentes utilizava o algoritmo proposto e o outro não
-agente dispõe de $5e5$ passos, sendo recompensado de 1 para ativações
-de eventos salientes e 10 para ativações do $monkey_{}$ utilizando o
-algoritmo proposto.
+Para avaliar o impacto da utilização de exploração interna à política
+parcial, foram realizados 100 experimentos de 500 mil passos cada com
+a mesma parametrização de recompensas anterior e com valores de $\epS
+\in \{0.2, 0.4, 0.6, 0.8\}$.  O desempenho foi comparado com um agente
+utilizando Q-Learning e outro com comportamento aleatório e os
+resultados estão presentes na Figura \ref{fig:ep}, que apresenta a
+média cumulativa de ativações do \tmon\ por passo de experimento.  A
+análise do gráfico sugere que a utilização da técnica proposta para
+obtenção e aplicação de políticas parciais pode superar a utilzação de
+algoritmos que não utilizam políticas parciais.  Pode-se também
+perceber que o valor de \ep\ possui impacto significativo no
+aprendizado, sendo o desempenho apresentado diretamente proporcional
+ao valor de \ep.
 
 \begin{figure}
   \centering
@@ -587,8 +651,8 @@ algoritmo proposto.
     ~
     \begin{subfigure}[b]{0.47\textwidth}
       \includegraphics[width=\textwidth]{toyonxstep-mediaacum-epsopt-parcial-02-04-06-08}
-      \caption{Influência de $\epsilon_{p^3}$ no Aprendizado}
-      \label{fig:ep3}
+      \caption{Influência de \ep\ no Aprendizado}
+      \label{fig:ep}
     \end{subfigure}
   \end{subfigure}
 
@@ -599,33 +663,6 @@ algoritmo proposto.
   \end{subfigure}
   \caption{}\label{fig:res}
 \end{figure}
-
-% Para verificar a suscetibilidade do algoritmo proposto seria à
-% \tr{estratégia de abandono da política parcial}, foram realizadas
-% repetições de experimentos com variações gradativas do valor de
-% $\epsilon_o$, conforme descrito na seção \tr{...}. Os resultados são
-% apresentados na figura \ref{fig:epsopt}. O gráfico mostra a média
-% cumulativa de ativações do \emph{monkey} por passo. Pela análise
-% desses resultados, podemos verificar a variação do desempenho do
-% aprendizado com o valor escolhido para $\epsilon_o$, sugerindo que a
-% correta escolha desse parâmetro possui um impacto significativo no
-% desempenho de aprendizado do agente. \tr{TODO: complementar}
-
-% Foram também investigadas duas estratégias de adição de novos
-% estados à política parcial: (i) \tr{backward}, em que um novo estado
-% $s_t$ somente é adicionado ao conjunto iniciador $I^o$ de uma
-% política parcial $o$ se ocorrer que ao realizar a transição $s_t,\
-% a_t \rightarrow s_{t+1}$, tenha-se $s_{t+1} \in I^o$ e (ii)
-% \tr{backward+forward}, em que ocorre a adição descrita em (i), além
-% de: caso o agente, estando em $s_t \in I^o$, realizar a transição
-% $s_t,\ a_t \rightarrow s_{t+1}$, $s_{t+1}$ é incluído em $I^o$. Como
-% no algoritmo original, somente era realizada a adição (i), mas no
-% artigo original de políticas parciais \cite{option1999} é levantada
-% também a possibilidade descrita em (ii), procedeu-se à investigação
-% dos possíveis resultados decorrentes dessa nova adição. Os
-% resultados desse experimento podem ser vistos na figura
-% \ref{fig:dummy}, que mostra \tr{...}. Pela análise dos resultados aí
-% presentes, podemos concluir que \tr{...}.
 
 % \section{Conclusão}
 % Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
@@ -640,9 +677,26 @@ algoritmo proposto.
 % \end{received}
 
 % INCLUDE BIBLIOGRAPHY WHICH MUST FOLLOW kdmile.bst TEMPLATE
-% \bibliographystyle{kdmile}
-% \bibliography{kdmile}
+\bibliographystyle{kdmile}
+\bibliography{kdmile}
 % For information on how to write bibliography entries, 
 % see file kdmileb.bib
 
 \end{document}
+
+#+ORGTBL: SEND thenameofthetable orgtbl-to-latex :splice nil :skip 0
+|-------------+------------+----------+------|
+| Objeto      | Ação       | Evento   | Mov. |
+|             |            | saliente |      |
+|-------------+------------+----------+------|
+| alarme      | -          | \tmon\   | -    |
+|             | -          | \tmoff\  | -    |
+| botão A     | pressionar | \muon\   | -    |
+|             | empurrar   | -        | V    |
+| botão B     | pressionar | \muoff\  | -    |
+|             | empurrar   | -        | V    |
+| bola        | chutar     |          | A    |
+| interruptor | pressionar | \lion    | -    |
+|             | pressionar | \lioff   | -    |
+| sino        | -          | \beon\   | V    |
+|-------------+------------+----------+------|

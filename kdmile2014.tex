@@ -585,41 +585,44 @@ aleatória dentre as possíveis para o estado atual.
 
 \section{Avaliação Experimental}
 O domínio utilizado na avaliação experimental foi o \emph{Playroom}
-\cite{imrl2004}, em que o agente
-\begin{wrapfigure}{r}{0.5\textwidth}
-  \small
+\cite{imrl2004}, em que o agente se econtra em um reticulado
+$5\times5$ e deve descobrir como ativar um
+\emph{alarme} interagindo com objetos aí
+%
+\begin{wrapfigure}{r}{0.45\textwidth}
+  \newcommand{\fppt}{\fontsize{.295cm}{1em}\selectfont}
+  \fppt
   \begin{center}
     % BEGIN RECEIVE ORGTBL thenameofthetable
-\begin{tabular}{llll}
-\hline
-Objeto & Ação & Evento & Mov. \\
- &  & saliente &  \\
-\hline
-alarme & - & \tmon\ & - \\
- & - & \tmoff\ & - \\
-botão A & pressionar & \muon\ & - \\
- & empurrar & - & V \\
-botão B & pressionar & \muoff\ & - \\
- & empurrar & - & V \\
-bola & chutar & - & A \\
-interruptor & pressionar & \lion & - \\
- & pressionar & \lioff & - \\
-sino & - & \beon\ & V \\
-\hline
-\end{tabular}
+    \begin{tabular}{llll}
+      \hline
+      Objeto & Ação & Evento & Mov. \\
+      &  & saliente &  \\
+      \hline
+      alarme & - & \tmon\ & - \\
+      & - & \tmoff\ & - \\
+      botão A & pressionar & \muon\ & - \\
+      & empurrar & - & V \\
+      botão B & pressionar & \muoff\ & - \\
+      & empurrar & - & V \\
+      bola & chutar & - & A \\
+      interruptor & pressionar & \lion & - \\
+      & pressionar & \lioff & - \\
+      sino & - & \beon\ & V \\
+      \hline
+    \end{tabular}
     % END RECEIVE ORGTBL thenameofthetable
   \end{center}
-  \tiny
+  \fppt
   \caption{Objetos presentes no domínio com as correspondentes ações e eventos salientes}
   \label{fig:obj}
 \end{wrapfigure}
-se econtra em um reticulado $5\times5$ e deve descobrir como ativar um
-\emph{alarme} interagindo com objetos aí presentes. O agente é
-composto de um \emph{olho}, uma \emph{mão} e um \emph{alvo} e possui
-sempre disponíveis as seguintes ações: apontar \emph{olho} para a
-célula onde se encontra a \emph{mão} ou para a célula onde se encontra
-o \emph{alvo}; mover a \emph{mão} ou o \emph{alvo} para a célula
-atualmente apontada pelo \emph{olho}.
+%
+presentes. O agente é composto de um \emph{olho}, uma \emph{mão} e um
+\emph{alvo} e possui sempre disponíveis as seguintes ações: apontar
+\emph{olho} para a célula onde se encontra a \emph{mão} ou para a
+célula onde se encontra o \emph{alvo}; mover a \emph{mão} ou o
+\emph{alvo} para a célula atualmente apontada pelo \emph{olho}.
 
 Na tabela ao lado estão relacionados os objetos aí presentes,
 juntamente com as ações e o evento saliente que disparam.  Essas ações

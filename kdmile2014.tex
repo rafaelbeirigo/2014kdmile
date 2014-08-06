@@ -588,7 +588,12 @@ O domínio utilizado na avaliação experimental foi o \emph{Playroom}
 \cite{imrl2004}, em que o agente se econtra em um reticulado
 $5\times5$ e deve descobrir como ativar um \emph{alarme} interagindo
 com objetos aí
-%
+presentes. O agente é composto de um \emph{olho}, uma \emph{mão} e um
+\emph{alvo} e possui sempre disponíveis as seguintes ações: apontar
+\emph{olho} para a célula onde se encontra a \emph{mão} ou para a
+célula onde se encontra o \emph{alvo}; mover a \emph{mão} ou o
+\emph{alvo} para a célula atualmente apontada pelo \emph{olho}.
+
 \begin{wrapfigure}[14]{r}{0.45\textwidth}
   \newcommand{\fppt}{\fontsize{.295cm}{1em}\selectfont}
   \fppt
@@ -616,15 +621,10 @@ com objetos aí
   \caption{\fppt \emph{Playroom}: objetos, ações e eventos salientes}
   \label{fig:obj}
 \end{wrapfigure}
-%
-presentes. O agente é composto de um \emph{olho}, uma \emph{mão} e um
-\emph{alvo} e possui sempre disponíveis as seguintes ações: apontar
-\emph{olho} para a célula onde se encontra a \emph{mão} ou para a
-célula onde se encontra o \emph{alvo}; mover a \emph{mão} ou o
-\emph{alvo} para a célula atualmente apontada pelo \emph{olho}.
 
 Na tabela ao lado estão relacionados os objetos aí presentes,
-juntamente com as ações e o evento saliente que disparam.  Essas ações
+juntamente com as ações e o evento
+saliente que disparam.  Essas ações
 ficam disponíveis somente quando o \emph{olho} e a \emph{mão} estão
 sobre a célula em que se encontra o objeto.  Na coluna \emph{Mov.},
 objetos marcados com \emph{A} movem-se para a posição atual do

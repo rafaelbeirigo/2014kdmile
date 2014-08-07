@@ -152,10 +152,10 @@
   recompensas recebidas que refletem a qualidade das ações tomadas
   pelo agente em um processo de tentativa e erro. Em problemas com
   estrutura hierárquica, a solução final depende do encadeamento de
-  soluções para sub-problemas aí presentes, sendo frequente a
-  repetição de sub-problemas nesse encadeamento. Nesses casos, a
+  soluções para subproblemas aí presentes, sendo frequente a
+  repetição de subproblemas nesse encadeamento. Nesses casos, a
   utilização de políticas parciais permite o aprendizado e
-  armazenamento das soluções individuais para cada sub-problema, que
+  armazenamento das soluções individuais para cada subproblema, que
   podem então ser utilizadas múltiplas vezes na composição de uma
    solução completa para o problema final, acelerando o
   aprendizado. Apesar de vantajosa, a utilização de políticas parciais
@@ -163,9 +163,9 @@
   uma sobrecarga. Para contornar esse problema, foram propostas
   técnicas de descoberta automática de políticas parciais, dentre as
   quais a utilização de motivação intrínseca se destaca por permitir
-  ao agente aprender soluções de sub-problemas úteis na solução do
+  ao agente aprender soluções de subproblemas úteis na solução do
   problema final sem a necessidade de se definir manualmente novas
-  recompensas para esses sub-problemas individualmente. Apesar de
+  recompensas para esses subproblemas individualmente. Apesar de
   promissora, essa proposta utiliza um conjunto de componentes de
   aprendizado que ainda carece de investigação aprofundada acerca dos
   impactos individual e coletivo de cada componente, notadamente a
@@ -227,14 +227,14 @@ de técnicas de otimização. Um exemplo disso é a utilização de
 políticas parciais \cite{option1999}, que permitem que um problema
 de AR originalmente com representação monolítica seja representado
 de forma modular. Na nova representação, são determinados
-sub-problemas componentes do problema original, permitindo o
+subproblemas componentes do problema original, permitindo o
 aprendizado simultâneo da solução para o problema original e seus
-sub-problemas. Quando o problema original possui uma estrutura
+subproblemas. Quando o problema original possui uma estrutura
 \emph{hierárquica}, é comum o agente ter de resolver mais de uma vez
-o mesmo sub-problema em momentos diferentes. Nesses casos, a
+o mesmo subproblema em momentos diferentes. Nesses casos, a
 utilização de políticas parciais apresenta a vantagem de acelerar o
 aprendizado por eliminar a necessidade de se aprender a solução para
-o mesmo sub-problema mais de uma vez, permitindo o reuso do
+o mesmo subproblema mais de uma vez, permitindo o reuso do
 conhecimento já adquirido na forma de políticas parciais
 \cite{option1999} e dessa forma acelerando o aprendizado.
 
@@ -245,17 +245,17 @@ tempo de projeto. Para contornar esse revés, são estudadas técnicas
 de descoberta automática de políticas parciais
 \cite{stolle2002learning,bakker2004hierarchical,mcgovern2001automatic,imrl2004},
 em que a definição das mesmas fica a cargo de um algoritmo
-responsável por identificar sub-problemas e criar políticas parciais
+responsável por identificar subproblemas e criar políticas parciais
 para resolvê-los. Das diversas técnicas empregadas, pode ser
 destacada a utilização de \emph{motivação intrínseca} em AR
 \cite{imrl2004}, em que o agente recebe recompensas adicionais
 através de um mecanismo interno associado a variações de
 características do ambiente que lhe despertam \emph{marcado
 interesse}. Nessas técnicas, o agente é codificado de forma a
-associar sub-problemas a variações significativas de atributos
+associar subproblemas a variações significativas de atributos
 selecionados na descrição fatorada do estado, reduzindo o trabalho
 de definição das políticas parciais à determinação dos atributos
-relevantes para a identificação dos sub-problemas.
+relevantes para a identificação dos subproblemas.
 
 Essa técnica foi aplicada com sucesso na solução de um problema com
 forte estrutura hierárquica \cite{imrl2004}, através da proposta de um
@@ -307,7 +307,7 @@ serem executas, onde \Oset\ corresponde ao conjunto de todas as ações
 primitivas e políticas parciais.  A aplicação de políticas parciais
 conjuntamente às ações primitivas possui forte caráter
 \emph{hierárquico}, dado que a obtenção da solução do problema
-original é realizada através da divisão deste em sub-problemas
+original é realizada através da divisão deste em subproblemas
 menores, cuja solução é obtida através do aprendizado de políticas
 parciais.
 
@@ -353,8 +353,8 @@ parciais.
 \end{wrapfigure}
 A obtenção de políticas parciais pode ser realizada de forma
 automática simultaneamente à solução do problema original através da
-utilização de motivação intrínseca para identificação de sub-tarefas e
-correspondente aprendizado de políticas parciais.  O Agoritmo
+utilização de motivação intrínseca para identificação de subproblemas
+e correspondente aprendizado de políticas parciais.  O Agoritmo
 \ref{alg:imrl}, proposto em \cite{imrl2004} (IMRL), ao lado,
 implementa o conceito de \emph{recompensas intrínsecas}, representadas
 por $r^i$, recebidas quando ocorrem variações significativas de
@@ -368,7 +368,7 @@ a obtenção das políticas parciais.
 Políticas parciais podem ser obtidas automaticamente simultaneamente
 ao aprendizado através do algoritmo apresentado em \cite{imrl2004},
 que utiliza motivação intrínseca para detectar a presença de
-sub-problemas e associar a cada um deles uma política parcial para
+subproblemas e associar a cada um deles uma política parcial para
 resolvê-lo.  Entretanto, o algoritmo proposto concentra-se nos
 aspectos relacionados à \emph{obteção} da políticas parciais.  Neste
 trabalho, são investigados dois aspectos da \emph{aplicação} das
@@ -439,7 +439,7 @@ uma política parcial por parte do agente, no momento da escolha da
 próxima ação a ser executada, originalmente essa escolha seria feita
 sempre de forma gulosa somente.  Isso foi feito porque, apesar de a
 estratégia gulosa ser a melhor no caso de a política parcial ser ótima
-para o sub-problema sendo resolvido, ela implica em uma restrição que
+para o subproblema sendo resolvido, ela implica em uma restrição que
 potencialmente atrapalharia o desempenho de aprendizado do agente nos
 passos iniciais, em que as políticas parciais estão em fase inicial de
 aprendizado.
@@ -655,7 +655,7 @@ Conhecimento
 que busca acelerar o aprendizado do agente através do reuso de
 características compartilhadas entre problemas distintos.  Como
 trabalhos futuros, pretende-se esteder o algoritmo para a solução de
-uma classe de problemas, em que os sub-problemas comuns são
+uma classe de problemas, em que os subproblemas comuns são
 identificados e armazenados para uso futuro, dessa forma contribuindo
 para acelerar a obtenção das soluções.
 

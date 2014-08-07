@@ -277,12 +277,13 @@ ação a ser executada em um estado e a função $V^{\pi}: S \rightarrow
 \mathcal{R}$ fornece o valor esperado de recompensas futuras ao,
 partindo de $s \in S$, executar $\pi$.  A solução de um PDM é dado
 pela política $\pi^* = \arg\max_{\pi}{V^{\pi}(s), \forall s \in S}$,
-denominada \emph{ótima}, que pode ser obtida através de técnicas de
-Aprendizado por Reforço (AR) \cite{rlczaba}, nas quais o agente
-experimenta ações em estados ainda não visitados através de
-exploração, guiando sua trajetória através do conhecimento já
-adquirido, em um compromisso entre a descoberta de informação sobre o
-ambiente e a utilização do conhecimento adquirido.
+denominada \emph{ótima}, que pode ser obtida através do Q-Learning
+\cite{qlearning}, uma técnica de Aprendizado por Reforço (AR). Nesse
+algoritmo, o a seleção da ações a serem executadas é feita pela
+estratégia $\epsilon$-gulosa, $\epsilon \in [0,1]$, que retorna ações
+aleatórias com probabilidade $\epsilon$ e gulosas com probabilidade $1
+- \epsilon$, configurando o compromisso
+\emph{exploração}/\emph{aplicação}.
 
 Por ser realizado através de tentativa e erro esse processo é
 geralmente lento e pode ser acelerado pela utilização de políticas
@@ -292,7 +293,12 @@ parcial pode ser iniciada, $\beta: S \rightarrow [0,1]$ a
 probabilidade de terminar a política parcial em um estado $s \in S$ e
 $\pi:S \rightarrow \mathcal{O}$, associa ações primitivas ou políticas
 parciais a serem executas, sendo que $\mathcal{O}$ corresponde ao
-conjunto de todas as ações primitivas e políticas parciais.
+conjunto de todas as ações primitivas e políticas parciais.  A
+aplicação de políticas parciais conjuntamente às ações primitivas
+possui forte caráter \emph{hierárquico}, dado que a obtenção da
+solução do problema original é realizada através da divisão deste em
+sub-problemas menores, cuja solução é obtida através do aprendizado de
+políticas parciais.
 
 \section{Proposta}\label{sec:algoritmo}
 Políticas parciais podem ser obtidas automaticamente simultaneamente

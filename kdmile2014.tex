@@ -115,7 +115,7 @@
 % \newcommand{\grifar}[1]{\uwave{#1}}
 
 % Substituir pelo título quando estiver definido
-\newcommand{\titulo}{Avaliação de Estratégias para Aplicação de\\ \ Políticas Parciais com Motivação Intrínseca}
+\newcommand{\titulo}{Estratégias para Aplicação de\\ Políticas Parciais com Motivação Intrínseca}
 
 %% Melhores comentários para o pacote algorithm
 \renewcommand{\algorithmiccomment}[1]{#1}
@@ -209,8 +209,8 @@
 \section{Introdução}
 Problemas nos quais o agente deve tomar uma série de decisões
 sequenciais podem ser resolvidos através de técnicas de Aprendizado
-por Reforço \cite{rlczaba}, em que o agente recebe um reforço numérico
-indicando a qualidade de cada ação tomada. Esse processo de
+por Reforço \cite{rlczaba} (AR), em que o agente recebe um reforço
+numérico indicando a qualidade de cada ação tomada. Esse processo de
 aprendizado ocorre por tentativa e erro, no qual o agente alterna
 entre a \emph{aplicação} do conhecimento adquirido até o momento para
 selecionar a melhor ação e a \emph{exploração} do ambiente, onde o
@@ -290,8 +290,8 @@ $s \in S$, executar $\pi$.  A solução de um PDM é dado pela política
 $\pi^*(s) = \arg\max_{\pi}{V^{\pi}(s), \forall s \in S}$,
 \emph{exploração}/\emph{aplicação}.  denominada \emph{ótima}, que pode
 ser obtida através do Q-Learning \cite{watkins1989learning}, uma
-técnica de Aprendizado por Reforço (AR). Nesse algoritmo, o a seleção
-da ações a serem executadas é feita pela estratégia $\epsilon$-gulosa,
+técnica de Aprendizado por Reforço. Nesse algoritmo, o a seleção da
+ações a serem executadas é feita pela estratégia $\epsilon$-gulosa,
 $\epsilon \in [0,1]$, que retorna ações aleatórias com probabilidade
 $\epsilon$ e gulosas com probabilidade $1 - \epsilon$, configurando o
 compromisso

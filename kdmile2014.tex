@@ -75,6 +75,7 @@
 \newcommand{\beon}{$sino_{ON}$}
 
 % Termos/conceitos
+\newcommand{\imrl}{IMRL}
 \newcommand{\mi}{motivação intrínseca}
 \newcommand{\epS}{\epsilon_{p}}
 \newcommand{\ep}{$\epS$}
@@ -303,6 +304,48 @@ políticas parciais.
 A obtenção de políticas parciais pode ser realizada de forma
 automática simultaneamente à solução do problema original através do
 algoritmo proposto em \cite{imrl}, representado ao lado. 
+
+\begin{wrapfigure}[14]{r}{0.45\textwidth}
+  \newcommand{\fppt}{\fontsize{.295cm}{1em}\selectfont}
+  \fppt
+  \begin{center}
+    % BEGIN RECEIVE ORGTBL thenameofthetable
+    \begin{algorithm}
+      \caption{\imrl}
+      \label{alg:armipep}
+      \algsetup{indent=2em}
+      \small
+      \begin{algorithmic}[1]
+        \newcommand{\sd}{s_{t+1}}
+        \newcommand{\bo}[1]{$\beta^o(#1)$}
+        \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
+        \newcommand{\tv}{\tr{valor terminal para a política parcial $o$}}
+        \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
+        \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
+        \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
+        \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
+        \newcommand{\termoA}{\bo{\sd}$v$}
+        \newcommand{\termoB}{[\ubo{\sd}][\maos]}
+        \newcommand{\termoC}{\bo{x}$v$}
+        \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
+        \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
+
+        \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
+        \REPEAT
+        \STATE\COMMENT{Obter $\sd$, $r^e_{t+1}$ por $s_t,\ a_t \rightarrow s_{t+1}$}
+        \STATE\COMMENT{Tratar Ocorrência de Evento Saliente}
+        \STATE\COMMENT{Atualizar Modelo das Políticas Parciais}
+        \STATE\COMMENT{Atualizar Função-Valor (Q-Learning)}
+        \STATE\COMMENT{Atualizar Funções-Valor (Políticas Parciais)}
+        \STATE\COMMENT{Obter $a_{t+1}$ (estratégia $\epsilon$-gulosa )}
+        \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
+        \UNTIL{condição de parada}
+      \end{algorithmic}
+    \end{algorithm}
+  \end{center}
+  \caption{\fppt \emph{Playroom}: objetos, ações e eventos salientes}
+  \label{fig:obj}
+\end{wrapfigure}
 
 \section{Proposta}\label{sec:algoritmo}
 Políticas parciais podem ser obtidas automaticamente simultaneamente

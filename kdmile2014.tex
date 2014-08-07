@@ -210,52 +210,50 @@
 Problemas nos quais o agente deve tomar uma série de decisões
 sequenciais podem ser resolvidos através de técnicas de Aprendizado
 por Reforço \cite{rlczaba} (AR), em que o agente recebe um reforço
-numérico indicando a qualidade de cada ação tomada. Esse processo de
+numérico indicando a qualidade de cada ação tomada.  Esse processo de
 aprendizado ocorre por tentativa e erro, no qual o agente alterna
 entre a \emph{aplicação} do conhecimento adquirido até o momento para
 selecionar a melhor ação e a \emph{exploração} do ambiente, onde o
 agente experimenta novas ações, aumentando o seu conhecimento sobre o
-ambiente e o problema. Apesar do sucesso apresentado na aplicação de
+ambiente e o problema.  Apesar do sucesso apresentado na aplicação de
 técnicas AR a problemas reais
 \cite{tesauro1995tdgammon,barto1996elevator,scardua2002optimal,da2006inverse,abbeel2007helicopter},
 elas podem apresentar indesejada lentidão na obtenção das soluções
 \cite{barto2003hrl}.
  
 Uma forma de mitigar essa lentidão é explorar características da
-\emph{representação} do problema original que permitam a aplicação
-de técnicas de otimização. Um exemplo disso é a utilização de
-políticas parciais \cite{option1999}, que permitem que um problema
-de AR originalmente com representação monolítica seja representado
-de forma modular. Na nova representação, são determinados
-subproblemas componentes do problema original, permitindo o
-aprendizado simultâneo da solução para o problema original e seus
-subproblemas. Quando o problema original possui uma estrutura
-\emph{hierárquica}, é comum o agente ter de resolver mais de uma vez
-o mesmo subproblema em momentos diferentes. Nesses casos, a
+\emph{representação} do problema original que permitam a representação
+de subproblemas.  Possibilitar que um problema de AR originalmente com
+representação monolítica seja representado de forma modular permite o
+uso de políticas parciais \cite{option1999}.  Na nova representação,
+são determinados subproblemas componentes do problema original,
+permitindo o aprendizado simultâneo da solução para o problema
+original e seus subproblemas.  Quando o problema original possui uma
+estrutura \emph{hierárquica}, é comum o agente ter de resolver mais de
+uma vez o mesmo subproblema em momentos diferentes.  Nesses casos, a
 utilização de políticas parciais apresenta a vantagem de acelerar o
-aprendizado por eliminar a necessidade de se aprender a solução para
-o mesmo subproblema mais de uma vez, permitindo o reuso do
-conhecimento já adquirido na forma de políticas parciais
-\cite{option1999} e dessa forma acelerando o aprendizado.
+aprendizado por eliminar a necessidade de se aprender a solução para o
+mesmo subproblema mais de uma vez, permitindo o reuso do conhecimento
+já adquirido na forma de políticas parciais \cite{option1999} e dessa
+forma acelerando o aprendizado.
 
-Entretanto, para que as políticas parciais possam ser utilizadas, há
-a necessidade da definição de elementos cuja identificação pode não
-ser imediata à apreciação do problema, podendo causar sobrecarga em
-tempo de projeto. Para contornar esse revés, são estudadas técnicas
-de descoberta automática de políticas parciais
+Entretanto, para que as políticas parciais possam ser utilizadas, há a
+necessidade da definição de elementos cuja identificação pode não ser
+imediata à apreciação do problema, podendo causar sobrecarga em tempo
+de projeto.  Para contornar esse revés, são estudadas técnicas de
+descoberta automática de políticas parciais
 \cite{stolle2002learning,bakker2004hierarchical,mcgovern2001automatic,imrl2004},
-em que a definição das mesmas fica a cargo de um algoritmo
-responsável por identificar subproblemas e criar políticas parciais
-para resolvê-los. Das diversas técnicas empregadas, pode ser
-destacada a utilização de \emph{motivação intrínseca} em AR
-\cite{imrl2004}, em que o agente recebe recompensas adicionais
-através de um mecanismo interno associado a variações de
-características do ambiente que lhe despertam \emph{marcado
-interesse}. Nessas técnicas, o agente é codificado de forma a
-associar subproblemas a variações significativas de atributos
-selecionados na descrição fatorada do estado, reduzindo o trabalho
-de definição das políticas parciais à determinação dos atributos
-relevantes para a identificação dos subproblemas.
+em que a definição das mesmas fica a cargo de um algoritmo responsável
+por identificar subproblemas e criar políticas parciais para
+resolvê-los.  Das diversas técnicas empregadas, pode ser destacada a
+utilização de \emph{motivação intrínseca} em AR \cite{imrl2004}, em
+que o agente recebe recompensas adicionais através de um mecanismo
+interno associado a variações de características do ambiente que lhe
+despertam \emph{marcado interesse}.  Nessas técnicas, o agente é
+codificado de forma a associar subproblemas a variações significativas
+de atributos selecionados na descrição fatorada do estado, reduzindo o
+trabalho de definição das políticas parciais à determinação dos
+atributos relevantes para a identificação dos subproblemas.
 
 Essa técnica foi aplicada com sucesso na solução de um problema com
 forte estrutura hierárquica \cite{imrl2004}, através da proposta de um

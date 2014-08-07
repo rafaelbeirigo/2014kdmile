@@ -16,6 +16,7 @@
 \usepackage{algorithm}
 \usepackage[noend]{algorithmic}
 \usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage[normalem]{ulem}
 
 %\usepackage{cite} % NOTE: do **not** include this package because it conflicts with kdmile.bst
@@ -77,18 +78,25 @@
 % Termos/conceitos
 \newcommand{\imrl}{IMRL}
 \newcommand{\mi}{motivação intrínseca}
-\newcommand{\epS}{\epsilon_{p}}
+\newcommand{\epS}{\xi_{p}}
 \newcommand{\ep}{$\epS$}
-\newcommand{\pilhaS}{\mathcal{P}}
+\newcommand{\pilhaS}{\Pi}
 \newcommand{\pilha}{$\pilhaS$}
+
+\newcommand{\pps}{$\phi$}
+\newcommand{\ppc}[1]{$\phi_{#1}$}
+
+
 \newcommand{\attS}{a_{t+1}}
 \newcommand{\att}{$\attS$}
 \newcommand{\qbS}{Q^B}
 \newcommand{\qb}{$\qbS$}
-\newcommand{\peumS}{p_1}
-\newcommand{\peum}{$\peumS$}
 \newcommand{\td}{\emph{top-down}}
 \newcommand{\bu}{\emph{bottom-up}}
+
+% := e =:
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
 
 % Comando para espaçamento vertical no ambiente algorithm
 \newcommand{\GIMMESPACE}{\vspace{3.17 mm}}
@@ -270,12 +278,12 @@ Problemas de decisão sequencial são usualmente representados por um
 \emph{Processo Markoviano de Decisão} (PMD) \cite{puterman2009markov},
 definido pela quádrupa $<S, A, P, R>$, em que $S$ e $A$ são conjuntos
 finitos de estados e ações respectivamente,
-$R:S\rightarrow\mathcal{R}$ representa a recompensa recebida ao
+$R:S\rightarrow\Re$ representa a recompensa recebida ao
 alcançar um estado $s \in S$ e $P:S\times A\times S \rightarrow [0,1]$
 a probabilidade de alcançar um estado a partir de outro através da
 execução de uma ação.  Uma política $\pi: S \rightarrow A$ associa uma
 ação a ser executada em um estado e a função $V^{\pi}: S \rightarrow
-\mathcal{R}$ fornece o valor esperado de recompensas futuras ao,
+\Re$ fornece o valor esperado de recompensas futuras ao,
 partindo de $s \in S$, executar $\pi$.  A solução de um PDM é dado
 pela política $\pi^* = \arg\max_{\pi}{V^{\pi}(s), \forall s \in S}$,
 \emph{exploração}/\emph{aplicação}.  denominada \emph{ótima}, que pode
@@ -287,22 +295,21 @@ e gulosas com probabilidade $1 - \epsilon$, configurando o compromisso
 
 Por ser realizado através de tentativa e erro esse processo é
 geralmente lento e pode ser acelerado pela utilização de políticas
-parciais \cite{option1999}, definidas por $<\mathcal{I}, \pi, \beta>$,
+parciais \cite{option1999} \pps$\ \defeq\ <\mathcal{I},\ \pi, \beta>$,
 em que $\mathcal{I} \subseteq S$ indica os estados em que a política
-parcial pode ser iniciada, $\beta: S \rightarrow [0,1]$ a
-probabilidade de terminar a política parcial em um estado $s \in S$ e
-$\pi:S \rightarrow \mathcal{O}$, associa ações primitivas ou políticas
-parciais a serem executas, sendo que $\mathcal{O}$ corresponde ao
-conjunto de todas as ações primitivas e políticas parciais.  A
-aplicação de políticas parciais conjuntamente às ações primitivas
-possui forte caráter \emph{hierárquico}, dado que a obtenção da
-solução do problema original é realizada através da divisão deste em
-sub-problemas menores, cuja solução é obtida através do aprendizado de
-políticas parciais.
-%
-\vspace{1pt}
-\setlength\intextsep{2pt}
-\begin{wrapfigure}[12]{l}{0.5\textwidth}
+parcial \pps\ pode ser iniciada, $\beta: S \rightarrow [0,1]$ a
+probabilidade de terminar \pps\ em um estado $s \in S$ e $\pi:S
+\rightarrow \Phi$, associa ações primitivas ou políticas parciais a
+serem executas, onde $\Phi$ corresponde ao conjunto de todas as ações
+primitivas e políticas parciais.  A aplicação de políticas parciais
+conjuntamente às ações primitivas possui forte caráter
+\emph{hierárquico}, dado que a obtenção da solução do problema
+original é realizada através da divisão deste em sub-problemas
+menores, cuja solução é obtida através do aprendizado de políticas
+parciais.
+
+\setlength\intextsep{0pt}
+\begin{wrapfigure}{r}{0.5\textwidth}
   \begin{minipage}{0.5\textwidth}
     \begin{center}
       \begin{algorithm}[H]
@@ -329,10 +336,11 @@ políticas parciais.
           \REPEAT
           \STATE\COMMENT{Obter $\sd$, $r^e_{t+1}$ por $s_t,\ a_t \rightarrow s_{t+1}$}
           \STATE\COMMENT{Tratar Ocorrência de Evento Saliente}
-          \STATE\COMMENT{Atualizar Modelo das Políticas Parciais}
+          \STATE\COMMENT{Atualizar Modelo (Políticas Parciais)}
           \STATE\COMMENT{Atualizar Função-Valor (Q-Learning)}
+          \STATE\COMMENT{Atualizar Módulo de Planejamento}
           \STATE\COMMENT{Atualizar Funções-Valor (Políticas Parciais)}
-          \STATE\COMMENT{Obter $a_{t+1}$ (estratégia $\epsilon$-gulosa )}
+          \STATE\COMMENT{Obter $a_{t+1}$ (estratégia $\epsilon$-gulosa)}
           \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
           \UNTIL{condição de parada}
         \end{algorithmic}
@@ -340,43 +348,49 @@ políticas parciais.
     \end{center}
   \end{minipage}
 \end{wrapfigure}
-~~A obtenção de políticas parciais pode ser realizada de forma
-automática simultaneamente à solução do problema original através da
+A obtenção de políticas parciais
+ pode ser realizada de forma
+automática simultaneamente
+à solução do problema original através da
 utilização de motivação intrínseca para identificação de sub-tarefas e
 correspondente aprendizado de políticas parciais.  O algoritmo
-proposto em \cite{imrl2004}, representado ao lado, implementa o
+proposto em \cite{imrl2004} (IMRL), apresentado ao lado, implementa o
 conceito de \emph{recompensas intrínsecas}, que são recebidas quando
 ocorrem variações significativas de determinados atributos presentes
 da descrição fatorada do estado, sendo denominados \emph{atributos
     salientes} e a ocorrência da variação denominada \emph{evento
     saliente}, sendo o conceito utilizado para a obtenção, atualização
-a aplicação do modelo e função valor das políticas parciais pelo
-técnica.
+e aplicação do modelo e função valor para a obtenção das políticas
+parciais.
 
-\section{Proposta}\label{sec:algoritmo}
+\section{Proposta}
 Políticas parciais podem ser obtidas automaticamente simultaneamente
 ao aprendizado através do algoritmo apresentado em \cite{imrl2004},
 que utiliza motivação intrínseca para detectar a presença de
 sub-problemas e associar a cada um deles uma política parcial para
-resolvê-lo.  Neste trabalho propõe-se a adição de duas funcionalidades
-a esse algoritmo, a saber: utilização de uma \emph{pilha} de políticas
-parciais e exploração \emph{interna às políticas parciais}.  No
-momento da obtenção da próxima ação, feita de forma aleatória ou
+resolvê-lo.  Entretanto, o algoritmo proposto concentra-se nos
+aspectos relacionados à \emph{obteção} da políticas parciais.  Neste
+trabalho, são investigados dois aspectos da \emph{aplicação} das
+políticas parciais: exploração interna e método de terminação, através
+da adição de duas funcionalidades ao algoritmo original.
+
+No momento da obtenção da próxima ação, feita de forma aleatória ou
 gulosa, caso a próxima ação selecionada seja uma política parcial
-$p_1$, esta é adicionada ao topo da pilha \pilha.  Dessa forma, um
+\ppc{1}, esta é adicionada ao topo da pilha \pilha.  Dessa forma, um
 agente que inicia com uma pilha vazia $\pilhaS=[\ ]$ e obtém como
-próxima ação a política parcial \peum\ resultará com
-$\pilhaS=[\peumS]$. Caso a aplicação de \peum\ sugira a execução de
-uma nova política parcial $p_2$, essa será então empilhada, resultando
-em $\pilhaS=[\peumS, p_2]$ e assim sucessivamente para novas políticas
-parciais.  Uma política parcial é removida da pilha no momento em que
-seu objetivo é atingido pelo agente, ou seja, o evento saliente
-utilizado para criá-la é disparado.  Como uma política parcial $p$
-pode invocar outras de modo a atingir seu objetivo, $p$ é removida da
-pilha juntamente com as políticas parciais invocadas por ela.  A
-estratégia de remoção testa as políticas parciais para remoção
-partindo da base da pilha em direção ao topo, ou seja, prioriza a
-remoção das políticas parciais mais anteriormente adicinadas.
+próxima ação a política parcial \ppc{1} resultará com
+$\pilhaS=[$\ppc{1}$]$.  Caso a aplicação de \ppc{1} sugira a execução
+de uma nova política parcial \ppc{2}, essa será então empilhada,
+resultando em $\pilhaS=[$\ppc{1}$,\ $\ppc{2}$]$ e assim sucessivamente
+para novas políticas parciais.  Uma política parcial é removida da
+pilha no momento em que seu objetivo é atingido pelo agente, ou seja,
+o evento saliente utilizado para criá-la é disparado.  Como uma
+política parcial \pps\ pode invocar outras de modo a atingir seu
+objetivo, \pps\ é removida da pilha juntamente com as políticas
+parciais invocadas por ela.  A estratégia de remoção testa as
+políticas parciais para remoção partindo da base da pilha em direção
+ao topo, ou seja, prioriza a remoção das políticas parciais mais
+anteriormente adicinadas.
 
 Propõe-se também um mecanismo de \emph{exploração interna} à política
 parcial, elaborada para atenuar o efeito de \emph{rigidez}

@@ -5,14 +5,18 @@
 
 \documentclass[kdmile,a4paper]{kdmile} % NOTE: kdmile is published on A4 paper
 \usepackage{graphicx,url}  % for using figures and url format
-\usepackage[T1]{fontenc}   % avoids warnings such as "LaTeX Font Warning: Font shape 'OMS/cmtt/m/n' undefined"
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[latin1]{inputenc}
+%\usepackage[T1]{fontenc}   % avoids warnings such as "LaTeX Font Warning: Font shape 'OMS/cmtt/m/n' undefined"
 \usepackage[brazilian]{babel}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{soul,xcolor}
 \usepackage{algorithm}
-\usepackage{algorithmic}
+\usepackage[noend]{algorithmic}
 \usepackage{amsmath}
-\usepackage{ulem}
+\usepackage[normalem]{ulem}
 
 %\usepackage{cite} % NOTE: do **not** include this package because it conflicts with kdmile.bst
 
@@ -61,6 +65,30 @@
 \renewcommand{\algorithmicand}{\textbf{e}}
 \renewcommand{\algorithmicor}{\textbf{ou}}
 
+% Eventos salientes
+\newcommand{\tmon}{$alarme_{ON}$}
+\newcommand{\tmoff}{$alarme_{OFF}$}
+\newcommand{\muon}{$musica_{ON}$}
+\newcommand{\muoff}{$musica_{OFF}$}
+\newcommand{\lion}{$luz_{ON}$}
+\newcommand{\lioff}{$luz_{OFF}$}
+\newcommand{\beon}{$sino_{ON}$}
+
+% Termos/conceitos
+\newcommand{\mi}{motivação intrínseca}
+\newcommand{\epS}{\epsilon_{p}}
+\newcommand{\ep}{$\epS$}
+\newcommand{\pilhaS}{\mathcal{P}}
+\newcommand{\pilha}{$\pilhaS$}
+\newcommand{\attS}{a_{t+1}}
+\newcommand{\att}{$\attS$}
+\newcommand{\qbS}{Q^B}
+\newcommand{\qb}{$\qbS$}
+\newcommand{\peumS}{p_1}
+\newcommand{\peum}{$\peumS$}
+\newcommand{\td}{\emph{top-down}}
+\newcommand{\bu}{\emph{bottom-up}}
+
 % Comando para espaçamento vertical no ambiente algorithm
 \newcommand{\GIMMESPACE}{\vspace{3.17 mm}}
 
@@ -76,16 +104,16 @@
 % \newcommand{\grifar}[1]{\uwave{#1}}
 
 % Substituir pelo título quando estiver definido
-\newcommand{\titulo}{Lorem ipsum dolor sit amet, consectetuer adipiscing elit}
+\newcommand{\titulo}{Avaliação de Estratégias para Aplicação de\\ \ Políticas Parciais com Motivação Intrínseca}
 
 %% Melhores comentários para o pacote algorithm
-\renewcommand{\algorithmiccomment}[1]{// #1}
+\renewcommand{\algorithmiccomment}[1]{#1}
 
 % ALL FIELDS UNTIL BEGIN{document} ARE MANDATORY
 
 
 % Includes headers with simplified name of the authors and article title
-\markboth{R. L. Beirigo and V. F. da Silva and A. H. R. Costa}
+\markboth{R. L. Beirigo and V. Freire and A. H. R. Costa}
 {\titulo}
 %  -> \markboth{}{}
 %         takes 2 arguments
@@ -99,7 +127,7 @@
 % List of authors
 %IF THERE ARE TWO or more institutions, please use:
 %\author{Name of Author1\inst{1}, Name of Author2\inst{2}, Name of Author3\inst{2}}
-\author{R. L. Beirigo and V. F. da Silva and A. H. R. Costa}
+\author{R. L. Beirigo and V. Freire and A. H. R. Costa}
 
 %Affiliation and email
 \institute{Escola Politécnica da Universidade de São Paulo, Brazil \\
@@ -108,7 +136,35 @@
 
 % Article abstract - it should be from 100 to 300 words
 \begin{abstract}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.
+  As técnicas de Aprendizado por Reforço permitem a solução de um
+  problema através da escolha de ações que maximizem valores de
+  recompensas recebidas que refletem a qualidade das ações tomadas
+  pelo agente em um processo de tentativa e erro. Em problemas com
+  estrutura hierárquica, a solução final depende do encadeamento de
+  soluções para sub-problemas aí presentes, sendo frequente a
+  repetição de sub-problemas nesse encadeamento. Nesses casos, a
+  utilização de políticas parciais permite o aprendizado e
+  armazenamento das soluções individuais para cada sub-problema, que
+  podem então ser utilizadas múltiplas vezes na composição de uma
+   solução completa para o problema final, acelerando o
+  aprendizado. Apesar de vantajosa, a utilização de políticas parciais
+  necessita de definições por parte do projetista, o que representa
+  uma sobrecarga. Para contornar esse problema, foram propostas
+  técnicas de descoberta automática de políticas parciais, dentre as
+  quais a utilização de motivação intrínseca se destaca por permitir
+  ao agente aprender soluções de sub-problemas úteis na solução do
+  problema final sem a necessidade de se definir manualmente novas
+  recompensas para esses sub-problemas individualmente. Apesar de
+  promissora, essa proposta utiliza um conjunto de componentes de
+  aprendizado que ainda carece de investigação aprofundada acerca dos
+  impactos individual e coletivo de cada componente, notadamente a
+  aplicação das políticas parciais durante o aprendizado. Neste
+  trabalho são investigadas estratégias de aplicação de políticas
+  parciais durante o Aprendizado por Reforço com Motivação
+  Intrínseca. Duas estratégias são propostas e o desempenho de cada
+  estratégia é avaliado experimentalmente. Com base nesta avaliação,
+  uma nova estratégia é proposta, a qual utiliza as alternativas que
+  apresentaram o melhor desempenho na avaliação experimental.
 \end{abstract}
 
 % ACM Computing Classification System categories
@@ -123,7 +179,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor
 %                   the last argument, in square brackets, is optional.
 
 % Article keywords
-\keywords{aprendizado por reforço, descoberta de macro-ações, motivação intrínseca}
+\keywords{aprendizado por reforço, descoberta de políticas parciais, motivação intrínseca}
 %  -> \keywords{} (in alphabetical order \keywords{document processing, sequences,
 %                      string searching, subsequences, substrings})
 
@@ -140,204 +196,566 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor
 \maketitle
 
 \section{Introdução}
-Pellentesque dapibus suscipit ligula. Donec posuere augue in quam. Etiam vel tortor sodales tellus ultricies commodo. Suspendisse potenti. Aenean in sem ac leo mollis blandit. Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi. Phasellus lacus. Etiam laoreet quam sed arcu. Phasellus at dui in ligula mollis ultricies. Integer placerat tristique nisl. Praesent augue. Fusce commodo. Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus. Nullam libero mauris, consequat quis, varius et, dictum id, arcu. Mauris mollis tincidunt felis. Aliquam feugiat tellus ut neque. Nulla facilisis, risus a rhoncus fermentum, tellus tellus lacinia purus, et dictum nunc justo sit amet elit.
+Problemas nos quais o agente deve tomar uma série de decisões
+sequenciais podem ser resolvidos através de técnicas de Aprendizado
+por Reforço \cite{rlczaba}, em que o agente recebe um reforço numérico
+indicando a qualidade de cada ação tomada. Esse processo de
+aprendizado ocorre por tentativa e erro, no qual o agente alterna
+entre a \emph{aplicação} do conhecimento adquirido até o momento para
+selecionar a melhor ação e a \emph{exploração} do ambiente, onde o
+agente experimenta novas ações, aumentando o seu conhecimento sobre o
+ambiente e o problema. Apesar do sucesso apresentado na aplicação de
+técnicas AR a problemas reais
+\cite{tesauro1995tdgammon,barto1996elevator,scardua2002optimal,da2006inverse,abbeel2007helicopter},
+elas podem apresentar indesejada lentidão na obtenção das soluções
+\cite{barto2003hrl}.
+ 
+Uma forma de mitigar essa lentidão é explorar características da
+\emph{representação} do problema original que permitam a aplicação
+de técnicas de otimização. Um exemplo disso é a utilização de
+políticas parciais \cite{option1999}, que permitem que um problema
+de AR originalmente com representação monolítica seja representado
+de forma modular. Na nova representação, são determinados
+sub-problemas componentes do problema original, permitindo o
+aprendizado simultâneo da solução para o problema original e seus
+sub-problemas. Quando o problema original possui uma estrutura
+\emph{hierárquica}, é comum o agente ter de resolver mais de uma vez
+o mesmo sub-problema em momentos diferentes. Nesses casos, a
+utilização de políticas parciais apresenta a vantagem de acelerar o
+aprendizado por eliminar a necessidade de se aprender a solução para
+o mesmo sub-problema mais de uma vez, permitindo o reuso do
+conhecimento já adquirido na forma de políticas parciais
+\cite{option1999} e dessa forma acelerando o aprendizado.
+
+Entretanto, para que as políticas parciais possam ser utilizadas, há
+a necessidade da definição de elementos cuja identificação pode não
+ser imediata à apreciação do problema, podendo causar sobrecarga em
+tempo de projeto. Para contornar esse revés, são estudadas técnicas
+de descoberta automática de políticas parciais
+\cite{stolle2002learning,bakker2004hierarchical,mcgovern2001automatic,imrl2004},
+em que a definição das mesmas fica a cargo de um algoritmo
+responsável por identificar sub-problemas e criar políticas parciais
+para resolvê-los. Das diversas técnicas empregadas, pode ser
+destacada a utilização de \emph{motivação intrínseca} em AR
+\cite{imrl2004}, em que o agente recebe recompensas adicionais
+através de um mecanismo interno associado a variações de
+características do ambiente que lhe despertam \emph{marcado
+interesse}. Nessas técnicas, o agente é codificado de forma a
+associar sub-problemas a variações significativas de atributos
+selecionados na descrição fatorada do estado, reduzindo o trabalho
+de definição das políticas parciais à determinação dos atributos
+relevantes para a identificação dos sub-problemas.
+
+Essa técnica foi aplicada com sucesso na solução de um problema com
+forte estrutura hierárquica \cite{imrl2004}, através da proposta de um
+algoritmo que utiliza em conjunto múltiplas técnicas de AR. Apesar da
+aprensentação detalhada do papel da motivação intrínseca no
+aprendizado, não há uma investigação mais aprofundada dos diversos
+componentes de aprendizado envolvidos algoritmo, notadamente a
+estratégia de aplicação das políticas parciais aprendidas. Neste
+trabalho, investigamos essa questão, apresentando estratégias para a
+aplicação das políticas parciais aprendidas juntamente com a avaliação
+experimental de cada uma delas.  A primeira contribuição refere-se ao
+armazenamento da aplicação de políticas parciais através de uma
+estrutura de dados em forma de pilha, que armazena incrementalmente as
+políticas parciais utilizadas pelo agente.  Para o processo de
+terminação das políticas parciais e consequente remoção da pilha,
+investiga-se o papel da exploração nesse processo.  Os resultados
+experimentais obtidos sugerem a aplicabilidade das técnicas propostas
+para o aprendizado de políticas parciais com a utilização de \mi.
 
 \section{Fundamentos Teóricos}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.
+Problemas de decisão sequencial são usualmente representados por um
+\emph{Processo Markoviano de Decisão} (PMD) \cite{puterman2009markov},
+definido pela quádrupa $<S, A, P, R>$, em que $S$ e $A$ são conjuntos
+finitos de estados e ações respectivamente,
+$R:S\rightarrow\mathcal{R}$ representa a recompensa recebida ao
+alcançar um estado $s \in S$ e $P:S\times A\times S \rightarrow [0,1]$
+a probabilidade de alcançar um estado a partir de outro através da
+execução de uma ação.  Uma política $\pi: S \rightarrow A$ associa uma
+ação a ser executada em um estado e a função $V^{\pi}: S \rightarrow
+\mathcal{R}$ fornece o valor esperado de recompensas futuras ao,
+partindo de $s \in S$, executar $\pi$.  A solução de um PDM é dado
+pela política $\pi^* = \arg\max_{\pi}{V^{\pi}(s), \forall s \in S}$,
+denominada \emph{ótima}, que pode ser obtida através de técnicas de
+Aprendizado por Reforço (AR) \cite{rlczaba}, nas quais o agente
+experimenta ações em estados ainda não visitados através de
+exploração, guiando sua trajetória através do conhecimento já
+adquirido, em um compromisso entre a descoberta de informação sobre o
+ambiente e a utilização do conhecimento adquirido.
 
-\section{Algoritmo Proposto}\label{sec:algoritmo}
-No Algoritmo \ref{alg:modificado} encontram-se marcadas as modificações propostas em relação ao algoritmo original \cite{imrl}. O intuito é o de contribuir à proposta original soluções de eventuais ambiguidades ou aparentes inconsistências, dessa forma apresentando um algoritmo que, mantendo o espírito original da utilização de Motivação Instrínseca no Aprendizado por Reforço, acrescenta alternativas de implementação buscando obter melhorias de desempenho no aprendizado. Abaixo são descritas as motivações e respectivas motivações teóricas e/ou de cunho prático.
+Por ser realizado através de tentativa e erro esse processo é
+geralmente lento e pode ser acelerado pela utilização de políticas
+parciais \cite{option1999}, definidas por $<\mathcal{I}, \pi, \beta>$,
+em que $\mathcal{I} \subseteq S$ indica os estados em que a política
+parcial pode ser iniciada, $\beta: S \rightarrow [0,1]$ a
+probabilidade de terminar a política parcial em um estado $s \in S$ e
+$\pi:S \rightarrow \mathcal{O}$, associa ações primitivas ou políticas
+parciais a serem executas, sendo que $\mathcal{O}$ corresponde ao
+conjunto de todas as ações primitivas e políticas parciais.
 
-Nas linhas \ref{alg:mod:ind:model}, \ref{alg:mod:ind:ql} e \ref{alg:mod:ind:qo}, os índices de $r^e_t$ e $r^i_t$ foram modificados para $r^e_{t+1}$ e $r^i_{t+1}$, respectivamente. Isso foi feito para permitir que as atualizações que utilizam esses valores considerassem a transição $s_t,\ a_t \leftarrow s_{t+1}$ ao invés da precedente a esta, como era anteriormente. Ainda de acordo com essa modificação, a obtenção de $r^e_{t+1}$, que anteriormente era realizada após a linha \ref{alg:mod:re2:localantigo}, passa a ser realizada logo após a transição de estados (linha \ref{alg:mod:re2}).
+\section{Proposta}\label{sec:algoritmo}
+Políticas parciais podem ser obtidas automaticamente simultaneamente
+ao aprendizado através do algoritmo apresentado em \cite{imrl2004},
+que utiliza motivação intrínseca para detectar a presença de
+sub-problemas e associar a cada um deles uma política parcial para
+resolvê-lo.  Neste trabalho propõe-se a adição de duas funcionalidades
+a esse algoritmo, a saber: utilização de uma \emph{pilha} de políticas
+parciais e exploração \emph{interna às políticas parciais}.  No
+momento da obtenção da próxima ação, feita de forma aleatória ou
+gulosa, caso a próxima ação selecionada seja uma política parcial
+$p_1$, esta é adicionada ao topo da pilha \pilha.  Dessa forma, um
+agente que inicia com uma pilha vazia $\pilhaS=[\ ]$ e obtém como
+próxima ação a política parcial \peum\ resultará com
+$\pilhaS=[\peumS]$. Caso a aplicação de \peum\ sugira a execução de
+uma nova política parcial $p_2$, essa será então empilhada, resultando
+em $\pilhaS=[\peumS, p_2]$ e assim sucessivamente para novas políticas
+parciais.  Uma política parcial é removida da pilha no momento em que
+seu objetivo é atingido pelo agente, ou seja, o evento saliente
+utilizado para criá-la é disparado.  Como uma política parcial $p$
+pode invocar outras de modo a atingir seu objetivo, $p$ é removida da
+pilha juntamente com as políticas parciais invocadas por ela.  A
+estratégia de remoção testa as políticas parciais para remoção
+partindo da base da pilha em direção ao topo, ou seja, prioriza a
+remoção das políticas parciais mais anteriormente adicinadas.
 
-A atualização do modelo da macro-ação na proposta original, é precedida de um teste para evitar que a macro-ação correspondente ao evento saliente que possa ter ocorrido no passo atual, $o_e$, seja processada (linha \ref{alg:mod:oe:if}). Uma vantagem advinda disso é o de se poder utilizar os valores de $Q^{o_e}$ já atualizados. Entretanto, como a atualização de $Q^{o_e}$ somente ocorre ao final do algoritmo, é necessário esperar os próximos passos para utilizar os valores atualizados.  Dessa forma, e como a primeira referência a $o_e$ ocorre na linha \ref{alg:mod:oe:priocorr}, na nova proposta a inicialização e atribuição foram adicionadas nas linhas \ref{alg:mod:oe:ini} e \ref{alg:mod:oe:atr}, respectivamente. Isso foi feito por dois motivos: (i) definir $o_e$ de forma explícita no algoritmo e (ii) tratar os valores que $o_e$ assume de acordo com a lógica de atualização do modelo da macro-ação, aproveitando os valores atualizados de $Q^{o_e}$.
+Propõe-se também um mecanismo de \emph{exploração interna} à política
+parcial, elaborada para atenuar o efeito de \emph{rigidez}
+potencialmente imposto pela política parcial, em que o agente fica
+preso a uma sequência de ações. Dessa forma, durante a aplicação de
+uma política parcial por parte do agente, no momento da escolha da
+próxima ação a ser executada, originalmente essa escolha seria feita
+sempre de forma gulosa somente.  Isso foi feito porque, apesar de a
+estratégia gulosa ser a melhor no caso de a política parcial ser ótima
+para o sub-problema sendo resolvido, ela implica em uma restrição que
+potencialmente atrapalharia o desempenho de aprendizado do agente nos
+passos iniciais, em que as políticas parciais estão em fase inicial de
+aprendizado.  Dessa forma, o parâmetro $\epS \in [0,1]$ indica o
+percentual de exploração utilizado na aplicação da política parcial.
+No momento da aplicação da política parcial, é sorteado um valor no
+intervalo $[0,1]$; caso esse valor seja maior que \ep\, o agente
+aplica a política parcial sendo seguida de forma gulosa e, em caso
+contrário, o agente realiza exploração, ou seja, executa uma ação
+aleatória dentre as possíveis para o estado atual.
 
-O algoritmo original prevê a adição de estados às macro-ações de forma retroativa: caso o agente, partindo de $s_t$ alcance $s_{t+1}$ e $s_{t+1} \in I^o$, $s_t$ é adicionado a $I^o$. Entretanto, caso uma macro-ação possa ser reiniciada em um estado terminal, pode ser gerado um ciclo de repetição indefinido em que a macro-ação chama a si mesma ao terminar. Dessa forma, na linha \ref{alg:mod:addI} foi adicionado um teste para evitar que um estado terminal da macro-ação seja adicionado ao seu \tr{conjunto iniciador}.
+% O Algoritmo \ref{alg:armipep} representa a proposta em pseudo-código.
 
-Como a escolha de quais ações são aplicáveis nesse momento é um fator importante na atualização do modelo das macro-ações, na proposta original, as funções $P^o$ e $R^o$ somente são atualizadas caso a ação $a_t$ executada no passo atual seja \tr{greedy} para a macro-ação em questão (linha \ref{alg:mod:atgreedy}). Isso pode ser explicado pelo fato de que a atualização dessas funções representem um consumo significativo de recursos computacionais. Na proposta atual, essa restrição foi investigada, sendo executados experimentos também para o caso em que não há a necessidade de $a_t$ ser a ação \tr{greedy}.
+% \begin{algorithm}
+% \caption{ARMIP\ep}
+% \label{alg:armipep}
+% \algsetup{indent=2em}
+% \small
+% \begin{algorithmic}[1]
+%     \newcommand{\sd}{s_{t+1}}
+%     \newcommand{\bo}[1]{$\beta^o(#1)$}
+%     \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
+%     \newcommand{\tv}{\tr{valor terminal para a política parcial $o$}}
+%     \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
+%     \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
+%     \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
+%     \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
+%     \newcommand{\termoA}{\bo{\sd}$v$}
+%     \newcommand{\termoB}{[\ubo{\sd}][\maos]}
+%     \newcommand{\termoC}{\bo{x}$v$}
+%     \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
+%     \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
 
-Na proposta original, a atualização de $Q_B$ para macro-ações (planejamento SMDP, linha \ref{alg:mod:qbo}) considerava para esse cálculo quaiquer estados $s_t$ que o agente viesse a visitar. Para evitar problemas de incosistência entre a função-valor e o \tr{conjunto iniciador} de uma macro-ação $o$, foi adicionado um teste que somente atualiza $Q_B(s_t,\ o)$ para uma dada option $o$ se $s_t \in I^o$. Dessa forma, evita-se que seja atribuído um valor positivo à execução de uma macro-ação $o$ em um estado em que a macro-ação não possa ser executada. Uma outra vantagem decorrente dessa modificação é a possível economia de recursos computacionais, já que algumas atualizações desnecessárias são potencialmente evitadas.
+%     \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
 
-\begin{algorithm}
-\caption{Algoritmo proposto (modificações sugeridas sublinhadas com pontilhado)}
-\label{alg:modificado}
-\algsetup{indent=2em}
-\small
-\begin{algorithmic}[1]
-    \newcommand{\sd}{s_{t+1}}
-    \newcommand{\bo}[1]{$\beta^o(#1)$}
-    \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
-    \newcommand{\tv}{\tr{valor terminal para a option $o$}}
-    \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
-    \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
-    \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
-    \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
-    \newcommand{\termoA}{\bo{\sd}$v$}
-    \newcommand{\termoB}{[\ubo{\sd}][\maos]}
-    \newcommand{\termoC}{\bo{x}$v$}
-    \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
-    \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
+%     \REPEAT
 
-    \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
+%     \STATE Obter próximo estado $\sd$ e recompensa extrínsica $r^e_{t+1}$ recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
 
-    \REPEAT
+%     \STATE\COMMENT{Tratar ocorrência de evento saliente}
 
-    \STATE Obter próximo estado $\sd$
+%     \STATE\COMMENT{Atualizar modelo das políticas parciais}
 
-    \STATE \label{alg:mod:re2} \grifar{$r^e_{t+1} \leftarrow$ recompensa extrínsica recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
+%     \STATE\COMMENT{Atualizar função valor estado-ação do Q-Learning, $Q_B$}
 
-    \GIMMESPACE
+%     \STATE\COMMENT{Atualizar funções valor estado-ação das políticas parciais}
 
-    \STATE\COMMENT{Trata ocorrência de evento saliente}
+%     \STATE Escolher $a_{t+1}$ através de estratégia $\epsilon$-gulosa
+%     com respeito a $Q_B$; aplicar políticas parciais por estratégia
+%     \ep-gulosa; empilhar ocorrências de políticas parciais 
 
-    \STATE \label{alg:mod:oe:ini}\grifar{$o_e \leftarrow nil$}
+%     \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
 
-    \IF{ocorreu um evento saliente $e$}
+%     \UNTIL{condição de parada}
+% \end{algorithmic}
+% \end{algorithm}
 
-        \IF{macro-ação para $e$, $o_e$, não existe em $O$}\label{alg:mod:oe:priocorr}
+% No Algoritmo \ref{alg:modificado} encontram-se marcadas as
+% modificações propostas em relação ao algoritmo original
+% \cite{imrl2004}. O intuito é o de contribuir à proposta original
+% soluções de eventuais ambiguidades ou aparentes inconsistências,
+% dessa forma apresentando um algoritmo que, mantendo o espírito
+% original da utilização de Motivação Instrínseca no Aprendizado por
+% Reforço, acrescenta alternativas de implementação buscando obter
+% melhorias de desempenho no aprendizado. Abaixo são descritas as
+% motivações e respectivas motivações teóricas e/ou de cunho prático.
 
-            \STATE \label{alg:mod:oe:atr}\grifar{$o_e \leftarrow $[macro-ação para $e$]}
+% Nas linhas \ref{alg:mod:ind:model}, \ref{alg:mod:ind:ql} e
+% \ref{alg:mod:ind:qo}, os índices de $r^e_t$ e $r^i_t$ foram
+% modificados para $r^e_{t+1}$ e $r^i_{t+1}$, respectivamente. Isso
+% foi feito para permitir que as atualizações que utilizam esses
+% valores considerassem a transição $s_t,\ a_t \leftarrow s_{t+1}$ ao
+% invés da precedente a esta, como era anteriormente. Ainda de acordo
+% com essa modificação, a obtenção de $r^e_{t+1}$, que anteriormente
+% era realizada após a linha \ref{alg:mod:re2:localantigo}, passa a
+% ser realizada logo após a transição de estados (linha
+% \ref{alg:mod:re2}).
 
-            \STATE Criar $o_e$ em $O$
+% A atualização do modelo da política parcial na proposta original, é
+% precedida de um teste para evitar que a política parcial
+% correspondente ao evento saliente que possa ter ocorrido no passo
+% atual, $o_e$, seja processada (linha \ref{alg:mod:oe:if}). Uma
+% vantagem advinda disso é o de se poder utilizar os valores de
+% $Q^{o_e}$ já atualizados. Entretanto, como a atualização de
+% $Q^{o_e}$ somente ocorre ao final do algoritmo, é necessário esperar
+% os próximos passos para utilizar os valores atualizados. Dessa
+% forma, e como a primeira referência a $o_e$ ocorre na linha
+% \ref{alg:mod:oe:priocorr}, na nova proposta a inicialização e
+% atribuição foram adicionadas nas linhas \ref{alg:mod:oe:ini} e
+% \ref{alg:mod:oe:atr}, respectivamente. Isso foi feito por dois
+% motivos: (i) definir $o_e$ de forma explícita no algoritmo e (ii)
+% tratar os valores que $o_e$ assume de acordo com a lógica de
+% atualização do modelo da política parcial, aproveitando os valores
+% atualizados de $Q^{o_e}$.
 
-            \STATE Adicionar $s_t$ a $I^{o_e}$
+% O algoritmo original prevê a adição de estados às políticas parciais
+% de forma retroativa: caso o agente, partindo de $s_t$ alcance
+% $s_{t+1}$ e $s_{t+1} \in I^o$, $s_t$ é adicionado a
+% $I^o$. Entretanto, caso uma política parcial possa ser reiniciada em
+% um estado terminal, pode ser gerado um ciclo de repetição indefinido
+% em que a política parcial chama a si mesma ao terminar. Dessa forma,
+% na linha \ref{alg:mod:addI} foi adicionado um teste para evitar que
+% um estado terminal da política parcial seja adicionado ao seu
+% conjunto iniciador.
 
-            \STATE $\beta^{o_e}(s_{t+1}) \leftarrow 1$
+% Como a escolha de quais ações são aplicáveis nesse momento é um
+% fator importante na atualização do modelo das políticas parciais, na
+% proposta original, as funções $P^o$ e $R^o$ somente são atualizadas
+% caso a ação $a_t$ executada no passo atual seja gulosa para a
+% política parcial em questão (linha \ref{alg:mod:atgreedy}). Isso
+% pode ser explicado pelo fato de que a atualização dessas funções
+% representem um consumo significativo de recursos computacionais. Na
+% proposta atual, essa restrição foi investigada, sendo executados
+% experimentos também para o caso em que não há a necessidade de $a_t$
+% ser a ação gulosa.
 
-        \ENDIF
+% Na proposta original, a atualização de $Q_B$ para políticas parciais
+% (planejamento SMDP, linha \ref{alg:mod:qbo}) considerava para esse
+% cálculo quaiquer estados $s_t$ que o agente viesse a visitar. Para
+% evitar problemas de incosistência entre a função-valor e o conjunto
+% iniciador de uma política parcial $o$, foi adicionado um teste que
+% somente atualiza $Q_B(s_t,\ o)$ para uma dada política parcial $o$
+% se $s_t \in I^o$. Dessa forma, evita-se que seja atribuído um valor
+% positivo à execução de uma política parcial $o$ em um estado em que
+% a política parcial não possa ser executada. Uma outra vantagem
+% decorrente dessa modificação é a possível economia de recursos
+% computacionais, já que algumas atualizações desnecessárias são
+% potencialmente evitadas.
 
-        \STATE $r^i_{t+1} \leftarrow \tau[1-P(s_{t+1}|s_t)]$ \COMMENT{$\tau$ constante}
+% \begin{algorithm}
+% \caption{Algoritmo X}
+% \label{alg:modificado}
+% \algsetup{indent=2em}
+% \small
+% \begin{algorithmic}[1]
+%     \newcommand{\sd}{s_{t+1}}
+%     \newcommand{\bo}[1]{$\beta^o(#1)$}
+%     \newcommand{\ubo}[1]{$1\ -\ $\bo{#1}}
+%     \newcommand{\tv}{\tr{valor terminal para a política parcial $o$}}
+%     \newcommand{\maxao}[1]{$\max_{a \in A \cup O}{#1}$}
+%     \newcommand{\maos}{\maxao{Q^o(\sd,\ a)}}
+%     \newcommand{\maox}{\maxao{Q^o(x,\ a)}}
+%     \newcommand{\aalpha}{$\xleftarrow{\alpha}$}
+%     \newcommand{\termoA}{\bo{\sd}$v$}
+%     \newcommand{\termoB}{[\ubo{\sd}][\maos]}
+%     \newcommand{\termoC}{\bo{x}$v$}
+%     \newcommand{\termoD}{$[$\ubo{x}$][$\maox$]$}
+%     \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
 
-    \ELSE
+%     \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
 
-        \STATE $r^i_{t+1} \leftarrow 0$
+%     \REPEAT
 
-    \ENDIF
+%     \STATE Obter próximo estado $\sd$
 
-    \GIMMESPACE
+%     \STATE \label{alg:mod:re2} \grifar{$r^e_{t+1} \leftarrow$ recompensa extrínsica recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
 
-    \STATE\COMMENT{Atualiza o modelo das macro-ações}
+%     \GIMMESPACE
 
-    \FOR{cada macro-ação $o \neq $\grifar{$o_e$} em $O$} \label{alg:mod:oe:if}
+%     \STATE\COMMENT{Trata ocorrência de evento saliente}
 
-        \IF{$s_{t+1} \in I^o$ \AND \grifar{$\beta^o(s_t) \neq 1$}} \label{alg:mod:addI}
+%     \STATE \label{alg:mod:oe:ini}\grifar{$o_e \leftarrow nil$}
 
-            \STATE Adicionar $s_t$ a $I^o$
+%     \IF{ocorreu um evento saliente $e$}
 
-        \ENDIF
+%         \IF{política parcial para $e$, $o_e$, não existe em $O$}\label{alg:mod:oe:priocorr}
 
-        \IF{\grifar{$a_t$ é a ação} \tr{greedy} \grifar{para $o$ no estado $s_t$}} \label{alg:mod:atgreedy}
+%             \STATE \label{alg:mod:oe:atr}\grifar{$o_e \leftarrow $[política parcial para $e$]}
 
-            \STATE\COMMENT{Atualiza o modelo probabilístico de transição da macro-ação}
+%             \STATE Criar $o_e$ em $O$
 
-            \STATE $P(x|s_t) \xleftarrow{\alpha} [\gamma(1 - \beta^o(s_{t+1}))P^o(x|s_{t+1}) + \gamma\beta^o(s_{t+1})\delta_{s_{t+1}x}]$
+%             \STATE Adicionar $s_t$ a $I^{o_e}$
 
-            \STATE\COMMENT{Atualiza modelo de recompensa da macro-ação} \STATE $R^o(s_t) \xleftarrow{\alpha} [$\grifar{$r^e_{t+1}$}$ + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$ \label{alg:mod:ind:model}
+%             \STATE $\beta^{o_e}(s_{t+1}) \leftarrow 1$
 
-        \ENDIF
+%         \ENDIF
 
-    \ENDFOR
+%         \STATE $r^i_{t+1} \leftarrow \tau[1-P(s_{t+1}|s_t)]$ \COMMENT{$\tau$ constante}
 
-    \GIMMESPACE
+%     \ELSE
 
-    \STATE\COMMENT{Atualização da \tr{função valor estado-ação} do Q-Learning}
+%         \STATE $r^i_{t+1} \leftarrow 0$
 
-    \STATE $Q_B(s_t,\ a_t) \xleftarrow{\alpha} $\grifar{$r^e_{t+1}$}$ + $\grifar{$r^i_{t+1}$}$ + \gamma\max_{a \in A \cup O}{Q_B(s_{t+1},\ a)}$ \label{alg:mod:ind:ql}
+%     \ENDIF
 
-    \GIMMESPACE
+%     \GIMMESPACE
 
-    \STATE\COMMENT{Atualização da \tr{função valor estado-ação} para planejamento SMDP}
+%     \STATE\COMMENT{Atualiza o modelo das políticas parciais}
 
-    \FOR{cada macro-ação $o$ em $O$}
+%     \FOR{cada política parcial $o \neq $\grifar{$o_e$} em $O$} \label{alg:mod:oe:if}
 
-        \IF{\grifar{$s_t \in I^o$}}
+%         \IF{$s_{t+1} \in I^o$ \AND \grifar{$\beta^o(s_t) \neq 1$}} \label{alg:mod:addI}
 
-        \STATE $Q_B(s_t,\ o) \xleftarrow{\alpha} R^o(s_t) + \sum_{x \in S}{P^o(x|s_t)\max_{a \in A \cup O}Q_B(x,\ a)}$ \label{alg:mod:qbo}
+%             \STATE Adicionar $s_t$ a $I^o$
 
-        \ENDIF
+%         \ENDIF
 
-    \ENDFOR
+%         \IF{\grifar{$a_t$ é a ação gulosa para $o$ no estado $s_t$}} \label{alg:mod:atgulosa}
 
-    \GIMMESPACE
+%             \STATE\COMMENT{Atualiza o modelo probabilístico de transição da política parcial}
 
-    \STATE\COMMENT{Atualização das \tr{funções valor estado-ação} para as macro-ações}
+%             \STATE $P(x|s_t) \xleftarrow{\alpha} [\gamma(1 - \beta^o(s_{t+1}))P^o(x|s_{t+1}) + \gamma\beta^o(s_{t+1})\delta_{s_{t+1}x}]$
 
-    \FOR{cada macro-ação $o$ em $O$ tal que $s_t \in I^o$}
+%             \STATE\COMMENT{Atualiza modelo de recompensa da política parcial} \STATE $R^o(s_t) \xleftarrow{\alpha} [$\grifar{$r^e_{t+1}$}$ + \gamma(1 - \beta^o(s_{t+1}))R^o(s_{t+1})]$ \label{alg:mod:ind:model}
 
-        \STATE $v \leftarrow$ \tv
+%         \ENDIF
 
-        \STATE $Q^o(s_t,\ a_t)$\aalpha$\ $\grifar{$r^e_{t+1}$}$\ +\ \gamma\{$\termoA$\ +\ $\termoB$\}$ \label{alg:mod:ind:qo}
+%     \ENDFOR
 
-        \FOR{cada macro-ação $o'$ em $O$ tal que $s_t \in I^{o'}$ e $o \neq o'$}
+%     \GIMMESPACE
 
-            \STATE $Q^o(s_t,\ o')$\aalpha $R^{o'}(s_t)\ + \sum_{x \in S}{P^{o'}(x|s_t)}\{$\termoC$\ +\ $\termoD$\}$
+%     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} do Q-Learning}
 
-        \ENDFOR
+%     \STATE $Q_B(s_t,\ a_t) \xleftarrow{\alpha} $\grifar{$r^e_{t+1}$}$ + $\grifar{$r^i_{t+1}$}$ + \gamma\max_{a \in A \cup O}{Q_B(s_{t+1},\ a)}$ \label{alg:mod:ind:ql}
 
-    \ENDFOR \label{alg:mod:re2:localantigo}
+%     \GIMMESPACE
 
-    \STATE Escolher $a_{t+1}$ através de estratégia \tr{$\epsilon$-greedy} com respeito a $Q_B$
+%     \STATE\COMMENT{Atualização da \tr{função valor estado-ação} para planejamento SMDP}
 
-    \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
+%     \FOR{cada política parcial $o$ em $O$}
 
-    \UNTIL{condição de parada}
+%         \IF{\grifar{$s_t \in I^o$}}
 
-\end{algorithmic}
-\end{algorithm}
-	
-\section{Resultados e Discussão}
-% Checar localização desse parágrafo (seria um de arcabouço teórico?)
-Espera-se como resultado da aplicação da utilização de Motivação Intrínseca em Aprendizado por Reforço um aceleramento do processo de aprendizado através da exploração da estrutura hierárquica do problema. Esse aproveitamento pode ser feito em três etapas: (i) identificação de \tr{sub-tarefas} e (ii) aprendizado e refinamento da solução das sub-tarefas (iii) composição da solução para a tarefa inicial utilizando as soluções das sub-tarefas.
+%         \STATE $Q_B(s_t,\ o) \xleftarrow{\alpha} R^o(s_t) + \sum_{x \in S}{P^o(x|s_t)\max_{a \in A \cup O}Q_B(x,\ a)}$ \label{alg:mod:qbo}
+
+%         \ENDIF
+
+%     \ENDFOR
+
+%     \GIMMESPACE
+
+%     \STATE\COMMENT{Atualização das \tr{funções valor estado-ação} para as políticas parciais}
+
+%     \FOR{cada política parcial $o$ em $O$ tal que $s_t \in I^o$}
+
+%         \STATE $v \leftarrow$ \tv
+
+%         \STATE $Q^o(s_t,\ a_t)$\aalpha$\ $\grifar{$r^e_{t+1}$}$\ +\ \gamma\{$\termoA$\ +\ $\termoB$\}$ \label{alg:mod:ind:qo}
+
+%         \FOR{cada política parcial $o'$ em $O$ tal que $s_t \in I^{o'}$ e $o \neq o'$}
+
+%             \STATE $Q^o(s_t,\ o')$\aalpha $R^{o'}(s_t)\ + \sum_{x \in S}{P^{o'}(x|s_t)}\{$\termoC$\ +\ $\termoD$\}$
+
+%         \ENDFOR
+
+%     \ENDFOR \label{alg:mod:re2:localantigo}
+
+%     \STATE Escolher $a_{t+1}$ através de estratégia \tr{$\epsilon$-gulosa} com respeito a $Q_B$
+
+%     \STATE \transita{s}; \transita{a}; \transita{r^e}; \transita{r^i}
+
+%     \UNTIL{condição de parada}
+
+% \end{algorithmic}
+% \end{algorithm}
+
+\section{Avaliação Experimental}
+O domínio utilizado na avaliação experimental foi o \emph{Playroom}
+\cite{imrl2004}, em que o agente se econtra em um reticulado
+$5\times5$ e deve descobrir como ativar um \emph{alarme} interagindo
+com objetos aí
+presentes. O agente é composto de um \emph{olho}, uma \emph{mão} e um
+\emph{alvo} e possui sempre disponíveis as seguintes ações: apontar
+\emph{olho} para a célula onde se encontra a \emph{mão} ou para a
+célula onde se encontra o \emph{alvo}; mover a \emph{mão} ou o
+\emph{alvo} para a célula atualmente apontada pelo \emph{olho}.
+
+\begin{wrapfigure}[14]{r}{0.45\textwidth}
+  \newcommand{\fppt}{\fontsize{.295cm}{1em}\selectfont}
+  \fppt
+  \begin{center}
+    % BEGIN RECEIVE ORGTBL thenameofthetable
+    \begin{tabular}{llll}
+      \hline
+      Objeto & Ação & Evento & Mov. \\
+      &  & saliente &  \\
+      \hline
+      alarme & - & \tmon\ & - \\
+      & - & \tmoff\ & - \\
+      botão A & pressionar & \muon\ & - \\
+      & empurrar & - & V \\
+      botão B & pressionar & \muoff\ & - \\
+      & empurrar & - & V \\
+      bola & chutar & - & A \\
+      interruptor & pressionar & \lion & - \\
+      & pressionar & \lioff & - \\
+      sino & - & \beon\ & V \\
+      \hline
+    \end{tabular}
+    % END RECEIVE ORGTBL thenameofthetable
+  \end{center}
+  \caption{\fppt \emph{Playroom}: objetos, ações e eventos salientes}
+  \label{fig:obj}
+\end{wrapfigure}
+
+Na tabela ao lado estão relacionados os objetos aí presentes,
+juntamente com as ações e o evento
+saliente que disparam.  Essas ações
+ficam disponíveis somente quando o \emph{olho} e a \emph{mão} estão
+sobre a célula em que se encontra o objeto.  Na coluna \emph{Mov.},
+objetos marcados com \emph{A} movem-se para a posição atual do
+\emph{alvo} e as marcadas com \emph{V} para uma célula vizinha
+aleatória ao serem ativados.  Caso a \emph{bola} seja chutada com o
+\emph{alvo} sobre o \emph{sino}, este é ativado, disparando o evento
+\beon.  O \emph{alarme} dispara quando, com a música ligada e a luz
+desligada, ocorre \beon\ e é desativado quando o estado da luz ou da
+música é modificado; o agente somente consegue diferenciar os botões e
+executar as ações associadas a eles se a luz estiver ligada.
+
+Para avaliar a técnica proposta, foram realizados dois experimentos,
+sendo que em um deles o módulo de obtenção de políticas parciais a
+partir de \mi\ foi desativado, ou seja, o agente somente receberia
+recompensas extrínsecas, sem a obtenção de políticas parciais.  Foram
+realizados 100 experimentos, de 500 mil passos cada, com o agente
+recebendo uma recompensa extrínseca para ocorrência de \tmon\ no valor
+de 10 e recompensas intrínsecas para os demais eventos salientes no
+valor de 1.  Os resultados são apresentados no gráfico da Figura
+\ref{fig:mi}, que apresenta a média de passos necessários para ativar
+\tmon\ por quantidade de ativação. Os resultados aí presentes sugerem
+maior eficiência de aprendizado por parte do agente que utiliza \mi\,
+pois este diminui o tempo necessário para a solução do problema com
+uma maior rapidez em relação ao agente que utiliza somente motivação
+extrínseca.
+
+No gráfico da Figura \ref{fig:ri} são apresentados os valores de
+recompensa intrínseca recebida por passo do experimento, evidenciando
+algumas características do aprendizado utilizando \mi : o agente
+inicialmente procede à execução das tarefas mais simples, como
+ligar/desligar a luz, o que pode ser visto pela frequência e
+prematuridade com que o agente recebe recompensas intrínsecas para
+essas tarefas. Pode-se perceber também uma variação dos valores
+recebidos associados ao evento saliente com a repetição dos mesmos: há
+uma tendência de \emph{diminuição} dos valores recebidos para eventos
+salientes repetidos, mostrando a capacidade da técnica de priorizar a
+realização de tarefas menos conhecidas.
+
+Para avaliar o impacto da utilização de exploração interna à política
+parcial, foram realizados 100 experimentos de 500 mil passos cada com
+a mesma parametrização de recompensas anterior e com valores de $\epS
+\in \{0.2, 0.4, 0.6, 0.8\}$.  O desempenho foi comparado com um agente
+utilizando Q-Learning e outro com comportamento aleatório e os
+resultados estão presentes na Figura \ref{fig:ep}, que apresenta a
+média cumulativa de ativações do \tmon\ por passo de experimento.  A
+análise do gráfico sugere que a utilização da técnica proposta para
+obtenção e aplicação de políticas parciais pode superar a utilização
+de algoritmos que não utilizam políticas parciais.  Pode-se também
+perceber que o valor de \ep\ possui impacto significativo no
+aprendizado, sendo o desempenho apresentado diretamente proporcional
+ao valor de \ep.
 
 \begin{figure}
+  \centering
+  \begin{subfigure}[b]{\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{r_i-2014-07-12_07-15-03-Teri.eps}
-    \caption{Evolução da recompensa intrínseca recebida no aprendizado}
-    \label{fig:rixt}
+    \begin{subfigure}[b]{0.47\textwidth}
+      \includegraphics[width=\textwidth]{EfeitoMI}
+      \caption{Efeito da Motivação Intrínseca no Aprendizado}
+      \label{fig:mi}
+    \end{subfigure}
+    ~
+    \begin{subfigure}[b]{0.47\textwidth}
+      \includegraphics[width=\textwidth]{toyonxstep-mediaacum-epsopt-parcial-02-04-06-08}
+      \caption{Influência de \ep\ no Aprendizado}
+      \label{fig:ep}
+    \end{subfigure}
+  \end{subfigure}
+
+  \begin{subfigure}[t]{\textwidth}
+    \includegraphics[width=\textwidth]{r_i-2014-07-12_07-15-03-Teri}
+    \caption{Recebimento de Recompensa Intrínseca Durante o Aprendizado}
+    \label{fig:ri}
+  \end{subfigure}
+  \caption{}\label{fig:res}
 \end{figure}
 
-Para testar as propostas relacionadas ao algoritmo, procedeu-se à realização de experimentos , cuja função seria a de verificar empiricamente a validade da implementação. Essa verificação empírica serviria a dois propósitos: checar a consistência da implementação e avaliar a qualidade das modificações propostas.  Um experimento que se enquadra no primeiro dos propósitos consisitiu em avaliar a quantidade e valor das recompensas intrínsecas recebidas associadas a cada evento saliente possível (um resultado similar foi apresentado na Figura 4 do artigo original). O experimento consistiu de 100 repetições de $5\times10^5$ passos cada, onde o agente aprendia de acordo com o Algoritmo \ref{alg:modificado}. Os resultados estão presentes na figura \ref{fig:rixt}, onde são apresentados os valores de recompensa intrínseca recebidos pelo agente por passos do experimento.
+\section{Conclusão}
+Neste trabalho foram propostas duas estratégias de aplicação de
+políticas parciais no Aprendizado por Reforço com Motivação
+Intrínseca: aplicação de políticas parciais em pilha e exploração
+interna à política parcial.  Experimentos foram realizados de forma a
+validar a proposta, nos quais o agente armazenava as políticas
+parciais aplicadas durante o o aprendizado, removendo-as através de
+estratégia proposta.  A aplicação das políticas parciais foi
+modificada de forma a permitir exploração interna, com a qual o agente
+poderia contornar uma eventual restritividade por parte da aplicação
+das políticas parciais.  Realizou-se uma comparação da técnica de
+aprendizado proposta frente a abordagens mais clássicas de aprendizado
+e comportamento aleatório.  Os resultados obtidos sugerem a
+aplicabilidade da técnica para acelerar o processo de aprendizado.
+Percebeu-se ainda que o parâmetro de exploração interna à política
+parcial possui impacto significativo no desempenho de aprendizado,
+sendo o desempenho apresentado diretamente proporcional a esse valor.
 
-A análise dos resultados presentes na Figura \ref{fig:rixt} sugere algumas características do aprendizado resultante: o agente inicialmente procede à execução das tarefas mais simples, como ligar/desligar a luz. Isso pode ser visto pela frequência e prematuridade com que o agente recebe recompensas intrínsecas para essas tarefas. Pode-se perceber uma variação dos valores recebidos associados ao evento saliente com a repetição dos mesmos: há uma tendência de \emph{diminuição} dos valores recebidos para eventos salientes repetidos.
-
-É importante notar, entretanto, que, marcadamente no caso do evento \emph{lightON}, parece haver algumas vezes um \emph{aumento} da recompensa intrínseca recebida com a repetição. Isso pode ser devido à definição de evento saliente utilizada especificamente para esse experimento (somente atributos relacionados aos \tr{status} do ambiente), o que, associado à definição de $P^o$ para a descrição completa do estado, permitiria também uma evolução crescente de seus valores.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{imrlvsql.png}
-    \caption{Comparação de aprendizado utilizando ou não motivação intrínseca para descoberta de macro-ações}
-    \label{fig:imrlvsql}
-\end{figure}
-
-Pode-se também observar uma aparente \emph{graduação} do agente na execução das sub-tarefas: após o aprendizado das sub-tarefas mais simples, começam a ocorrer com mais frequência recompensas intrínsecas associadas a sub-tarefas mais complexas, que por sua vez são dependentes das mais simples. Em última instância, a sub-tarefa \emph{monkeyON} ocorre seguindo o padrão descrito acima e aproximadamente após o aprendizado das sub-tarefas mais simples de que \emph{monkeyON} depende. Essa é, das características citadas, a de maior interesse para este trabalho, pois sugere justamente a ocorrência de um aprendizado (e consequente utilização) das macro-ações de uma forma \emph{hierárquica}, partindo de sub-tarefas componentes mais simples até atinger o objetivo final do problema.
-
-Para avaliar a importância relativa da descoberta de macro-ações com auxílio de motivação intrínseca, foi realizado um experimento no qual o agente aprende com o Q-Learning tradicional, ou seja, não utiliza recompensas intrínsecas para a descoberta de macro-ações e comparado com o desempenho do agente que utiliza o Algoritmo \ref{alg:modificado} para o aprendizado. O resultado desse experimento pode ser visto na figura \ref{fig:imrlvsql}, que mostra a quantidade média de passos necessárias para atingir o objetivo à medida que o agente o atinge, ou seja, quão rápido o agente consegue resolver a tarefa em \emph{cada vez menos passos}. Pela análise do gráfico, podemos ver que o agente que utiliza a motivação intrínseca além da extrínseca possui uma evolução mais rápida em relação ao agente que somente utiliza a motivação extrínseca, o que sugere que a vantagem da utilização da motivação intrínseca para obtenção de macro-ações no aprendizado.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{epsopt.png}
-    \caption{Análise da sensibilidade do algoritmo à estratégia de abandono da macro-ação}
-    \label{fig:epsopt}
-\end{figure}
-
-Para verificar a suscetibilidade do algoritmo proposto seria à \tr{estratégia de abandono da macro-ação}, foram realizadas repetições de experimentos com variações gradativas do valor de $\epsilon_o$, conforme descrito na seção \tr{...}. Os resultados são apresentados na figura \ref{fig:epsopt}. O gráfico mostra a média cumulativa de ativações do \emph{monkey} por passo. Pela análise desses resultados, podemos verificar a variação do desempenho do aprendizado com o valor escolhido para $\epsilon_o$, sugerindo que a correta escolha desse parâmetro possui um impacto significativo no desempenho de aprendizado do agente. \tr{TODO: complementar}
-
-Foram também investigadas duas estratégias de adição de novos estados à macro-ação: (i) \tr{backward}, em que um novo estado $s_t$ somente é adicionado ao conjunto iniciador $I^o$ de uma macro-ação $o$ se ocorrer que ao realizar a transição $s_t,\ a_t \rightarrow s_{t+1}$, tenha-se $s_{t+1} \in I^o$ e (ii) \tr{backward+forward}, em que ocorre a adição descrita em (i), além de: caso o agente, estando em $s_t \in I^o$, realizar a transição  $s_t,\ a_t \rightarrow s_{t+1}$, $s_{t+1}$ é incluído em $I^o$. Como no algoritmo original, somente era realizada a adição (i), mas no artigo original de macro-ações \cite{option} é levantada também a possibilidade descrita em (ii), procedeu-se à investigação dos possíveis resultados decorrentes dessa nova adição. Os resultados desse experimento podem ser vistos na figura \ref{fig:dummy}, que mostra \tr{...}. Pela análise dos resultados aí presentes, podemos concluir que \tr{...}.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\textwidth]{dummy.png}
-    \caption{\tr{TODO: consolidar e plotar} Comparação de aprendizado utilizando adições de estados à macro-ação pelas estratégias \tr{backward} e \tr{backward+forward}}
-    \label{fig:dummy}
-\end{figure}
+A estratégia proposta pode ser utilizada para o aprendizado automático
+de políticas parciais em problemas de Aprendizado por Reforço,
+contribuindo dessa forma para o campo de pesquisa em Transferência de
+Conhecimento
+\cite{beirigo2012,bergamo2011accelerating,bogdan2013forward,da2011geometric,da2011navigation,koga2013speeding,matos2011simultaneous,matos2011stochastic},
+que busca acelerar o aprendizado do agente através do reuso de
+características compartilhadas entre problemas distintos.  Como
+trabalhos futuros, pretende-se esteder o algoritmo para a solução de
+uma classe de problemas, em que os sub-problemas comuns são
+identificados e armazenados para uso futuro, dessa forma contribuindo
+para acelerar a obtenção das soluções.
 
 \begin{received}
 \end{received}
 
 % INCLUDE BIBLIOGRAPHY WHICH MUST FOLLOW kdmile.bst TEMPLATE
 \bibliographystyle{kdmile}
-\bibliography{kdmileb}
+\bibliography{kdmile}
 % For information on how to write bibliography entries, 
 % see file kdmileb.bib
 
 \end{document}
+
+#+ORGTBL: SEND thenameofthetable orgtbl-to-latex :splice nil :skip 0
+|-------------+------------+----------+------|
+| Objeto      | Ação       | Evento   | Mov. |
+|             |            | saliente |      |
+|-------------+------------+----------+------|
+| alarme      | -          | \tmon\   | -    |
+|             | -          | \tmoff\  | -    |
+| botão A     | pressionar | \muon\   | -    |
+|             | empurrar   | -        | V    |
+| botão B     | pressionar | \muoff\  | -    |
+|             | empurrar   | -        | V    |
+| bola        | chutar     | -        | A    |
+| interruptor | pressionar | \lion    | -    |
+|             | pressionar | \lioff   | -    |
+| sino        | -          | \beon\   | V    |
+|-------------+------------+----------+------|

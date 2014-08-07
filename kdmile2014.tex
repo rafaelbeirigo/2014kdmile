@@ -76,6 +76,8 @@
 \newcommand{\beon}{$sino_{ON}$}
 
 % Termos/conceitos
+\newcommand{\qt}{Q(s_t, a_t)}
+\newcommand{\qtt}{Q(s_{t+1}, a)}
 \newcommand{\imrl}{IMRL}
 \newcommand{\mi}{motivação intrínseca}
 \newcommand{\epS}{\xi_{p}}
@@ -288,50 +290,29 @@ resultados alcançados são descritos na Seção
 Problemas de decisão sequencial são usualmente representados por um
 \emph{Processo Markoviano de Decisão} (PMD) \cite{puterman2009markov},
 definido pela quádrupla $\langle S, A, P, R \rangle$, em que $S$ e $A$
-são conjuntos finitos de estados e ações respectivamente, $R \colon S
-\to \Re$ representa a recompensa \emph{extrínseca} $r^e$ recebida ao
-alcançar um estado $s \in S$ e $P \colon S \times A \times S \to
-[0,1]$ a probabilidade de alcançar um estado a partir de outro através
-da execução de uma ação.  Uma política $\pi \colon S \to A$ associa
-uma ação a ser executada em um estado e a função $V^{\pi} \colon S \to
-\Re$ fornece o valor esperado de recompensas futuras ao, partindo de
-$s \in S$, executar $\pi$.  A solução de um PDM é dado pela política
-$\pi^*(s) = \arg\max_{\pi}{V^{\pi}(s), \forall s \in S}$, denominada
-\emph{ótima}, obtida pelo Q-Learning \cite{watkins1989learning}
-iterativamente por
-%
-\newcommand{\qt}{Q(s_t, a_t)}
-\newcommand{\qtt}{Q(s_{t+1}, a)}
+são conjuntos finitos de estados e ações respectivamente, sendo $R
+\colon S \to \Re$ representa a recompensa \emph{extrínseca} $r^e$
+recebida ao alcançar um estado $s \in S$ e $P \colon S \times A \times
+S \to [0,1]$ a probabilidade de se alcançar $s_{t+1} \in S$ a partir
+de $s \in S$ ao se executar a ação $a \in A$.  Uma política $\pi
+\colon S \to A$ associa uma ação a ser executada em um estado e a
+função $Q \colon S \times A \to \Re$ fornece o valor esperado de
+recompensas futuras ao se executar a ação $a$ no estado $s$, sendo o
+valor \emph{ótimo} dado por $Q^*(s) = \max_a Q(s, a)$ , que pode ser
+obtida iterativamente pelo Q-Learning \cite{watkins1989learning} por
 %
 $\qt \leftarrow (1 - \alpha)\qt + \alpha (r_{t+1} + \gamma \max_a\qtt)$,
 %
-onde $\alpha \in\ ]0,1]$ e $\gamma \in [0,1]$ correspondem à \emph{taxa
-    de aprendizado} e \emph{fator de desconto futuro},
-respectivamente.
-
-
-
-%  através da atualização
-% \emph{exploração}/\emph{aplicação}.  
-% uma
-% técnica de Aprendizado por Reforço. Nesse algoritmo, o a seleção da
-% ações a serem executadas é feita pela estratégia $\epsilon$-gulosa,
-% $\epsilon \in [0,1]$, que retorna ações aleatórias com probabilidade
-% $\epsilon$ e gulosas com probabilidade $1 - \epsilon$, sendo a
-% atualização 
-
-% da função $Q: S\times A\rightarrow \Re$, que indica o valor de se e
-
-% sendo feita atualização iterativa da função $Q: S \times
-% A \rightarrow \mathcal{R}$ por
-% %
-% %
-% sendo feita atualização iterativa da função $Q: S \times
-% A \rightarrow \mathcal{R}$ por
-% %
-% \newcommand{\qt}{Q(s_t, a_t)}
-% $\qt\ \leftarrow (1 - \alpha)\qt\ + \alpha (r_t + \gamma \max_a)$
-% %
+onde $\alpha \in\ ]0,1]$ e $\gamma \in [0,1]$ correspondem à taxa de
+aprendizado e ao fator de desconto futuro, respectivamente e $s_{t+1}$
+ao estado alcançado após executar-se a ação $a_t$ em $s_t$.  A solução
+para o PMD é a política ótima $\pi^*$, que pode ser obtida por
+$\pi^*(s) = \arg\max_a Q^*(s, a), \forall s \in S$, uma vez obtida
+$Q^*$.  No Q-Learning as ações são selecionadas pela estratégia
+$\epsilon$-gulosa, que recomenda uma ação aleatórias e ótimas com
+probabilidades $\epsilon \in [0,1]$ e $1 - \epsilon$, respectivamente.
+Dessa forma, o agente aplica o conhecimento adquirido sobre o
+problema, aprimorando-o através de exploração.
 
 Por ser realizado através de tentativa e erro esse processo é
 geralmente lento e pode ser acelerado pela utilização de políticas
@@ -344,9 +325,8 @@ serem executas, onde \Oset\ corresponde ao conjunto de todas as ações
 primitivas e políticas parciais.  A aplicação de políticas parciais
 conjuntamente às ações primitivas possui forte caráter
 \emph{hierárquico}, dado que a obtenção da solução do problema
-original é realizada através da divisão deste em subproblemas
-menores, cuja solução é obtida através do aprendizado de políticas
-parciais.
+original é realizada através da divisão deste em subproblemas menores,
+cuja solução é obtida através do aprendizado de políticas parciais.
 
 \setlength\intextsep{1pt}
 \begin{wrapfigure}{r}{0.5\textwidth}

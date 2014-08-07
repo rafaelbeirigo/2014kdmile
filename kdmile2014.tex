@@ -274,26 +274,64 @@ investiga-se o papel da exploração nesse processo.  Os resultados
 experimentais obtidos sugerem a aplicabilidade das técnicas propostas
 para o aprendizado de políticas parciais com a utilização de \mi.
 
-\section{Fundamentos Teóricos}
+Este artigo está organizado da seguinte forma.  A Seção
+\ref{sec:fundamentosteoricos} apresenta os conceitos fundamentais
+envolvidos na modelagem e solução do problema de AR, incluindo o
+algoritmo do trabalho-base que utiliza o conceito de motivação
+intrínseca.  A proposta apresentada no presente trabalho é descrita na
+Seção \ref{sec:proposta}.  A avaliação experimental da proposta e os
+resultados alcançados são descritos na Seção
+\ref{sec:avaliacaoexperimental}. Finalmente, a Seção
+\ref{sec:conclusao} apresenta as conclusões e direcionamentos futuros
+
+\section{Fundamentos Teóricos}\label{sec:fundamentosteoricos}
 Problemas de decisão sequencial são usualmente representados por um
 \emph{Processo Markoviano de Decisão} (PMD) \cite{puterman2009markov},
-definido pela quádrupa $<S, A, P, R>$, em que $S$ e $A$ são conjuntos
-finitos de estados e ações respectivamente, $R:S\rightarrow\Re$
-representa a recompensa \emph{extrínseca} $r^e$ recebida ao alcançar
-um estado $s \in S$ e $P:S\times A\times S \rightarrow [0,1]$ a
-probabilidade de alcançar um estado a partir de outro através da
-execução de uma ação.  Uma política $\pi: S \rightarrow A$ associa uma
-ação a ser executada em um estado e a função $V^{\pi}: S \rightarrow
+definido pela quádrupla $\langle S, A, P, R \rangle$, em que $S$ e $A$
+são conjuntos finitos de estados e ações respectivamente, $R \colon S
+\to \Re$ representa a recompensa \emph{extrínseca} $r^e$ recebida ao
+alcançar um estado $s \in S$ e $P \colon S \times A \times S \to
+[0,1]$ a probabilidade de alcançar um estado a partir de outro através
+da execução de uma ação.  Uma política $\pi \colon S \to A$ associa
+uma ação a ser executada em um estado e a função $V^{\pi} \colon S \to
 \Re$ fornece o valor esperado de recompensas futuras ao, partindo de
 $s \in S$, executar $\pi$.  A solução de um PDM é dado pela política
-$\pi^*(s) = \arg\max_{\pi}{V^{\pi}(s), \forall s \in S}$,
-\emph{exploração}/\emph{aplicação}.  denominada \emph{ótima}, que pode
-ser obtida através do Q-Learning \cite{watkins1989learning}, uma
-técnica de Aprendizado por Reforço. Nesse algoritmo, o a seleção da
-ações a serem executadas é feita pela estratégia $\epsilon$-gulosa,
-$\epsilon \in [0,1]$, que retorna ações aleatórias com probabilidade
-$\epsilon$ e gulosas com probabilidade $1 - \epsilon$, configurando o
-compromisso
+$\pi^*(s) = \arg\max_{\pi}{V^{\pi}(s), \forall s \in S}$, denominada
+\emph{ótima}, obtida pelo Q-Learning \cite{watkins1989learning}
+iterativamente por
+%
+\newcommand{\qt}{Q(s_t, a_t)}
+\newcommand{\qtt}{Q(s_{t+1}, a)}
+%
+$\qt \leftarrow (1 - \alpha)\qt + \alpha (r_{t+1} + \gamma \max_a\qtt)$,
+%
+onde $\alpha \in\ ]0,1]$ e $\gamma \in [0,1]$ correspondem à \emph{taxa
+    de aprendizado} e \emph{fator de desconto futuro},
+respectivamente.
+
+
+
+%  através da atualização
+% \emph{exploração}/\emph{aplicação}.  
+% uma
+% técnica de Aprendizado por Reforço. Nesse algoritmo, o a seleção da
+% ações a serem executadas é feita pela estratégia $\epsilon$-gulosa,
+% $\epsilon \in [0,1]$, que retorna ações aleatórias com probabilidade
+% $\epsilon$ e gulosas com probabilidade $1 - \epsilon$, sendo a
+% atualização 
+
+% da função $Q: S\times A\rightarrow \Re$, que indica o valor de se e
+
+% sendo feita atualização iterativa da função $Q: S \times
+% A \rightarrow \mathcal{R}$ por
+% %
+% %
+% sendo feita atualização iterativa da função $Q: S \times
+% A \rightarrow \mathcal{R}$ por
+% %
+% \newcommand{\qt}{Q(s_t, a_t)}
+% $\qt\ \leftarrow (1 - \alpha)\qt\ + \alpha (r_t + \gamma \max_a)$
+% %
 
 Por ser realizado através de tentativa e erro esse processo é
 geralmente lento e pode ser acelerado pela utilização de políticas
@@ -363,7 +401,7 @@ variação denominada \emph{evento saliente}, sendo o conceito utilizado
 para a obtenção, atualização e aplicação do modelo e função valor para
 a obtenção das políticas parciais.
 
-\section{Proposta}
+\section{Proposta}\label{sec:proposta}
 Políticas parciais podem ser obtidas automaticamente simultaneamente
 ao aprendizado através do algoritmo apresentado em \cite{imrl2004},
 que utiliza motivação intrínseca para detectar a presença de
@@ -522,7 +560,8 @@ executadas no estado em que o agente se encontra.
     \label{fig:obj}
   \end{minipage}
 \end{wrapfigure}
-\section{Avaliação Experimental}
+
+\section{Avaliação Experimental}\label{sec:avaliacaoexperimental}
 O domínio utilizado na avaliação experimental foi o \emph{Playroom}
 \cite{imrl2004}, em que o agente se econtra em um reticulado
 $5\times5$ e deve descobrir como ativar um \emph{alarme} interagindo
@@ -633,7 +672,7 @@ Pode-se também perceber que o valor de \ep\ possui impacto
 significativo no aprendizado, sendo o desempenho apresentado
 diretamente proporcional ao valor de \ep.
 
-\section{Conclusão}
+\section{Conclusão}\label{sec:conclusao}
 Neste trabalho foram propostas duas estratégias de aplicação de
 políticas parciais no Aprendizado por Reforço com Motivação
 Intrínseca: aplicação de políticas parciais em pilha e exploração

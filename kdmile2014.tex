@@ -1,4 +1,4 @@
-% by Mirella M. Moro; version: January/18/2012 @ 04:16pm
+% by Mirella M. Moro; version: January/18/2012 @ 04:16pm%
 % -- 01/18/2012: more discussion on SBBD + kdmile; overall revision
 % -- 09/03/2010: bib file with names for proceedings and journals; cls with shrinked {received}
 % -- 08/27/2010: appendix, table example, more explanation within comments, editors' data
@@ -297,9 +297,9 @@ S \to [0,1]$ a probabilidade de se alcançar $s_{t+1} \in S$ a partir
 de $s \in S$ ao se executar a ação $a \in A$.  Uma política $\pi
 \colon S \to A$ associa uma ação a ser executada em um estado e a
 função $Q \colon S \times A \to \Re$ fornece o valor esperado de
-recompensas futuras ao se executar a ação $a$ no estado $s$, sendo o
-valor \emph{ótimo} dado por $Q^*(s) = \max_a Q(s, a)$ , que pode ser
-obtida iterativamente pelo Q-Learning \cite{watkins1989learning} por
+recompensas futuras ao se executar a ação $a$ no estado $s$, e pode
+ser obtida iterativamente pelo Q-Learning \cite{watkins1989learning}
+por
 %
 $\qt \leftarrow (1 - \alpha)\qt + \alpha (r_{t+1} + \gamma \max_a\qtt)$,
 %
@@ -307,26 +307,25 @@ onde $\alpha \in\ ]0,1]$ e $\gamma \in [0,1]$ correspondem à taxa de
 aprendizado e ao fator de desconto futuro, respectivamente e $s_{t+1}$
 ao estado alcançado após executar-se a ação $a_t$ em $s_t$.  A solução
 para o PMD é a política ótima $\pi^*$, que pode ser obtida por
-$\pi^*(s) = \arg\max_a Q^*(s, a), \forall s \in S$, uma vez obtida
-$Q^*$.  No Q-Learning as ações são selecionadas pela estratégia
-$\epsilon$-gulosa, que recomenda uma ação aleatórias e ótimas com
-probabilidades $\epsilon \in [0,1]$ e $1 - \epsilon$, respectivamente.
-Dessa forma, o agente aplica o conhecimento adquirido sobre o
-problema, aprimorando-o através de exploração.
+$\pi^*(s) = \arg\max_a Q^*(s, a), \forall s \in S$.  No Q-Learning as
+ações são selecionadas pela estratégia $\epsilon$-gulosa, que
+recomenda ações aleatórias e ótimas com probabilidades $\epsilon \in
+[0,1]$ e $1 - \epsilon$, respectivamente.  Dessa forma, o agente
+aplica o conhecimento adquirido sobre o problema, aprimorando-o
+através de exploração.
 
 Por ser realizado através de tentativa e erro esse processo é
 geralmente lento e pode ser acelerado pela utilização de políticas
-parciais \cite{option1999} \pps$\ \defeq\ <\mathcal{I},\ \pi, \beta>$,
-em que $\mathcal{I} \subseteq S$ indica os estados em que a política
-parcial \pps\ pode ser iniciada, $\beta: S \rightarrow [0,1]$ a
-probabilidade de terminar \pps\ em um estado $s \in S$ e $\pi:S
-\rightarrow \OsetS$, associa ações primitivas ou políticas parciais a
+parciais \cite{option1999} \pps$\ \defeq\ \langle \mathcal{I},\ \pi,
+\beta \rangle$, em que $\mathcal{I} \subseteq S$ indica os estados em
+que a política parcial \pps\ pode ser iniciada, $\beta \colon S \to
+[0,1]$ a probabilidade de terminar \pps\ em um estado $s \in S$ e $\pi
+\colon S \to \OsetS$, associa ações primitivas ou políticas parciais a
 serem executas, onde \Oset\ corresponde ao conjunto de todas as ações
-primitivas e políticas parciais.  A aplicação de políticas parciais
-conjuntamente às ações primitivas possui forte caráter
-\emph{hierárquico}, dado que a obtenção da solução do problema
-original é realizada através da divisão deste em subproblemas menores,
-cuja solução é obtida através do aprendizado de políticas parciais.
+primitivas e políticas parciais.  A obtenção da solução do problema
+original é obtida pela divisão em subproblemas para os quais são
+aprendidas políticas parciais que podem aplicar umas às outras, desta
+forma conferindo a esta técnica um forte caráter hierárquico.
 
 \setlength\intextsep{1pt}
 \begin{wrapfigure}{r}{0.5\textwidth}

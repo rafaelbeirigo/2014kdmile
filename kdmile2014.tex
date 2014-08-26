@@ -386,7 +386,7 @@ ao aprendizado através do algoritmo apresentado em \cite{imrl2004},
 que utiliza motivação intrínseca para detectar a presença de
 subproblemas e associar a cada um deles uma política parcial para
 resolvê-lo.  Entretanto, o algoritmo proposto concentra-se nos
-aspectos relacionados à \emph{obteção} da políticas parciais.  Neste
+aspectos relacionados à \emph{obtenção} da políticas parciais.  Neste
 trabalho, são investigados dois aspectos da \emph{aplicação} das
 políticas parciais: exploração interna e método de terminação, através
 da adição de duas funcionalidades ao algoritmo original.
@@ -450,15 +450,14 @@ anteriormente adicionadas, como mostrado no Algoritmo
 Propõe-se também um mecanismo de \emph{exploração interna} à política
 parcial, elaborada para atenuar o efeito de \emph{rigidez}
 potencialmente imposto pela política parcial, em que o agente fica
-preso a uma sequência de ações. Dessa forma, durante a aplicação de
-uma política parcial por parte do agente, no momento da escolha da
-próxima ação a ser executada, originalmente essa escolha seria feita
-sempre de forma gulosa somente.  Isso foi feito porque, apesar de a
+preso a uma sequência de ações.  Isso foi feito porque, apesar de a
 estratégia gulosa ser a melhor no caso de a política parcial ser ótima
 para o subproblema sendo resolvido, ela implica em uma restrição que
 potencialmente atrapalharia o desempenho de aprendizado do agente nos
 passos iniciais, em que as políticas parciais estão em fase inicial de
-aprendizado.
+aprendizado.  De forma a contornar esse problema, propõe-se a
+aplicação da estratégia $\epsilon$-gulosa para a escolha da próxima
+ação a ser executada durante a aplicação das política parciais.
 
 \setlength\intextsep{1pt}
 \begin{wrapfigure}{r}{0.5\textwidth}
@@ -495,7 +494,7 @@ aprendizado.
     \end{center}
   \end{minipage}
 \end{wrapfigure}
-Dessa forma, introduziu-se o parâmetro $\epS \in [0,1]$, que indica o
+Para isso, introduziu-se o parâmetro $\epS \in [0,1]$, que indica o
 percentual de exploração utilizado na aplicação de uma política
 parcial.  No momento de selecionar a próxima ação a ser executada,
 caso o agente esteja executando uma política parcial \pps\, é sorteado
@@ -509,8 +508,9 @@ feita da forma usual, aplicando a estratégia $\epsilon$-gulosa no
 conjunto das ações primitivas e políticas parciais possíveis de serem
 executadas no estado em que o agente se encontra.
 
+\section{Avaliação Experimental}\label{sec:avaliacaoexperimental}
 \setlength\intextsep{1pt}
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{wrapfigure}[14]{r}{0.5\textwidth}
   \begin{minipage}{0.5\textwidth}
     \newcommand{\fppt}{\fontsize{.295cm}{1em}\selectfont}
     \fppt
@@ -539,24 +539,22 @@ executadas no estado em que o agente se encontra.
     \label{fig:obj}
   \end{minipage}
 \end{wrapfigure}
-
-\section{Avaliação Experimental}\label{sec:avaliacaoexperimental}
 O domínio utilizado na avaliação experimental foi o \emph{Playroom}
 \cite{imrl2004}, em que o agente se econtra em um reticulado
 $5\times5$ e deve descobrir como ativar um \emph{alarme} interagindo
-com objetos aí
-presentes. O agente é composto de um \emph{olho}, uma \emph{mão} e um
-\emph{alvo} e possui sempre disponíveis as seguintes ações: apontar
-\emph{olho} para a célula onde se encontra a \emph{mão} ou para a
-célula onde se encontra o \emph{alvo}; mover a \emph{mão} ou o
-\emph{alvo} para a célula atualmente apontada pelo \emph{olho}.
+com objetos aí presentes. O agente é composto de um \emph{olho}, uma
+\emph{mão} e um \emph{alvo} e possui sempre disponíveis as seguintes
+ações: apontar \emph{olho} para a célula onde se encontra a \emph{mão}
+ou para a célula onde se encontra o \emph{alvo}; mover a \emph{mão} ou
+o \emph{alvo} para a célula atualmente apontada pelo \emph{olho}.
 
 \setlength\intextsep{0pt}
-\begin{wrapfigure}[16]{l}{0.5\textwidth}
-  \begin{minipage}{0.5\textwidth}
+\begin{wrapfigure}[11]{r}{0.3\textwidth}
+  \begin{minipage}{0.3\textwidth}
     \begin{center}
       \begin{figure}[H]
         \includegraphics[width=\textwidth]{EfeitoMI}
+        \tiny
         \caption{Efeito da Motivação Intrínseca no Aprendizado}
         \label{fig:mi}
       \end{figure}
@@ -564,18 +562,18 @@ célula onde se encontra o \emph{alvo}; mover a \emph{mão} ou o
   \end{minipage}
 \end{wrapfigure}
 Na Figura \ref{fig:obj} estão relacionados os objetos aí presentes,
-juntamente com as ações e o evento saliente que disparam.  Essas ações
-ficam disponíveis somente quando o \emph{olho} e a \emph{mão} estão
-sobre a célula em que se encontra o objeto.  Na coluna \emph{Mov.},
-objetos marcados com \emph{A} movem-se para a posição atual do
-\emph{alvo} e as marcadas com \emph{V} para uma célula vizinha
-aleatória ao serem ativados.  Caso a \emph{bola} seja chutada com o
-\emph{alvo} sobre o \emph{sino}, este é ativado, disparando o evento
-\beon.  O \emph{alarme} dispara quando, com a música ligada e a luz
-desligada, ocorre \beon\ e é desativado quando o estado da luz ou da
-música é modificado; o agente somente consegue diferenciar os botões
-\emph{A} e \emph{B} e executar as ações associadas a eles se a luz
-estiver ligada.
+juntamente com as ações e o evento
+saliente que disparam.  Essas ações ficam disponíveis somente quando o
+\emph{olho} e a \emph{mão} estão sobre a célula em que se encontra o
+objeto.  Na coluna \emph{Mov.}, objetos marcados com \emph{A} movem-se
+para a posição atual do \emph{alvo} e as marcadas com \emph{V} para
+uma célula vizinha aleatória ao serem ativados.  Caso a \emph{bola}
+seja chutada com o \emph{alvo} sobre o \emph{sino}, este é ativado,
+disparando o evento \beon.  O \emph{alarme} dispara quando, com a
+música ligada e a luz desligada, ocorre \beon\ e é desativado quando o
+estado da luz ou da música é modificado; o agente somente consegue
+diferenciar os botões \emph{A} e \emph{B} e executar as ações
+associadas a eles se a luz estiver ligada.
 
 Para avaliar a técnica proposta, foram realizados dois experimentos,
 sendo que em um deles o módulo de obtenção de políticas parciais a
@@ -621,7 +619,7 @@ salientes repetidos, mostrando a capacidade da técnica de priorizar a
 realização de tarefas menos conhecidas.
 
 \setlength\intextsep{0pt}
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{wrapfigure}[19]{r}{0.5\textwidth}
   \begin{minipage}{0.5\textwidth}
     \begin{center}
       \begin{figure}[H]

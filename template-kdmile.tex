@@ -68,7 +68,7 @@
 \newcommand{\grifar}[1]{\hl{#1}}
 
 % Substituir pelo título quando estiver definido
-\newcommand{\titulo}{Título}
+\newcommand{\titulo}{Lorem ipsum dolor sit amet, consectetuer adipiscing elit}
 
 %% Melhores comentários para o pacote algorithm
 \renewcommand{\algorithmiccomment}[1]{// #1}
@@ -77,7 +77,7 @@
 
 
 % Includes headers with simplified name of the authors and article title
-\markboth{S. de Amo and A. P. L. de Carvalho and A. Plastino}
+\markboth{R. L. Beirigo and V. F. da Silva and A. H. R. Costa}
 {\titulo}
 %  -> \markboth{}{}
 %         takes 2 arguments
@@ -91,24 +91,20 @@
 % List of authors
 %IF THERE ARE TWO or more institutions, please use:
 %\author{Name of Author1\inst{1}, Name of Author2\inst{2}, Name of Author3\inst{2}}
-\author{S. de Amo\inst{1}, A. P. L. de Carvalho\inst{2}, A. Plastino\inst{3}}
-
+\author{R. L. Beirigo and V. F. da Silva and A. H. R. Costa}
 
 %Affiliation and email
-\institute{Universidade Federal de Uberl\^andia, Brazil \\ \email{deamo@ufu.br}
-% IF THERE IS ANOTHER INSTITUTION:
-\and Universidade de São Paulo, Brazil  \\ \email{andre@icmc.usp.br}
-\and Universidade Federal Fluminense, Brazil  \\ \email{plastino@icmc.usp.br}
+\institute{Escola Politécnica da Universidade de São Paulo, Brazil \\
+  \email{\{rafaelbeirigo, valdinei.freire, anna.reali\}@usp.br}
 }
 
 
 % Article abstract - it should be from 100 to 300 words
 \begin{abstract}
-The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integrating researchers, practitioners, developers, students and users to present theirs research results, to discuss ideas, and to exchange techniques, tools, and practical experiences related to the Data Mining and Machine Learning areas. 
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.
 \end{abstract}
 
 % ACM Computing Classification System categories
-\category{H.2.8}{Database Management}{Database Applications} 
 \category{I.2.6}{Artificial Intelligence}{Learning} 
 
 % Categories and Descriptors are available at the 1998 ACM Computing Classification System
@@ -119,20 +115,38 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
 %                   [data types and structures]
 %                   the last argument, in square brackets, is optional.
 
-
-
 % Article keywords
-\keywords{aprendizado por reforço, motivação intrínseca, descoberta de macro-ações}
+\keywords{aprendizado por reforço, descoberta de macro-ações, motivação intrínseca}
 %  -> \keywords{} (in alphabetical order \keywords{document processing, sequences,
 %                      string searching, subsequences, substrings})
-
 
 % THE ARTICLE BEGINS
 \begin{document}
 
+% This is optional:
+\begin{bottomstuff}
+% TODO: preencher adequadamente
+% similar to \thanks
+% for authors' addresses; research/grant statements
+\end{bottomstuff}
+
+\maketitle
+
+\section{Introdução}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+\section{Fundamentos Teóricos}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+% ARTICLE NEW SECTION
+\section{Algoritmo}\label{sec:algoritmo}
+No Algoritmo \ref{alg:modificado} são exibidas (marcadas em verde) as
+modificações em relação à proposta original, realizadas neste
+trabalho.
+
 \begin{algorithm}                      % enter the algorithm environment
-\caption{Algoritmo original}           % give the algorithm a caption
-\label{alg:original}                   % and a label for \ref{} commands later in the document
+\caption{Algoritmo modificado}         % give the algorithm a caption
+\label{alg:modificado}                 % and a label for \ref{} commands later in the document
 \algsetup{indent=2em}
 \begin{algorithmic}[1]                 % enter the algorithmic environment
     \newcommand{\sd}{s_{t+1}}
@@ -150,31 +164,48 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
     \newcommand{\transita}[1]{$#1_t \leftarrow #1_{t+1}$}
 
     \REQUIRE{Inicializar $s_t,\ a_t,\ $\grifar{$o_t$}$,\ r^e_t,\ r^i_t$}
+
     \REPEAT
 
     \STATE Obter próximo estado $\sd$
 
-    \STATE \grifar{$r^e_{t+1} \leftarrow$ recompensa extrínsica
-      recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
+    \STATE \label{alg:mod:re2} \grifar{$r^e_{t+1} \leftarrow$ recompensa extrínsica recebida na transição $s_t,\ a_t \rightarrow s_{t+1}$}
 
     \GIMMESPACE
+
     \STATE\COMMENT{Trata ocorrência de evento saliente}
+
+    \STATE\label{alg:mod:oenil}\grifar{$o_e \leftarrow nil$}
+
     \IF{ocorreu um evento saliente $e$}
+
         \IF{macro-ação para $e$, $o_e$, não existe em $O$}
+
+            \STATE\label{alg:mod:oeo}\grifar{$o_e \leftarrow $[representação da macro-ação associada a $e$]}
+
             \STATE Criar $o_e$ em $O$
+
             \STATE Adicionar $s_t$ a $I^{o_e}$
+
             \STATE $\beta^{o_e}(s_{t+1}) \leftarrow 1$
+
         \ENDIF
+
         \STATE $r^i_{t+1} \leftarrow \tau[1-P(s_{t+1}|s_t)]$
+
         \COMMENT{$\tau$ constante}
     \ELSE
         \STATE $r^i_{t+1} \leftarrow 0$
     \ENDIF
 
     \GIMMESPACE
+
     \STATE\COMMENT{Atualiza o modelo das macro-ações}
+
     \FOR{cada macro-ação $o \neq $\grifar{$o_e$} em $O$}
+
         \IF{$s_{t+1} \in I^o$ \AND \grifar{$\beta^o(s_t) \neq 1$}}
+
             \STATE Adicionar $s_t$ a $I^o$
         \ENDIF
         \IF{\grifar{$a_t$ é a ação} \tr{greedy} \grifar{para $o$ no estado $s_t$}}
@@ -225,18 +256,6 @@ The Symposium on Knowledge Discovery, Mining and Learning (KDMiLe) aims at integ
     \UNTIL{condição de parada}
 \end{algorithmic}
 \end{algorithm}
-
-% This is optional:
-\begin{bottomstuff}
-% similar to \thanks
-% for authors' addresses; research/grant statements
-\end{bottomstuff}
-
-\maketitle
-
-% ARTICLE NEW SECTION
-\section{Call for Contributions}
-KDMiLe is organized alternately in conjunction with The Brazilian Conference on Intelligent Systems (BRACIS) and the Symposium on Database Systems (SBBD). The KDMiLe Program Committee invites submissions containing new ideas and proposals, and also applications, in the Data Mining and Machine Learning areas. Submitted papers will be reviewed based on originality, relevance, technical soundness and clarity of presentation. 
 
 % ARTICLE NEW SUBSECTION
 \subsection{Scope and Topics}

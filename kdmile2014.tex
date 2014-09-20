@@ -96,6 +96,9 @@
 \newcommand{\td}{\emph{top-down}}
 \newcommand{\bu}{\emph{bottom-up}}
 
+%% Added para versão revisada
+\newcommand{\alg}{A-EIP$^3$}
+
 % := e =:
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\eqdef}{=\vcentcolon}
@@ -618,36 +621,190 @@ uma tendência de \emph{diminuição} dos valores recebidos para eventos
 salientes repetidos, mostrando a capacidade da técnica de priorizar a
 realização de tarefas menos conhecidas.
 
+Para avaliar o impacto de \ep\ no aprendizado, logo, do percentual de
+exploração interna à política parcial, foram realizados 100
+experimentos de $5 \times 10^5$ passos cada nos quais os valores
+de~\ep\ variaram em $\epS \in \{0,0; 0,2; 0,4; 0,6; 0,8; 1,0\}$, com
+valores dos demais parâmetros idênticos aos listados acima.  O
+desempenho desses robôs foi comparado com um robô aprendendo pelo
+Q-Learning e um robô executando ações aleatórias, sem nenhuma
+estratégia e sem realizar aprendizado.
+
 \setlength\intextsep{0pt}
-\begin{wrapfigure}[19]{r}{0.5\textwidth}
+\begin{wrapfigure}{l}{0.5\textwidth}
   \begin{minipage}{0.5\textwidth}
     \begin{center}
       \begin{figure}[H]
-        \includegraphics[width=\textwidth]{toyonxstep-mediaacum-epsopt-parcial-02-04-06-08}
-        \caption{Avaliação da estratégia de pilhas de políticas
-            parciais para exploração interna com diferentes valores de
-            \ep, \emph{versus} Q-Learning e comportamento aleatório}
-        \label{fig:ep}
+        \begin{center}
+          \includegraphics[width=0.95\textwidth]{toyonxstep-mediaacum-epsopt-parcial-00-02-04-06-08-10}
+          \caption{Avaliação da estratégia de pilhas de políticas parciais
+              para exploração interna com diferentes valores de \ep,
+              \emph{versus} Q-Learning e comportamento aleatório.  O gráfico
+              mostra a quantidade média acumulada de vezes que cada agente
+              conseguiu resolver o problema.}
+          \label{fig:ep}
+        \end{center}
       \end{figure}
     \end{center}
   \end{minipage}
 \end{wrapfigure}
-Para avaliar o impacto da utilização de exploração interna à política
-parcial, foram realizados 100 experimentos de \quinhentosmil\ passos
-cada com a mesma parametrização anterior, mas com valores de $\epS \in
-\{0.2, 0.4, 0.6, 0.8\}$.  O desempenho foi comparado com um agente
-utilizando Q-Learning e outro com comportamento aleatório e os
-resultados estão presentes na Figura \ref{fig:ep}, que apresenta a
-média cumulativa de ativações do \tmon\ por passo de experimento.
-Podemos perceber um desempenho inicial desfavorável da técnica frente
-ao Q-Learning.  Isso pode ser explicado pelo custo adicional da
-técnica relacionado ao aprendizado das políticas parciais.
-Entretanto, o desempenho cumulativo da técnica apresentou evolução
-mais rápida e melhor desempenho final, sugerindo a vantagem do
-aprendizado inicial das políticas parciais para posterior reuso.
-Pode-se também perceber que o valor de \ep\ possui impacto
-significativo no aprendizado, sendo o desempenho apresentado
-diretamente proporcional ao valor de \ep.
+Os resultados obtidos são apresentados no gráfico da
+Figura~\ref{fig:ep}.  No gráfico foi plotada a média acumulada da
+quantidade de vezes que cada robô conseguiu resolver o problema por
+passo do experimento.  No primeiro passo o valor é 0 para todos os
+robôs, pois com um passo nenhum robô é capaz de disparar \tmon; após
+os quinhentos passos do aprendizado, o valor corresponde à média da
+quantidade \emph{total} de vezes que o respectivo robô disparou \tmon.
+Assim, por exemplo, o robô que utilizou o \alg\ com $\epS=0,6$
+conseguiu disparar \tmon\ $588,13$ nos quinhentos mil passos, sendo a
+média calculada para as 100 repetições, o robô que aprendeu com o
+Q-Learning disparou uma média de $423,19$ vezes e o robô que executou
+ações aleatórias, $95,98$.
+
+Procedendo à análise dos dados presentes no gráfico, inicialmente
+considere-se o robô que aprendeu com o \alg, utilizando os valores de
+$\epS \in \{0,2; 0,4; 0,6; 0,8\}$.  Observando-se o gráfico, pode-se
+perceber que um \emph{maior} valor de \ep\ parece obter um
+\emph{melhor} desempenho, ou seja, o desempenho dos respectivos robôs
+é proporcional ao valor de \ep\ utilizado, sendo o melhor desempenho
+do conjunto apresentado pelo robô que utilizou $\epS=0,8$.  Outra
+maneira de ler os dados é a de que quanto maior a exploração interna à
+política parcial, melhor o desempenho do robô, dado que essa
+exploração é controlada pelo parâmetro \ep.
+
+Esse resultado pode parecer contra-intuitivo à primeira vista, dado
+que a função da política parcial é \emph{auxiliar} o robô a resolver
+os subproblemas, dessa forma esperando-se que quanto mais o robô se
+ativer às recomendações da política parcial, melhor será seu
+desempenho.
+
+Entretanto, é importante considerar que as políticas parciais são
+\emph{descobertas}, \emph{criadas} e \emph{aprendidas} no \alg.  Dessa
+forma, é de se esperar que a qualidade das mesmas somente esteja
+relativamente \emph{satisfatória} após algum tempo de aprendizado.
+Assim, o auxílio da exploração interna à política parcial no
+desempenho dos robôs pode ser explicada pela importância que a
+exploração interna tem \emph{no próprio aprendizado da política
+    parcial}, ou seja, os resultados sugerem a necessidade de o robô
+realizar exploração no aprendizado das políticas parciais.
+
+A hipótese de que \emph{a exploração interna à política parcial
+    favorece o aprendizado} é corroborada pelo resultado
+correspondente ao robô que utilizou o valor de $\epS=0,0$, ou seja, o
+robô que \emph{não realizou exploração interna às políticas parciais},
+e que apresentou o desempenho menos favorável do conjunto.  Esse
+resultado apoia, portanto, a hipótese de que o aprendizado das
+políticas parciais pode ser auxiliado pela exploração interna.
+
+Comparando-se os resultados apresentados pelo robô que aprendeu com o
+\alg\ utilizando $\epS=0,8$ e pelo robô que aprendeu com o Q-Learning,
+os dados presentes no gráfico sugerem uma desvantagem de desempenho
+final por parte do robô que aprendeu com o Q-Learning, corroborando os
+dados apresentados anteriormente, referentes à Figura~\ref{fig:mi}.
+Entretanto, o desempenho inicial correspondente ao Q-Learning supera o
+do \alg, o que é revertido somente pouco antes da metade do
+experimento.  Esse resultado pode ser explicado pela sobrecarga
+representada pelo aprendizado das políticas parciais relacionada ao
+\alg, também corroborando os resultados anteriores apresentados na
+discussão relacionada à Figura~\ref{fig:mi}.
+
+Por outro lado, o robô que utilizou $\epS=0,4$ apresentou um
+desempenho inferior ao do Q-Learning, o que aponta uma característica
+indesejável do \alg: uma dependência em termos da escolha do valor do
+parâmetro $\epS$.  Um resultado ainda mais expressivo é o apresentado
+pelo robô que utilizou $\epS=0,2$: esse robô apresentou um resultado
+\emph{inferior ao robô que executou ações aleatórias}.  Esse resultado
+sugere, portanto, uma significativa sensibilidade do \alg\ ao valor de
+\ep, sendo que uma má escolha de \ep\ pode comprometer
+substancialmente o desempenho de aprendizado.
+
+Assim, os resultados obtidos para o aprendizdo com o \alg\ utilizando
+os valores de $\epS \in \{0,2; 0,4; 0,6; 0,8\}$ sugerem a
+aplicabilidade da técnica proposta para o aprendizado, inclusive
+podendo superar uma técnica de aprendizado tradicional como o
+Q-Learning.  Entretanto, a técnica é fortemente dependente do valor
+escolhido para $\epS$, sendo que uma má escolha de \ep\ pode
+\emph{prejudicar expressivamente} o aprendizado.
+
+O robô que realizou o aprendizado utilizando o valor de $\epS=1,0$
+realizou exploração $100\%$ das vezes em que uma política parcial era
+aplicada, ou seja, no momento em que o agente iria obter uma ação
+através da política parcial sendo aplicada, no lugar era realizado um
+sorteio de uma ação aleatória a ser executada ao invés da ação que
+seria sugerida pela política parcial.  Esse robô ainda realizou o
+aprendizado paralelo, realizado por um módulo similar ao utilizado
+pelo Q-Learning, como detalhado na Seção~\ref{sec:imrl}, onde as ações
+\emph{primitivas} ainda eram escolhidas segundo uma estratégia
+$\epsilon$-gulosa.  Entretanto, devido ao fato de explorar
+\emph{sempre} que aplicava uma política parcial, esperava-se que o
+desempenho apresentado pelo robô que utilizou $\epS=1,0$ fosse similar
+ao robô que realizou ações aleatórias, o que não ocorreu.  Esse
+resultado representou uma surpresa na fase experimental, e será
+discutido com o auxílio dos resultados apresentados a seguir.
+
+Para verificar o impacto isolado da proposta de empilhamento de
+políticas parciais, realizou-se um conjunto de experimentos em que os
+robôs que aprenderam com $\epS \in \{0,0; 0,2; 0,4; 0,6; 0,8; 1,0\}$,
+mas, nesse novo conjunto de experimentos, \emph{os robôs não
+    utilizaram a pilha de políticas parciais}, ou seja, aplicaram as
+políticas parciais aprendidas até a terminação, sem, entretanto,
+empilhá-las, como proposto neste trabalho.
+
+\setlength\intextsep{0pt}
+\begin{wrapfigure}{l}{0.5\textwidth}
+  \begin{minipage}{0.5\textwidth}
+    \begin{center}
+      \begin{figure}[H]
+        \begin{center}
+          \includegraphics[width=0.95\textwidth]{toyonxstep-mediaacum-epsopt-sempilha-parcial-00-02-04-06-08-10}
+          \caption{Avaliação do impacto da utilização da estratégia de pilhas.
+              O gráfico é análogo ao da Figura~\ref{fig:ep}, com a diferença
+              de que este gráfico apresenta o desempenho dos robôs utilizando
+              exploração interna sem utilizar empilhamento de políticas
+              parciais.}
+          \label{fig:epsp}
+        \end{center}
+      \end{figure}
+    \end{center}
+  \end{minipage}
+\end{wrapfigure}
+Os resultados são aprentados na Figura~\ref{fig:epsp}, que apresenta
+um gráfico análogo ao da Figura~\ref{fig:ep}, mas considerando os
+robôs que não utilizaram a pilha de políticas parciais.  Analisando
+primeiramente o desempenho do robô que utilizou $\epS=1,0$, pode-se
+perceber que, ao não utilizar a pilha de políticas parciais, o robô,
+explorando $100\%$ das vezes em que aplicou as políticas parciais,
+\emph{apresentou um resultado} comparável ao do agente que realizou
+ações aleatórias, como era esperado que ocorresse e que não ocorreu
+quando o robô utilizou o empilhamento de políticas parciais.
+
+Dessa forma, a análise conjunta dos resultados para $\epS=1,0$
+\emph{com} e \emph{sem} empilhamento de políticas parciais sugere que
+o empilhamento de políticas parciais pode ser prejudicial ao processo
+de exploração interna às políticas parciais, ou seja, as propostas
+deste trabalho são \emph{conflitantes}.  Uma interpretação alternativa
+seria a de que há um \emph{compromisso} entre o \emph{fator de
+    exploração} e o \emph{fator de empilhamento}.
+
+Comparando os desempenhos dos robôs que utilizaram a pilha de
+políticas parciais e dos robôs que não utilizaram, e considerando a
+alta estocasticidade do domínio, \emph{não é possível afirmar que a
+    estratégia de empilhamento de políticas parciais apresente um
+    impacto significativo no desempenho de aprendizado}, dada a
+similaridade dos desempenhos entre os dois conjuntos de robôs, como
+pode ser visto pela análise conjunta dos gráficos das
+Figuras~\ref{fig:ep}~e~\ref{fig:epsp}.  Entretanto, o desempenho
+crescente com o valor de $\epS$ corrobora a hipótese anterior, de que
+a exploração interna favorece o aprendizado das políticas parciais.
+
+A investigação experimental do impacto da utilização de empilhamento
+de políticas não apresentou resultados favoráveis: os resultados
+obtidos sugerem que o empilhamento de políticas parciais não impacta
+significativamente no processo de aprendizado, além da possibilidade
+de ser conflitante com o processo de exploração interna, também
+proposto neste trabalho.  No próximo capítulo, serão apresentadas as
+conclusões deste trabalho, juntamente com possibilidades de
+investigações futuras.
 
 \section{Conclusão}\label{sec:conclusao}
 Neste trabalho foram propostas duas estratégias de aplicação de

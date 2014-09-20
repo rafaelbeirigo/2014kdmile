@@ -633,8 +633,8 @@ Q-Learning e um agente executando ações aleatórias, sem nenhuma
 estratégia e sem realizar aprendizado.
 
 \setlength\intextsep{0pt}
-\begin{wrapfigure}{l}{0.5\textwidth}
-  \begin{minipage}{0.5\textwidth}
+\begin{wrapfigure}{l}{0.65\textwidth}
+  \begin{minipage}{0.65\textwidth}
     \begin{center}
       \begin{figure}[H]
         \begin{center}
@@ -679,15 +679,13 @@ Esse resultado pode parecer contra-intuitivo à primeira vista, dado
 que a função da política parcial é \emph{auxiliar} o agente a resolver
 os subproblemas, dessa forma esperando-se que quanto mais o agente se
 ativer às recomendações da política parcial, melhor será seu
-desempenho.
-
-Entretanto, é importante considerar que as políticas parciais são
-\emph{descobertas}, \emph{criadas} e \emph{aprendidas} no \alg.  Dessa
-forma, é de se esperar que a qualidade das mesmas somente esteja
-relativamente \emph{satisfatória} após algum tempo de aprendizado.
-Assim, o auxílio da exploração interna à política parcial no
-desempenho dos agentes pode ser explicada pela importância que a
-exploração interna tem \emph{no próprio aprendizado da política
+desempenho.  Entretanto, é importante considerar que as políticas
+parciais são \emph{descobertas}, \emph{criadas} e \emph{aprendidas} no
+\alg.  Dessa forma, é de se esperar que a qualidade das mesmas somente
+esteja relativamente \emph{satisfatória} após algum tempo de
+aprendizado.  Assim, o auxílio da exploração interna à política
+parcial no desempenho dos agentes pode ser explicada pela importância
+que a exploração interna tem \emph{no próprio aprendizado da política
     parcial}, ou seja, os resultados sugerem a necessidade de o agente
 realizar exploração no aprendizado das políticas parciais.
 
@@ -736,15 +734,15 @@ aplicada, ou seja, no momento em que o agente iria obter uma ação
 através da política parcial sendo aplicada, no lugar era realizado um
 sorteio de uma ação aleatória a ser executada ao invés da ação que
 seria sugerida pela política parcial.  Esse agente ainda realizou o
-aprendizado paralelo, realizado por um módulo similar ao utilizado
-pelo Q-Learning, como detalhado na Seção~\ref{sec:imrl}, onde as ações
-\emph{primitivas} ainda eram escolhidas segundo uma estratégia
-$\epsilon$-gulosa.  Entretanto, devido ao fato de explorar
-\emph{sempre} que aplicava uma política parcial, esperava-se que o
-desempenho apresentado pelo agente que utilizou $\epS=1,0$ fosse
-similar ao agente que realizou ações aleatórias, o que não ocorreu.
-Esse resultado representou uma surpresa na fase experimental, e será
-discutido com o auxílio dos resultados apresentados a seguir.
+aprendizado paralelo, através de um módulo similar ao utilizado pelo
+Q-Learning, onde as ações \emph{primitivas} ainda eram escolhidas
+segundo uma estratégia $\epsilon$-gulosa.  Entretanto, devido ao fato
+de explorar \emph{sempre} que aplicava uma política parcial,
+esperava-se que o desempenho apresentado pelo agente que utilizou
+$\epS=1,0$ fosse similar ao agente que realizou ações aleatórias, o
+que não ocorreu.  Esse resultado representou uma surpresa na fase
+experimental, e será discutido com o auxílio dos resultados
+apresentados a seguir.
 
 Para verificar o impacto isolado da proposta de empilhamento de
 políticas parciais, realizou-se um conjunto de experimentos em que os
@@ -755,8 +753,8 @@ políticas parciais aprendidas até a terminação, sem, entretanto,
 empilhá-las, como proposto neste trabalho.
 
 \setlength\intextsep{0pt}
-\begin{wrapfigure}{l}{0.7\textwidth}
-  \begin{minipage}{0.7\textwidth}
+\begin{wrapfigure}{l}{0.65\textwidth}
+  \begin{minipage}{0.65\textwidth}
     \begin{center}
       \begin{figure}[H]
         \begin{center}

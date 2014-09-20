@@ -38,6 +38,14 @@
 *~
 \#*
 *.pdf
+*.brf
+*.bbl
+*.cookie
+*.temp
+_*
 
 # Local folders
 template/
+
+Makefile
+TAGS

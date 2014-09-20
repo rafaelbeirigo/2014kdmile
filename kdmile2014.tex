@@ -157,30 +157,30 @@
   recompensas recebidas que refletem a qualidade das ações tomadas
   pelo agente em um processo de tentativa e erro. Em problemas com
   estrutura hierárquica, a solução final depende do encadeamento de
-  soluções para subproblemas aí presentes, sendo frequente a
-  repetição de subproblemas nesse encadeamento. Nesses casos, a
-  utilização de políticas parciais permite o aprendizado e
-  armazenamento das soluções individuais para cada subproblema, que
-  podem então ser utilizadas múltiplas vezes na composição de uma
-   solução completa para o problema final, acelerando o
-  aprendizado. Apesar de vantajosa, a utilização de políticas parciais
-  necessita de definições por parte do projetista, o que representa
-  uma sobrecarga. Para contornar esse problema, foram propostas
-  técnicas de descoberta automática de políticas parciais, dentre as
-  quais a utilização de motivação intrínseca se destaca por permitir
-  ao agente aprender soluções de subproblemas úteis na solução do
-  problema final sem a necessidade de se definir manualmente novas
-  recompensas para esses subproblemas individualmente. Apesar de
-  promissora, essa proposta utiliza um conjunto de componentes de
-  aprendizado que ainda carece de investigação aprofundada acerca dos
-  impactos individual e coletivo de cada componente, notadamente a
-  aplicação das políticas parciais durante o aprendizado. Neste
-  trabalho são investigadas estratégias de aplicação de políticas
-  parciais durante o Aprendizado por Reforço com Motivação
-  Intrínseca. Duas estratégias são propostas e o desempenho de cada
-  estratégia é avaliado experimentalmente. Com base nesta avaliação,
-  uma nova estratégia é proposta, a qual utiliza as alternativas que
-  apresentaram o melhor desempenho na avaliação experimental.
+  soluções para subproblemas aí presentes, sendo frequente a repetição
+  de subproblemas nesse encadeamento. Nesses casos, a utilização de
+  políticas parciais permite o aprendizado e armazenamento das
+  soluções individuais para cada subproblema, que podem então ser
+  utilizadas múltiplas vezes na composição de uma solução completa
+  para o problema final, acelerando o aprendizado. Apesar de
+  vantajosa, a utilização de políticas parciais necessita de
+  definições por parte do projetista, o que representa uma
+  sobrecarga. Para contornar esse problema, foram propostas técnicas
+  de descoberta automática de políticas parciais, dentre as quais a
+  utilização de motivação intrínseca se destaca por permitir ao agente
+  aprender soluções de subproblemas úteis na solução do problema final
+  sem a necessidade de se definir manualmente novas recompensas para
+  esses subproblemas individualmente. Apesar de promissora, essa
+  proposta utiliza um conjunto de componentes de aprendizado que ainda
+  carece de investigação aprofundada acerca dos impactos individual e
+  coletivo de cada componente, notadamente a aplicação das políticas
+  parciais durante o aprendizado. Neste trabalho são investigadas
+  estratégias de aplicação de políticas parciais durante o Aprendizado
+  por Reforço com Motivação Intrínseca. Duas estratégias são propostas
+  e o desempenho de cada estratégia é avaliado experimentalmente. Com
+  base nesta avaliação, uma nova estratégia é proposta, a qual utiliza
+  as alternativas que apresentaram o melhor desempenho na avaliação
+  experimental.
 \end{abstract}
 
 % ACM Computing Classification System categories
@@ -392,7 +392,8 @@ resolvê-lo.  Entretanto, o algoritmo proposto concentra-se nos
 aspectos relacionados à \emph{obtenção} da políticas parciais.  Neste
 trabalho, são investigados dois aspectos da \emph{aplicação} das
 políticas parciais: exploração interna e método de terminação, através
-da adição de duas funcionalidades ao algoritmo original.
+da adição de duas funcionalidades ao algoritmo original, gerando o
+algoritmo \alg.
 
 \setlength\intextsep{1pt}
 \begin{wrapfigure}{r}{0.5\textwidth}
@@ -488,9 +489,10 @@ ação a ser executada durante a aplicação das política parciais.
 
           \REQUIRE{\pps\ em aplicação pelo agente, \ep~$\in [0,1]$}
           \IF{Aleatório([0,1])~$<$~\ep}
-            \STATE\COMMENT{$a_{t+1}$~$\leftarrow$~SeleçãoGulosa(\pps, $s_t$)}
-          \ELSE
-            \STATE\COMMENT{$a_{t+1}$~$\leftarrow$~SeleçãoAleatória(\Oset, $s_t$)}
+          \STATE\COMMENT{$a_{t+1}$~$\leftarrow$~SeleçãoGulosa(\pps,
+              $s_t$)} \ELSE
+          \STATE\COMMENT{$a_{t+1}$~$\leftarrow$~SeleçãoAleatória(\Oset,
+              $s_t$)}
           \ENDIF
         \end{algorithmic}
       \end{algorithm}
@@ -565,18 +567,18 @@ o \emph{alvo} para a célula atualmente apontada pelo \emph{olho}.
   \end{minipage}
 \end{wrapfigure}
 Na Figura \ref{fig:obj} estão relacionados os objetos aí presentes,
-juntamente com as ações e o evento
-saliente que disparam.  Essas ações ficam disponíveis somente quando o
-\emph{olho} e a \emph{mão} estão sobre a célula em que se encontra o
-objeto.  Na coluna \emph{Mov.}, objetos marcados com \emph{A} movem-se
-para a posição atual do \emph{alvo} e as marcadas com \emph{V} para
-uma célula vizinha aleatória ao serem ativados.  Caso a \emph{bola}
-seja chutada com o \emph{alvo} sobre o \emph{sino}, este é ativado,
-disparando o evento \beon.  O \emph{alarme} dispara quando, com a
-música ligada e a luz desligada, ocorre \beon\ e é desativado quando o
-estado da luz ou da música é modificado; o agente somente consegue
-diferenciar os botões \emph{A} e \emph{B} e executar as ações
-associadas a eles se a luz estiver ligada.
+juntamente com as ações e o evento saliente que disparam.  Essas ações
+ficam disponíveis somente quando o \emph{olho} e a \emph{mão} estão
+sobre a célula em que se encontra o objeto.  Na coluna \emph{Mov.},
+objetos marcados com \emph{A} movem-se para a posição atual do
+\emph{alvo} e as marcadas com \emph{V} para uma célula vizinha
+aleatória ao serem ativados.  Caso a \emph{bola} seja chutada com o
+\emph{alvo} sobre o \emph{sino}, este é ativado, disparando o evento
+\beon.  O \emph{alarme} dispara quando, com a música ligada e a luz
+desligada, ocorre \beon\ e é desativado quando o estado da luz ou da
+música é modificado; o agente somente consegue diferenciar os botões
+\emph{A} e \emph{B} e executar as ações associadas a eles se a luz
+estiver ligada.
 
 Para avaliar a técnica proposta, foram realizados dois experimentos,
 sendo que em um deles o módulo de obtenção de políticas parciais a
@@ -626,8 +628,8 @@ exploração interna à política parcial, foram realizados 100
 experimentos de $5 \times 10^5$ passos cada nos quais os valores
 de~\ep\ variaram em $\epS \in \{0,0; 0,2; 0,4; 0,6; 0,8; 1,0\}$, com
 valores dos demais parâmetros idênticos aos listados acima.  O
-desempenho desses robôs foi comparado com um robô aprendendo pelo
-Q-Learning e um robô executando ações aleatórias, sem nenhuma
+desempenho desses agentes foi comparado com um agente aprendendo pelo
+Q-Learning e um agente executando ações aleatórias, sem nenhuma
 estratégia e sem realizar aprendizado.
 
 \setlength\intextsep{0pt}
@@ -637,11 +639,12 @@ estratégia e sem realizar aprendizado.
       \begin{figure}[H]
         \begin{center}
           \includegraphics[width=0.95\textwidth]{toyonxstep-mediaacum-epsopt-parcial-00-02-04-06-08-10}
-          \caption{Avaliação da estratégia de pilhas de políticas parciais
-              para exploração interna com diferentes valores de \ep,
-              \emph{versus} Q-Learning e comportamento aleatório.  O gráfico
-              mostra a quantidade média acumulada de vezes que cada agente
-              conseguiu resolver o problema.}
+          \caption{Avaliação da estratégia de pilhas de políticas
+              parciais para exploração interna com diferentes valores
+              de \ep, \emph{versus} Q-Learning e comportamento
+              aleatório.  O gráfico mostra a quantidade média
+              acumulada de vezes que cada agente conseguiu resolver o
+              problema.}
           \label{fig:ep}
         \end{center}
       \end{figure}
@@ -650,31 +653,31 @@ estratégia e sem realizar aprendizado.
 \end{wrapfigure}
 Os resultados obtidos são apresentados no gráfico da
 Figura~\ref{fig:ep}.  No gráfico foi plotada a média acumulada da
-quantidade de vezes que cada robô conseguiu resolver o problema por
+quantidade de vezes que cada agente conseguiu resolver o problema por
 passo do experimento.  No primeiro passo o valor é 0 para todos os
-robôs, pois com um passo nenhum robô é capaz de disparar \tmon; após
-os quinhentos passos do aprendizado, o valor corresponde à média da
-quantidade \emph{total} de vezes que o respectivo robô disparou \tmon.
-Assim, por exemplo, o robô que utilizou o \alg\ com $\epS=0,6$
-conseguiu disparar \tmon\ $588,13$ nos quinhentos mil passos, sendo a
-média calculada para as 100 repetições, o robô que aprendeu com o
-Q-Learning disparou uma média de $423,19$ vezes e o robô que executou
-ações aleatórias, $95,98$.
+agentes, pois com um passo nenhum agente é capaz de disparar \tmon;
+após os quinhentos passos do aprendizado, o valor corresponde à média
+da quantidade \emph{total} de vezes que o respectivo agente disparou
+\tmon.  Assim, por exemplo, o agente que utilizou o \alg\ com
+$\epS=0,6$ conseguiu disparar \tmon\ $588,13$ nos quinhentos mil
+passos, sendo a média calculada para as 100 repetições, o agente que
+aprendeu com o Q-Learning disparou uma média de $423,19$ vezes e o
+agente que executou ações aleatórias, $95,98$.
 
 Procedendo à análise dos dados presentes no gráfico, inicialmente
-considere-se o robô que aprendeu com o \alg, utilizando os valores de
-$\epS \in \{0,2; 0,4; 0,6; 0,8\}$.  Observando-se o gráfico, pode-se
-perceber que um \emph{maior} valor de \ep\ parece obter um
-\emph{melhor} desempenho, ou seja, o desempenho dos respectivos robôs
-é proporcional ao valor de \ep\ utilizado, sendo o melhor desempenho
-do conjunto apresentado pelo robô que utilizou $\epS=0,8$.  Outra
-maneira de ler os dados é a de que quanto maior a exploração interna à
-política parcial, melhor o desempenho do robô, dado que essa
-exploração é controlada pelo parâmetro \ep.
+considere-se o agente que aprendeu com o \alg, utilizando os valores
+de $\epS \in \{0,2; 0,4; 0,6; 0,8\}$.  Observando-se o gráfico,
+pode-se perceber que um \emph{maior} valor de \ep\ parece obter um
+\emph{melhor} desempenho, ou seja, o desempenho dos respectivos
+agentes é proporcional ao valor de \ep\ utilizado, sendo o melhor
+desempenho do conjunto apresentado pelo agente que utilizou
+$\epS=0,8$.  Outra maneira de ler os dados é a de que quanto maior a
+exploração interna à política parcial, melhor o desempenho do agente,
+dado que essa exploração é controlada pelo parâmetro \ep.
 
 Esse resultado pode parecer contra-intuitivo à primeira vista, dado
-que a função da política parcial é \emph{auxiliar} o robô a resolver
-os subproblemas, dessa forma esperando-se que quanto mais o robô se
+que a função da política parcial é \emph{auxiliar} o agente a resolver
+os subproblemas, dessa forma esperando-se que quanto mais o agente se
 ativer às recomendações da política parcial, melhor será seu
 desempenho.
 
@@ -683,40 +686,41 @@ Entretanto, é importante considerar que as políticas parciais são
 forma, é de se esperar que a qualidade das mesmas somente esteja
 relativamente \emph{satisfatória} após algum tempo de aprendizado.
 Assim, o auxílio da exploração interna à política parcial no
-desempenho dos robôs pode ser explicada pela importância que a
+desempenho dos agentes pode ser explicada pela importância que a
 exploração interna tem \emph{no próprio aprendizado da política
-    parcial}, ou seja, os resultados sugerem a necessidade de o robô
+    parcial}, ou seja, os resultados sugerem a necessidade de o agente
 realizar exploração no aprendizado das políticas parciais.
 
 A hipótese de que \emph{a exploração interna à política parcial
     favorece o aprendizado} é corroborada pelo resultado
-correspondente ao robô que utilizou o valor de $\epS=0,0$, ou seja, o
-robô que \emph{não realizou exploração interna às políticas parciais},
-e que apresentou o desempenho menos favorável do conjunto.  Esse
-resultado apoia, portanto, a hipótese de que o aprendizado das
-políticas parciais pode ser auxiliado pela exploração interna.
+correspondente ao agente que utilizou o valor de $\epS=0,0$, ou seja,
+o agente que \emph{não realizou exploração interna às políticas
+    parciais}, e que apresentou o desempenho menos favorável do
+conjunto.  Esse resultado apoia, portanto, a hipótese de que o
+aprendizado das políticas parciais pode ser auxiliado pela exploração
+interna.
 
-Comparando-se os resultados apresentados pelo robô que aprendeu com o
-\alg\ utilizando $\epS=0,8$ e pelo robô que aprendeu com o Q-Learning,
-os dados presentes no gráfico sugerem uma desvantagem de desempenho
-final por parte do robô que aprendeu com o Q-Learning, corroborando os
-dados apresentados anteriormente, referentes à Figura~\ref{fig:mi}.
-Entretanto, o desempenho inicial correspondente ao Q-Learning supera o
-do \alg, o que é revertido somente pouco antes da metade do
-experimento.  Esse resultado pode ser explicado pela sobrecarga
-representada pelo aprendizado das políticas parciais relacionada ao
-\alg, também corroborando os resultados anteriores apresentados na
-discussão relacionada à Figura~\ref{fig:mi}.
+Comparando-se os resultados apresentados pelo agente que aprendeu com
+o \alg\ utilizando $\epS=0,8$ e pelo agente que aprendeu com o
+Q-Learning, os dados presentes no gráfico sugerem uma desvantagem de
+desempenho final por parte do agente que aprendeu com o Q-Learning,
+corroborando os dados apresentados anteriormente, referentes à
+Figura~\ref{fig:mi}.  Entretanto, o desempenho inicial correspondente
+ao Q-Learning supera o do \alg, o que é revertido somente pouco antes
+da metade do experimento.  Esse resultado pode ser explicado pela
+sobrecarga representada pelo aprendizado das políticas parciais
+relacionada ao \alg, também corroborando os resultados anteriores
+apresentados na discussão relacionada à Figura~\ref{fig:mi}.
 
-Por outro lado, o robô que utilizou $\epS=0,4$ apresentou um
+Por outro lado, o agente que utilizou $\epS=0,4$ apresentou um
 desempenho inferior ao do Q-Learning, o que aponta uma característica
 indesejável do \alg: uma dependência em termos da escolha do valor do
 parâmetro $\epS$.  Um resultado ainda mais expressivo é o apresentado
-pelo robô que utilizou $\epS=0,2$: esse robô apresentou um resultado
-\emph{inferior ao robô que executou ações aleatórias}.  Esse resultado
-sugere, portanto, uma significativa sensibilidade do \alg\ ao valor de
-\ep, sendo que uma má escolha de \ep\ pode comprometer
-substancialmente o desempenho de aprendizado.
+pelo agente que utilizou $\epS=0,2$: esse agente apresentou um
+resultado \emph{inferior ao agente que executou ações aleatórias}.
+Esse resultado sugere, portanto, uma significativa sensibilidade do
+\alg\ ao valor de \ep, sendo que uma má escolha de \ep\ pode
+comprometer substancialmente o desempenho de aprendizado.
 
 Assim, os resultados obtidos para o aprendizdo com o \alg\ utilizando
 os valores de $\epS \in \{0,2; 0,4; 0,6; 0,8\}$ sugerem a
@@ -726,42 +730,42 @@ Q-Learning.  Entretanto, a técnica é fortemente dependente do valor
 escolhido para $\epS$, sendo que uma má escolha de \ep\ pode
 \emph{prejudicar expressivamente} o aprendizado.
 
-O robô que realizou o aprendizado utilizando o valor de $\epS=1,0$
+O agente que realizou o aprendizado utilizando o valor de $\epS=1,0$
 realizou exploração $100\%$ das vezes em que uma política parcial era
 aplicada, ou seja, no momento em que o agente iria obter uma ação
 através da política parcial sendo aplicada, no lugar era realizado um
 sorteio de uma ação aleatória a ser executada ao invés da ação que
-seria sugerida pela política parcial.  Esse robô ainda realizou o
+seria sugerida pela política parcial.  Esse agente ainda realizou o
 aprendizado paralelo, realizado por um módulo similar ao utilizado
 pelo Q-Learning, como detalhado na Seção~\ref{sec:imrl}, onde as ações
 \emph{primitivas} ainda eram escolhidas segundo uma estratégia
 $\epsilon$-gulosa.  Entretanto, devido ao fato de explorar
 \emph{sempre} que aplicava uma política parcial, esperava-se que o
-desempenho apresentado pelo robô que utilizou $\epS=1,0$ fosse similar
-ao robô que realizou ações aleatórias, o que não ocorreu.  Esse
-resultado representou uma surpresa na fase experimental, e será
+desempenho apresentado pelo agente que utilizou $\epS=1,0$ fosse
+similar ao agente que realizou ações aleatórias, o que não ocorreu.
+Esse resultado representou uma surpresa na fase experimental, e será
 discutido com o auxílio dos resultados apresentados a seguir.
 
 Para verificar o impacto isolado da proposta de empilhamento de
 políticas parciais, realizou-se um conjunto de experimentos em que os
-robôs que aprenderam com $\epS \in \{0,0; 0,2; 0,4; 0,6; 0,8; 1,0\}$,
-mas, nesse novo conjunto de experimentos, \emph{os robôs não
+agentes que aprenderam com $\epS \in \{0,0; 0,2; 0,4; 0,6; 0,8;
+1,0\}$, mas, nesse novo conjunto de experimentos, \emph{os agentes não
     utilizaram a pilha de políticas parciais}, ou seja, aplicaram as
 políticas parciais aprendidas até a terminação, sem, entretanto,
 empilhá-las, como proposto neste trabalho.
 
 \setlength\intextsep{0pt}
-\begin{wrapfigure}{l}{0.5\textwidth}
-  \begin{minipage}{0.5\textwidth}
+\begin{wrapfigure}{l}{0.7\textwidth}
+  \begin{minipage}{0.7\textwidth}
     \begin{center}
       \begin{figure}[H]
         \begin{center}
           \includegraphics[width=0.95\textwidth]{toyonxstep-mediaacum-epsopt-sempilha-parcial-00-02-04-06-08-10}
-          \caption{Avaliação do impacto da utilização da estratégia de pilhas.
-              O gráfico é análogo ao da Figura~\ref{fig:ep}, com a diferença
-              de que este gráfico apresenta o desempenho dos robôs utilizando
-              exploração interna sem utilizar empilhamento de políticas
-              parciais.}
+          \caption{Avaliação do impacto da utilização da estratégia de
+              pilhas.  O gráfico é análogo ao da Figura~\ref{fig:ep},
+              com a diferença de que este gráfico apresenta o
+              desempenho dos agentes utilizando exploração interna sem
+              utilizar empilhamento de políticas parciais.}
           \label{fig:epsp}
         \end{center}
       \end{figure}
@@ -770,13 +774,13 @@ empilhá-las, como proposto neste trabalho.
 \end{wrapfigure}
 Os resultados são aprentados na Figura~\ref{fig:epsp}, que apresenta
 um gráfico análogo ao da Figura~\ref{fig:ep}, mas considerando os
-robôs que não utilizaram a pilha de políticas parciais.  Analisando
-primeiramente o desempenho do robô que utilizou $\epS=1,0$, pode-se
-perceber que, ao não utilizar a pilha de políticas parciais, o robô,
+agentes que não utilizaram a pilha de políticas parciais.  Analisando
+primeiramente o desempenho do agente que utilizou $\epS=1,0$, pode-se
+perceber que, ao não utilizar a pilha de políticas parciais, o agente,
 explorando $100\%$ das vezes em que aplicou as políticas parciais,
 \emph{apresentou um resultado} comparável ao do agente que realizou
 ações aleatórias, como era esperado que ocorresse e que não ocorreu
-quando o robô utilizou o empilhamento de políticas parciais.
+quando o agente utilizou o empilhamento de políticas parciais.
 
 Dessa forma, a análise conjunta dos resultados para $\epS=1,0$
 \emph{com} e \emph{sem} empilhamento de políticas parciais sugere que
@@ -786,12 +790,12 @@ deste trabalho são \emph{conflitantes}.  Uma interpretação alternativa
 seria a de que há um \emph{compromisso} entre o \emph{fator de
     exploração} e o \emph{fator de empilhamento}.
 
-Comparando os desempenhos dos robôs que utilizaram a pilha de
-políticas parciais e dos robôs que não utilizaram, e considerando a
+Comparando os desempenhos dos agentes que utilizaram a pilha de
+políticas parciais e dos agentes que não utilizaram, e considerando a
 alta estocasticidade do domínio, \emph{não é possível afirmar que a
     estratégia de empilhamento de políticas parciais apresente um
     impacto significativo no desempenho de aprendizado}, dada a
-similaridade dos desempenhos entre os dois conjuntos de robôs, como
+similaridade dos desempenhos entre os dois conjuntos de agentes, como
 pode ser visto pela análise conjunta dos gráficos das
 Figuras~\ref{fig:ep}~e~\ref{fig:epsp}.  Entretanto, o desempenho
 crescente com o valor de $\epS$ corrobora a hipótese anterior, de que

@@ -782,17 +782,39 @@ parciais.  Uma interpretação alternativa seria a de que há um
     de empilhamento}.
 
 \section{Conclusão}\label{sec:conclusao}
-Neste trabalho foram propostas duas estratégias de aplicação de
-políticas parciais no Aprendizado por Reforço com Motivação
-Intrínseca: aplicação de políticas parciais em pilha e exploração
-interna à política parcial.  As estratégias propostas foram avaliadas
-experimentalmente e comparadas a abordagens mais clássicas de
-aprendizado e os resultados obtidos sugerem a aplicabilidade da
-técnica para acelerar o processo de aprendizado através da aplicação
-de políticas parciais com motivação intrínseca.  Percebeu-se ainda que
-o parâmetro de exploração interna à política parcial possui impacto
-significativo no desempenho de aprendizado, sendo o desempenho
-apresentado diretamente proporcional a esse valor.
+Neste trabalho foram propostas estratégias de aplicação de políticas
+parciais com motivação intrínseca.  Empilhamento de políticas parciais
+e exploração interna às mesmas foram implementadas no algoritmo
+ARMI~\cite{imrl2004}, gerando o algoritmo \alg.  O novo algoritmo foi
+avaliado experimentalmente em um problema com fortes características
+hierárquicas, onde é possível identificar facilmente o encadeamento de
+subproblemas, que podem ser resolvidos por políticas parciais.
+
+A identificação dos subproblemas foi realizada através de eventos
+salientes, dados por variações significativas nos valores de
+determinados atributos da descrição fatorada de estados.  O
+aprendizado das políticas parciais foi auxiliado pela presença de
+recompensas intrínsecas, recompensas adicionais recebidas ao resolver
+um subproblema (disparar um evento saliente).  A utilização conjunta
+de eventos salientes e políticas parciais apresentou resultados
+experimentais que sugerem que elas são capazes de explorar a estrutura
+hierárquica de um problema de forma a melhorar o desempenho de
+aprendizado.  Essas características, herdadas do ARMI, foram
+preservadas no algoritmo proposto neste trabalho.
+
+As propostas deste trabalho foram avaliadas experimentalmente e os
+resultados sugerem que a exploração interna às políticas parciais
+potencialmente impacta positivamente no aprendizado.  Entretanto, o
+processo de exploração interna depende de um parâmetro cuja escolha de
+valores é de expressiva importância para o desempenho obtido, sendo
+que uma má escolha do valor do mesmo pode \emph{prejudicar} o
+aprendizado.  O empilhamento de políticas parciais, proposto neste
+trabalho, foi investigado através de avaliação experimental, em que o
+impacto da utilização dessa proposta foi isolado, comparando o
+aprendizado com e sem a utilização do conceito de empilhamento.  Os
+resultados experimentais obtidos sugerem que a utilização do
+empilhamento de políticas parciais não apresenta impacto expressivo no
+desempenho de aprendizado.
 
 A estratégia proposta pode ser utilizada para o aprendizado automático
 de políticas parciais em problemas de Aprendizado por Reforço,

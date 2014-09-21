@@ -773,36 +773,13 @@ primeiramente o desempenho do agente que utilizou $\epS=1,0$, pode-se
 perceber que, ao não utilizar a pilha de políticas parciais, o agente,
 explorando $100\%$ das vezes em que aplicou as políticas parciais,
 \emph{apresentou um resultado} comparável ao do agente que realizou
-ações aleatórias, como era esperado que ocorresse e que não ocorreu
-quando o agente utilizou o empilhamento de políticas parciais.
-
-Dessa forma, a análise conjunta dos resultados para $\epS=1,0$
-\emph{com} e \emph{sem} empilhamento de políticas parciais sugere que
-o empilhamento de políticas parciais pode ser prejudicial ao processo
-de exploração interna às políticas parciais, ou seja, as propostas
-deste trabalho são \emph{conflitantes}.  Uma interpretação alternativa
-seria a de que há um \emph{compromisso} entre o \emph{fator de
-    exploração} e o \emph{fator de empilhamento}.
-
-Comparando os desempenhos dos agentes que utilizaram a pilha de
-políticas parciais e dos agentes que não utilizaram, e considerando a
-alta estocasticidade do domínio, \emph{não é possível afirmar que a
-    estratégia de empilhamento de políticas parciais apresente um
-    impacto significativo no desempenho de aprendizado}, dada a
-similaridade dos desempenhos entre os dois conjuntos de agentes, como
-pode ser visto pela análise conjunta dos gráficos das
-Figuras~\ref{fig:ep}~e~\ref{fig:epsp}.  Entretanto, o desempenho
-crescente com o valor de $\epS$ corrobora a hipótese anterior, de que
-a exploração interna favorece o aprendizado das políticas parciais.
-
-A investigação experimental do impacto da utilização de empilhamento
-de políticas não apresentou resultados favoráveis: os resultados
-obtidos sugerem que o empilhamento de políticas parciais não impacta
-significativamente no processo de aprendizado, além da possibilidade
-de ser conflitante com o processo de exploração interna, também
-proposto neste trabalho.  No próximo capítulo, serão apresentadas as
-conclusões deste trabalho, juntamente com possibilidades de
-investigações futuras.
+ações aleatórias, como esperado.  Dessa forma, a análise conjunta dos
+resultados para $\epS=1,0$ \emph{com} e \emph{sem} empilhamento de
+políticas parciais sugere que o empilhamento de políticas parciais
+pode desfavorecer o processo de exploração interna às políticas
+parciais.  Uma interpretação alternativa seria a de que há um
+\emph{compromisso} entre o \emph{fator de exploração} e o \emph{fator
+    de empilhamento}.
 
 \section{Conclusão}\label{sec:conclusao}
 Neste trabalho foram propostas duas estratégias de aplicação de
